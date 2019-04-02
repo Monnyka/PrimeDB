@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PrimeDB</string>
+    <string name="txt_title">Discover</string>
+    <string name="txt_subtitle">Explore the movie information</string>
+    <string name="txt_countMonthly">123</string>
+    <string name="txt_lbMonthly">This month</string>
+    <string name="lb_Dashboard">Dashboard</string>
+    <string name="lb_BrowsMovie">Brows Movie</string>
+    <string name="lb_Coming_Up">Avenger : End Game (2019)</string>
+    <string name="lb_Coming_Up_title">Coming Up</string>
 </resources>
