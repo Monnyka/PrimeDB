@@ -26,15 +26,14 @@
         android:id="@+id/txt_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="55dp"
         android:fontFamily="@font/roboto_regular"
         android:text="@string/txt_subtitle"
         android:textColor="@color/colorSubtext"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/ll_movie_count"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_title" />
+        app:layout_constraintTop_toTopOf="parent" />
     <RelativeLayout
         android:id="@+id/ll_movie_count"
         android:layout_width="match_parent"
@@ -53,7 +52,7 @@
             android:fontFamily="@font/roboto_regular"
             android:text="@string/txt_countMonthly"
             android:textColor="@color/colorSubtext"
-            android:textSize="28sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
@@ -61,20 +60,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:text="@string/txt_lbMonthly"
             android:textColor="@color/colorTitle"
+            android:paddingTop="50dp"
+            android:paddingEnd="175dp"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:paddingTop="45dp"
-            android:paddingEnd="180dp"
             />
         <ImageView
-            android:layout_width="2dp"
+            android:layout_width="1dp"
             android:layout_height="50dp"
             android:background="@color/colorSubtext"
             android:gravity="center"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="14dp"
             android:layout_centerHorizontal="true"
+            android:elevation="5dp"
             />
         <TextView
             android:id="@+id/txt_countYearly"
@@ -85,22 +86,23 @@
             android:fontFamily="@font/roboto_regular"
             android:text="@string/txt_countMonthly"
             android:textColor="@color/colorSubtext"
-            android:textSize="28sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:paddingStart="165dp"
+            android:paddingTop="50dp"
             android:text="@string/txt_lbMonthly"
             android:textColor="@color/colorTitle"
-            android:layout_centerHorizontal="true"
-            android:paddingTop="45dp"
-            android:paddingStart="180dp"
-            android:paddingEnd="0dp"
-            />
+            android:textSize="14sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -203,12 +205,12 @@
         android:id="@+id/lb_Coming_Up_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="293dp"
         android:text="@string/lb_Coming_Up_title"
         android:textColor="@color/colorTitle"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -225,10 +227,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lb_Coming_Up_title">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="10dp">
 
             <ImageView
@@ -237,35 +239,69 @@
                 android:background="@drawable/bg_imageview_main"
                 android:padding="2.65dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/image_one" />
+                android:src="@drawable/image_one"/>
+            
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="185dp"
+                android:text="@string/lb_Movie_One"
+                android:textColor="@color/colorSubtext"
+                />
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="180dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="140dp"
                 android:background="@drawable/bg_imageview_main"
                 android:padding="2.65dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/image_two" />
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="185dp"
+                android:layout_marginStart="140dp"
+                android:text="@string/lb_Movie_two"
+                android:textColor="@color/colorSubtext"
+                />
 
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="180dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="280dp"
                 android:background="@drawable/bg_imageview_main"
                 android:padding="2.65dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/image_three" />
 
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="185dp"
+                android:layout_marginStart="280dp"
+                android:text="@string/lb_Movie_Three"
+                android:textColor="@color/colorSubtext"
+                />
+
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="180dp"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="420dp"
                 android:layout_marginEnd="60dp"
                 android:background="@drawable/bg_imageview_main"
                 android:padding="2.65dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/image_four" />
-        </LinearLayout>
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="185dp"
+                android:layout_marginStart="420dp"
+                android:text="@string/lb_Movie_Four"
+                android:textColor="@color/colorSubtext"
+                />
+        </RelativeLayout>
     </HorizontalScrollView>
 </android.support.constraint.ConstraintLayout>

@@ -8,4 +8,8 @@
     <string name="lb_BrowsMovie">Brows Movie</string>
     <string name="lb_Coming_Up">Avenger : End Game (2019)</string>
     <string name="lb_Coming_Up_title">Coming Up</string>
+    <string name="lb_Movie_One">Avengers: End Game (2019)</string>
+    <string name="lb_Movie_two">John Wick III (2019)</string>
+    <string name="lb_Movie_Three">X-Men: Dark Phoenix (2019)</string>
+    <string name="lb_Movie_Four">Pokemon: Detective Pikachu (2019)</string>
 </resources>
