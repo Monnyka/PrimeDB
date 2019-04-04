@@ -12,4 +12,10 @@
     <string name="lb_Movie_two">John Wick III (2019)</string>
     <string name="lb_Movie_Three">X-Men: Dark Phoenix (2019)</string>
     <string name="lb_Movie_Four">Pokemon: Detective Pikachu (2019)</string>
+    <string name="lb_movieDetail_title">Movie Detail</string>
+    <string name="txt_movie_title">Avengers: End Game (2019)</string>
+    <string name="txt_year">2019</string>
+    <string name="txt_rating">8.1</string>
+    <string name="txt_runtime">120 Minute</string>
+    <string name="txt_genre">Action, Sci-Fi, Adventure</>
 </resources>
