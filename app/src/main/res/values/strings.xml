@@ -4,8 +4,8 @@
     <string name="txt_subtitle">Explore the movie information</string>
     <string name="txt_countMonthly">123</string>
     <string name="txt_lbMonthly">This month</string>
-    <string name="lb_Dashboard">Dashboard</string>
-    <string name="lb_BrowsMovie">Brows Movie</string>
+    <string name="lb_Dashboard">DASHBOARD</string>
+    <string name="lb_BrowsMovie">BROWS LATEST MOVIE</string>
     <string name="lb_Coming_Up">Avenger : End Game (2019)</string>
     <string name="lb_Coming_Up_title">Coming Up</string>
     <string name="lb_Movie_One">Avengers: End Game (2019)</string>
@@ -17,9 +17,10 @@
     <string name="txt_year">2019</string>
     <string name="txt_rating">8.1</string>
     <string name="txt_runtime">120 Minute</string>
-    <string name="txt_genre">Action, Sci-Fi, Adventure</>
+    <string name="txt_genre">Action, Sci-Fi, Adventure</string>
     <string name="lb_director">Director</string>
     <string name="lb_cast">Cast</string>
     <string name="lb_synopsis">Synopsis</string>
     <string name="txt_synopsis">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,</string>
+    <string name="lb_movieDashboard_title">Dashboard</string>
 </resources>
