@@ -34,82 +34,88 @@
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <RelativeLayout
+
+    <HorizontalScrollView
         android:id="@+id/ll_movie_count"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_subtitle">
-        <TextView
-            android:id="@+id/txt_countMonthly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="180dp"
-            android:paddingStart="0dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@string/txt_countMonthly"
-            android:textColor="@color/colorSubtext"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="@string/txt_lbMonthly"
-            android:textColor="@color/colorTitle"
-            android:paddingTop="50dp"
-            android:paddingEnd="175dp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            />
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="50dp"
-            android:background="@color/colorSubtext"
-            android:gravity="center"
-            android:layout_marginTop="14dp"
-            android:layout_centerHorizontal="true"
-            android:elevation="5dp"
-            />
-        <TextView
-            android:id="@+id/txt_countYearly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="160dp"
-            android:paddingEnd="0dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@string/txt_countMonthly"
-            android:textColor="@color/colorSubtext"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            />
 
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="165dp"
-            android:paddingTop="50dp"
-            android:text="@string/txt_lbMonthly"
-            android:textColor="@color/colorTitle"
-            android:textSize="14sp"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_height="140dp"
+            >
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button_main"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IN CINEMA"
+                    android:textColor="#000000"
+                    />
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="200dp"
+                android:background="#000000"
+                />
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="315dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button_main"
+                >
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="515dp"
+                android:background="#000000"
+                />
+
+            <RelativeLayout
+                android:layout_width="300dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="630dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_button_main"
+                >
+
+
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="830dp"
+                android:background="#000000"
+                />
+
+        </RelativeLayout>
+    </HorizontalScrollView>
 
     <RelativeLayout
         android:id="@+id/rl_button_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toTopOf="@+id/lb_Coming_Up_title"
         app:layout_constraintEnd_toEndOf="parent"
