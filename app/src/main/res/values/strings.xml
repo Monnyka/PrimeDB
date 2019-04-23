@@ -23,4 +23,8 @@
     <string name="lb_synopsis">Synopsis</string>
     <string name="txt_synopsis">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,</string>
     <string name="lb_movieDashboard_title">Dashboard</string>
+    <string name="lbInCinema">IN THEATER </string>
+    <string name="lbSinceDate">Since April 21, 2019</string>
+    <string name="lbCountDown">COUNTDOWN</string>
+    <string name="lbMostPopular">MOST POPULAR</string>
 </resources>
