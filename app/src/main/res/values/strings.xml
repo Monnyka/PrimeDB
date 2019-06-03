@@ -27,4 +27,13 @@
     <string name="lbSinceDate">Since April 21, 2019</string>
     <string name="lbCountDown">COUNTDOWN</string>
     <string name="lbMostPopular">MOST POPULAR</string>
+    <string name="lb_Search">SEARCH</string>
+    <string name="lbMovieTitle">POCKEMON: DETECTIVE PIKACHU</string>
+    <string name="lbGenre">Action/ Adventure/ Drama/ Horror</string>
+    <string name="lbYear">2019</string>
+    <string name="lbReleaseDate">28 JAN</string>
+    <string name="lbLike">70%</string>
+    <string name="lbTomato">10%</string>
+    <string name="lb_synopsisDetail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard ummy text ever since the 1500s,  when an unknown printer took a galley of type and  scrambled it to make a type specimen book.</string>
+    <string name="lb_Director">Director</string>
 </resources>
