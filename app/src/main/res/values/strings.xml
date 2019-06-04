@@ -20,7 +20,7 @@
     <string name="txt_genre">Action, Sci-Fi, Adventure</string>
     <string name="lb_director">Director</string>
     <string name="lb_cast">Cast</string>
-    <string name="lb_synopsis">Synopsis</string>
+    <string name="lb_synopsis">SYNOPSIS</string>
     <string name="txt_synopsis">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,</string>
     <string name="lb_movieDashboard_title">Dashboard</string>
     <string name="lbInCinema">IN THEATER </string>
@@ -36,4 +36,8 @@
     <string name="lbTomato">10%</string>
     <string name="lb_synopsisDetail">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard ummy text ever since the 1500s,  when an unknown printer took a galley of type and  scrambled it to make a type specimen book.</string>
     <string name="lb_Director">Director</string>
+    <string name="lb_DirectorName"><![CDATA[Joe Rosso & Anthony Rosso]]></string>
+    <string name="lb_CastOneName">AS SPIDERMAN</string>
+    <string name="lb_SubRate">8.0</string>
+    <string name="lb_SubBudget">250M</string>
 </resources>

@@ -9,7 +9,8 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView imageView;
+    private ImageView imageViewUpcoming;
+    private ImageView imageViewInThealter;
 
 
     @Override
@@ -17,21 +18,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        imageView=(ImageView) findViewById(R.id.ivComing1);
+        imageViewUpcoming=(ImageView) findViewById(R.id.ivComing1);
+        imageViewInThealter=(ImageView)findViewById(R.id.imInTheater);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
+        imageViewUpcoming.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenDetailActivity();
+            }
+        });
+        imageViewInThealter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 OpenDetailActivity();
             }
         });
 
-
-
     }
     public void OpenDetailActivity(){
         Intent intent = new Intent(this, activity_moviedetail.class);
         startActivity(intent);
     }
+
+
 
 }
