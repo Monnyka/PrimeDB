@@ -24,7 +24,7 @@
     <VideoView
         android:id="@+id/VvTrailer"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
             android:gravity="center"
             android:text="@string/lbMovieTitle"
             android:textColor="#ffffff"
-            android:textSize="24sp"
+            android:textSize="20sp"
             />
     <TextView
         android:layout_centerHorizontal="true"
@@ -50,7 +50,7 @@
         android:text="@string/lbGenre"
         android:textColor="#ffffff"
         android:fontFamily="@font/avenir_lst_td_heavy"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:layout_below="@id/lbMovieTitle"
@@ -172,21 +172,21 @@
             android:layout_marginTop="25dp"
             android:layout_below="@+id/separateLine1"
             android:text="@string/lb_synopsis"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/colorSubtext"
             android:fontFamily="@font/avenir_lst_td_heavy"
             android:layout_marginStart="30dp"
             />
         <TextView
             android:id="@+id/lbSynopsisDetail"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/lbSynopsis"
             android:text="@string/lb_synopsisDetail"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/colorSubtext"
-            android:fontFamily="@font/avenir_lst_td_heavy"
+            android:fontFamily="@font/avenir_lst_td_black"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             />
@@ -197,7 +197,7 @@
             android:layout_marginTop="20dp"
             android:layout_below="@id/lbSynopsisDetail"
             android:text="@string/lb_Director"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/colorSubtext"
             android:fontFamily="@font/avenir_lst_td_heavy"
             android:layout_marginStart="30dp"/>
@@ -231,7 +231,7 @@
             android:layout_below="@id/ivDirector"
             android:layout_marginTop="25dp"
             android:text="@string/lb_cast"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textColor="@color/colorSubtext"
             android:fontFamily="@font/avenir_lst_td_heavy"
             android:layout_marginStart="30dp"
@@ -279,7 +279,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_back"
-        android:background="bg_"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
