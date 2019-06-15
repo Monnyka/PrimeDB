@@ -6,13 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class activity_moviedetail extends AppCompatActivity {
+public class activity_moviedetail extends BaseActivity {
 
     private ImageView btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NoStatusBar();
         setContentView(R.layout.activity_moviedetail);
 
         btnBack = (ImageView)findViewById(R.id.btnBackDetail);

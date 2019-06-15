@@ -80,7 +80,7 @@
                             android:fontFamily="@font/avenir_lst_td_black"
                             android:paddingEnd="100dp"
                             android:text="@string/lbInCinema"
-                            android:textColor="#000000"
+                            android:textColor="#8E8E8E"
                             android:textSize="12sp"
                             android:textStyle="bold" />
 
@@ -96,7 +96,7 @@
                             android:paddingLeft="15dp"
                             android:paddingEnd="100dp"
                             android:text="Avengers: Infinity War"
-                            android:textColor="#8E8E8E"
+                            android:textColor="#000000"
                             android:textSize="18sp"
                             android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
                             android:fontFamily="@font/avenir_lst_td_heavy"
                             android:paddingEnd="100dp"
                             android:text="@string/lbSinceDate"
-                            android:textColor="#8E8E8E"
+                            android:textColor="#000000"
                             android:textSize="10sp"
                             android:textStyle="bold" />
 
@@ -431,6 +431,7 @@
                         android:src="@drawable/image_one" />
 
                     <TextView
+                        android:id="@+id/lbUpComingMovieOne"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="185dp"
@@ -447,6 +448,7 @@
                         android:src="@drawable/image_two" />
 
                     <TextView
+                        android:id="@+id/lbUpComingMovieTwo"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="140dp"
@@ -464,6 +466,7 @@
                         android:src="@drawable/image_three" />
 
                     <TextView
+                        android:id="@+id/lbUpComingMovieThree"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="280dp"
