@@ -27,11 +27,12 @@ import org.json.JSONObject;
 public class MainActivity extends BaseActivity {
 
     private ImageView imageViewUpcoming;
+    private ImageView imageViewUpcomingTwo;
+    private ImageView imageViewUpcomingThree;
     private ImageView imageViewInTheater;
     private TextView inTheaterMovieLabel;
     private TextView inTheaterMovieDateLabel;
     private RequestQueue mQueue;
-    private RequestQueue mQueue2;
     private TextView lbUpcomingMovieTitleOne;
     private TextView lbUpcomingMovieTitleTwo;
     private TextView lbUpcomingMovieTitleThree;
@@ -41,18 +42,20 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Call Base for no displayed status bar
         NoStatusBar();
 
         mQueue = Volley.newRequestQueue(this);
-        mQueue2 = Volley.newRequestQueue(this);
-
         imageViewUpcoming=(ImageView) findViewById(R.id.ivComing1);
-        imageViewInTheater=(ImageView)findViewById(R.id.imInTheater);
+        imageViewUpcomingTwo=(ImageView) findViewById(R.id.ivUpComing2);
+        imageViewUpcomingThree=(ImageView) findViewById(R.id.ivUpComing3);
 
+
+        imageViewInTheater=(ImageView)findViewById(R.id.imInTheater);
         lbUpcomingMovieTitleOne=(TextView)findViewById(R.id.lbUpComingMovieOne);
         lbUpcomingMovieTitleTwo=(TextView)findViewById(R.id.lbUpComingMovieTwo);
         lbUpcomingMovieTitleThree=(TextView)findViewById(R.id.lbUpComingMovieThree);
-
         inTheaterMovieLabel=(TextView)findViewById(R.id.lbInTheaterMovieTitle);
         inTheaterMovieDateLabel=(TextView)findViewById(R.id.lbMovieInTheaterDate);
 
@@ -68,8 +71,7 @@ public class MainActivity extends BaseActivity {
                 OpenDetailActivity();
             }
         });
-        LoadInTheaterData();
-        LoadUpComingData();
+        RequestMainScreen();
     }
 
 
@@ -78,9 +80,12 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(this, activity_moviedetail.class);
         startActivity(intent);
     }
-    public void LoadInTheaterData(){
+    public void RequestMainScreen(){
 
             String Url="https://api.themoviedb.org/3/movie/now_playing?api_key=1469231605651a4f67245e5257160b5f&language=en-US&page=1";
+            String Url1="https://api.themoviedb.org/3/movie/upcoming?api_key=1469231605651a4f67245e5257160b5f&language=en-US&page=1";
+
+            //Request In Theater Movie
             JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -93,7 +98,6 @@ public class MainActivity extends BaseActivity {
                         String movieTitle = result.getString("title");
                         String releaseDate = result.getString("release_date");
                         String poster=result.getString("poster_path");
-                        Log.d("Re-Poster","s"+poster);
                         String Address="https://image.tmdb.org/t/p/original"+poster;
                         inTheaterMovieLabel.setText(movieTitle);
                         inTheaterMovieDateLabel.setText(releaseDate);
@@ -110,11 +114,8 @@ public class MainActivity extends BaseActivity {
                 error.printStackTrace();
             }
         });
-        mQueue.add(request);
-    }
-    public void LoadUpComingData(){
 
-        String Url1="https://api.themoviedb.org/3/movie/upcoming?api_key=1469231605651a4f67245e5257160b5f&language=en-US&page=1";
+            //Request Upcoming Movie
         JsonObjectRequest request1 = new JsonObjectRequest(Request.Method.GET, Url1, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -123,16 +124,33 @@ public class MainActivity extends BaseActivity {
 
                     for (int i = 0; i<1; i++) {
                         JSONObject result =jsonArray.getJSONObject(i);
-
                         String MovieTitle =result.getString("title");
-
-                        Log.d("Fxxxe","Ssss: "+MovieTitle);
-
                         String poster= result.getString("poster_path");
                         String poster1 ="https://image.tmdb.org/t/p/original"+poster;
                         lbUpcomingMovieTitleOne.setText(MovieTitle);
                         Glide.with(MainActivity.this).load(poster1).into(imageViewUpcoming);
+
                     }
+
+                    for (int j=0;j<2; j++){
+                        JSONObject result2 =jsonArray.getJSONObject(j);
+                        String MovieTitle =result2.getString("title");
+                        String poster= result2.getString("poster_path");
+                        String poster1 ="https://image.tmdb.org/t/p/original"+poster;
+                        lbUpcomingMovieTitleTwo.setText(MovieTitle);
+                        Glide.with(MainActivity.this).load(poster1).into(imageViewUpcomingTwo);
+                    }
+
+                    for (int k=0;k<3; k++){
+                        JSONObject result =jsonArray.getJSONObject(k);
+                        String MovieTitle =result.getString("title");
+                        String poster= result.getString("poster_path");
+                        String poster1 ="https://image.tmdb.org/t/p/original"+poster;
+                        lbUpcomingMovieTitleThree.setText(MovieTitle);
+                        Glide.with(MainActivity.this).load(poster1).into(imageViewUpcomingThree);
+                    }
+
+
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -144,7 +162,10 @@ public class MainActivity extends BaseActivity {
 
             }
         });
-        mQueue2.add(request1);
+
+
+        mQueue.add(request);
+        mQueue.add(request1);
     }
 
 }
