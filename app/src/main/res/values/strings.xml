@@ -40,4 +40,5 @@
     <string name="lb_CastOneName">AS SPIDERMAN</string>
     <string name="lb_SubRate">8.0</string>
     <string name="lb_SubBudget">250M</string>
+    <string name="lbPopularLastYear">Most Popular Last Year</string>
 </resources>
