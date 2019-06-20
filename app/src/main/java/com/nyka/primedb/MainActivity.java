@@ -1,5 +1,6 @@
 package com.nyka.primedb;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
@@ -73,7 +74,6 @@ public class MainActivity extends BaseActivity {
         lbMovieMostPopularReleaseDate=findViewById(R.id.lbMovieMostPopularReleaseDate);
         ivMostPopular=findViewById(R.id.ivMostPopular);
 
-
         //Open Detail Screen
         imageViewUpcoming.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +101,6 @@ public class MainActivity extends BaseActivity {
                 OpenScreenMovieDetail(IdMovie);
             }
         });
-
-
-
 
         RequestMainScreen();
     }
@@ -268,5 +265,12 @@ public class MainActivity extends BaseActivity {
         mQueue.add(request1);
         mQueue.add(requestPopularLastYear);
         mQueue.add(requestPopularThisYear);
+    }
+
+
+    public static void launch(Context context) {
+//        Intent intent=new Intent(context,MainActivity.class);
+//        context.startActivity(intent);
+        context.startActivity(new Intent(context, MainActivity.class));
     }
 }
