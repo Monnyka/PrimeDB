@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:paddingBottom="5dp"
+        android:orientation="vertical"
+        android:padding="0dp"
+        android:background="@color/colorMainBackground"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/im_cast_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:civ_border_width="1dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:civ_border_color="@color/colorSubtext"
+            android:src="@drawable/profile"/>
+        <TextView
+            android:id="@+id/lbCastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:text="Keanu Reeve"
+            android:textColor="@color/colorSubtext"
+            android:layout_alignStart="@+id/im_cast_image"
+            android:layout_centerVertical="true"
+            android:paddingBottom="18dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/avenir_lst_td_black"
+            />
+        <TextView
+            android:id="@+id/lbCharacter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_alignStart="@+id/im_cast_image"
+            android:text="AS John Wick"
+            android:textSize="14sp"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:textColor="@color/colorSubtext"
+            android:layout_centerVertical="true"
+            android:paddingTop="18dp"
+            />
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
