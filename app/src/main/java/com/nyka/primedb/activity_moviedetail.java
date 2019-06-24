@@ -1,15 +1,12 @@
 package com.nyka.primedb;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
+import android.util.Log;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -17,7 +14,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
@@ -25,14 +21,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class activity_moviedetail extends BaseActivity {
 
-    ImageView btnBack;
+    String mm="";
+    //ImageView btnBack;
     TextView lbMovieTitle;
     RequestQueue mQueue;
     String MovieID = "";
+
+    ArrayList<String> mArrayList;
+
+
+    /*  String[] imageUrls = new String[]{
+                "https://image.tmdb.org/t/p/w185/kZv92eTc0Gg3mKxqjjDAM73z9cy.jpg"
+        };*/
     ImageView ivPoster;
     TextView lbSynopsisDetail;
     TextView lbRated;
@@ -46,10 +53,15 @@ public class activity_moviedetail extends BaseActivity {
     TextView lbGenre;
     TextView lbVoteCount;
     TextView lbDistributeDetail;
+    TextView lbDirectorName;
+    ImageView ivDirector;
+    TextView lbCastMore;
 
     RecyclerView mRecyclerView;
     MovieAdapter mMovieAdapter;
     ArrayList<MovieItem> mMovieList;
+
+    ArrayList<String> imageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +71,7 @@ public class activity_moviedetail extends BaseActivity {
         mQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
         MovieID = intent.getStringExtra("movieID");
-        btnBack = findViewById(R.id.btnBackDetail);
+        //btnBack = findViewById(R.id.btnBackDetail);
         lbMovieTitle = findViewById(R.id.lbMovieTitle);
         ivPoster = findViewById(R.id.ivPoster);
         lbRated = findViewById(R.id.lbRated);
@@ -72,60 +84,67 @@ public class activity_moviedetail extends BaseActivity {
         lbRevenue = findViewById(R.id.lbRevenue);
         lbGenre = findViewById(R.id.lbGenre);
         lbVoteCount = findViewById(R.id.lbVoteCount);
+        lbDirectorName = findViewById(R.id.lbDirectorName);
+        ivDirector = findViewById(R.id.ivDirector);
         lbDistributeDetail = findViewById(R.id.lbDistributeDetail);
+        lbCastMore = findViewById(R.id.lbCastMore);
         lbSynopsisDetail = findViewById(R.id.lbSynopsisDetail);
-
         mRecyclerView = findViewById(R.id.recycler_view_cast);
-         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mMovieAdapter);
 
-        mMovieList =new ArrayList<>();
+        mMovieList = new ArrayList<>();
+        imageUrl = new ArrayList<>();
 
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenActivity();
-            }
-        });
         getMovieDetail();
-    }
+        getBanner();
 
-    private void OpenActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+
+
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                OpenActivity();
+//            }
+//        });
+
     }
+//    private void OpenActivity() {
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//    }
 
     public void getMovieDetail() {
         String movieUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "?api_key=" + apiKey + "&language=en-US";
-        String movieCreditUrl="https://api.themoviedb.org/3/movie/"+MovieID+"/credits?api_key=1469231605651a4f67245e5257160b5f";
+        String movieCreditUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "/credits?api_key=" + apiKey;
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, movieUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
                 try {
-
                     String MovieTitle = response.getString("original_title");
                     String poster = "https://image.tmdb.org/t/p/w185" + response.getString("poster_path");
                     String Synopsis = response.getString("overview");
                     String MovieRate = response.getString("vote_average");
                     String MovieTagLine = response.getString("tagline");
                     String MovieYear = response.getString("release_date");
-                    String MovieRunTime = response.getString("runtime");
+                    String MovieRunTime = response.getString("runtime") + "";
                     String MovieLanguage = response.getString("original_language");
                     boolean MovieRateR = response.getBoolean("adult");
                     String Revenue = response.getString("revenue");
                     String MovieVoteCount = response.getString("vote_count");
+                    String MovieBudget = response.getString("budget");
 
+                    String DateFormat = ConvertDateString(MovieYear);
+
+                    lbYear.setText(DateFormat);
                     if (Revenue != null && Revenue.length() > 6) {
                         String MovieRevenue = Revenue.substring(0, Revenue.length() - 6) + "M";
                         lbRevenue.setText(MovieRevenue);
                     } else lbRevenue.setText(Revenue);
 
-
-                    String MovieBudget = response.getString("budget");
                     Long mBudget = Long.parseLong(MovieBudget) / 1000000;
                     if (mBudget > 0) {
                         String mBudgetConvert = (mBudget) + "M";
@@ -136,21 +155,19 @@ public class activity_moviedetail extends BaseActivity {
                         lbBudget.setText(mBudgetConvert);
                     }
 
-                    if (MovieYear.length() > 4) {
-                        MovieYear.substring(MovieYear.length() - 4);
-                        lbYear.setText(MovieYear);
-                    }
-                    if (MovieRateR == true) {
-                        lbRatedR.setText("Rated-R");
-                    } else lbRatedR.setText("Everyone");
+                    if (MovieRateR) {
+                        lbRatedR.append("Rated-R");
+                    } else lbRatedR.append("Everyone");
 
-                    String minute = " Minute";
-                    lbRunTime.setText((MovieRunTime) + minute);
+                    if (MovieRunTime.equals("null")) {
+                        lbRunTime.append("0");
+                    } else lbRunTime.append((MovieRunTime) + "Minute");
+
                     lbMovieTitle.setText(MovieTitle);
                     lbSynopsisDetail.setText(Synopsis);
                     lbRated.setText(MovieRate);
                     lbLanguage.setText(MovieLanguage.toUpperCase());
-                    lbTagLine.setText("-" + MovieTagLine + "-");
+                    lbTagLine.setText(MovieTagLine);
                     lbVoteCount.setText(MovieVoteCount);
 
                     Glide.with(activity_moviedetail.this).load(poster).into(ivPoster);
@@ -171,7 +188,6 @@ public class activity_moviedetail extends BaseActivity {
                             lbGenre.append(MovieGenres);
                         }
 
-
                     }
                     //Loop find distribute company
                     JSONArray jsonArray1 = response.optJSONArray("production_companies");
@@ -182,7 +198,6 @@ public class activity_moviedetail extends BaseActivity {
                         String P_company = "-" + jsonObject.optString("name") + "\n";
                         lbDistributeDetail.append(P_company);
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -199,23 +214,51 @@ public class activity_moviedetail extends BaseActivity {
         JsonObjectRequest creditRequest = new JsonObjectRequest(Request.Method.GET, movieCreditUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 try {
                     JSONArray jsonArray = response.getJSONArray("cast");
 
-                    for(int i=0;i<5;i++){
+                    for (int i = 0; i < 10; i++) {
 
-                        JSONObject cast =jsonArray.getJSONObject(i);
+                        JSONObject cast = jsonArray.getJSONObject(i);
 
-                        String CastName =cast.getString("name");
-                        String CharrecterName ="as "+cast.getString("character");
-                        String  aa=cast.getString("profile_path");
-                        String imageUrl="https://image.tmdb.org/t/p/w185"+aa;
-                        mMovieList.add(new MovieItem(imageUrl,CastName,CharrecterName));
+                        int CastMore = jsonArray.length() - 10;
+                        String maa = String.valueOf(CastMore);
+                        lbCastMore.setText(maa);
+                        lbCastMore.append(" More");
+                        String CastName = cast.getString("name");
+                        String CharrecterName = "as " + cast.getString("character");
+                        String aa = cast.getString("profile_path");
+                        String imageUrl = "https://image.tmdb.org/t/p/w185" + aa;
+                        mMovieList.add(new MovieItem(imageUrl, CastName, CharrecterName));
 
                     }
-                    mMovieAdapter = new MovieAdapter(activity_moviedetail.this,mMovieList);
+                    mMovieAdapter = new MovieAdapter(activity_moviedetail.this, mMovieList);
                     mRecyclerView.setAdapter(mMovieAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //Get crew director
+                try {
+                    JSONArray jsonArray = response.getJSONArray("crew");
+
+                    for (int i = 0; i <= jsonArray.length(); i++) {
+                        JSONObject crew = jsonArray.getJSONObject(i);
+
+                        String getDirector = crew.optString("job");
+                        String Director_Image_Profile = "https://image.tmdb.org/t/p/w185" + crew.optString("profile_path");
+
+                        if (getDirector.equals("Director")) {
+                            String DirectorName = crew.optString("name");
+                            Glide.with(activity_moviedetail.this).load(Director_Image_Profile).into(ivDirector);
+
+                            if (lbDirectorName.getText() == "") {
+                                lbDirectorName.append(DirectorName);
+                            } else if (lbDirectorName.getText() != null)
+                                lbDirectorName.append(" & " + DirectorName);
+                        }
+
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -234,5 +277,62 @@ public class activity_moviedetail extends BaseActivity {
         mQueue.add(creditRequest);
     }
 
+    private String ConvertDateString(String MovieYear) {
+        String aa = MovieYear;
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
+        Date newDate = null;
+        try {
+            newDate = spf.parse(aa);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        spf = new SimpleDateFormat("dd MMM, yyyy");
+        String newDateString = spf.format(newDate);
+
+        return newDateString;
+    }
+
+    private void getBanner(){
+
+        String url="https://api.themoviedb.org/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f&language=en-US&include_image_language=en";
+        JsonObjectRequest requestBanner = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("backdrops");
+                    JSONArray jsonArrayPoster = response.getJSONArray("posters");
+
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject banner = jsonArray.getJSONObject(i);
+                        mm=("https://image.tmdb.org/t/p/original"+banner.getString("file_path"));
+                        Log.d("god","hell: "+mm);
+                        imageUrl.add(mm);
+                    }
+                    for(int i=0;i<jsonArrayPoster.length();i++){
+                        JSONObject poster = jsonArrayPoster.getJSONObject(i);
+                        mm=("https://image.tmdb.org/t/p/original"+poster.getString("file_path"));
+                        Log.d("god1","hell: "+mm);
+                        imageUrl.add(mm);
+                    }
+
+                    ViewPager viewPager =findViewById(R.id.view_pager);
+                    ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(activity_moviedetail.this, imageUrl);
+                    viewPager.setAdapter(viewPagerAdapter);
+
+                    Log.d("ffda",""+imageUrl);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        mQueue.add(requestBanner);
+    }
 
 }
