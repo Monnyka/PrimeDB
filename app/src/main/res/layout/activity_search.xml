@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/bg_toolbar"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/btnBackDetail"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:src="@drawable/ic_back"
+            android:background="@drawable/bg_clickable"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+        <!--<TextView-->
+
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Movie Detail"-->
+            <!--android:paddingTop="41dp"-->
+            <!--android:textSize="18sp"-->
+            <!--android:fontFamily="@font/avenir_lst_td_heavy"-->
+            <!--android:textColor="#ffffff"/>-->
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/titlePanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:background="@drawable/bg_toolbar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        >
+    <TextView
+        android:id="@+id/screenTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_movie"
+        android:textSize="22sp"
+        android:textColor="#ffffff"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/avenir_lst_td_black"
+        />
+
+        <TextView
+            android:layout_below="@id/screenTitle"
+            android:id="@+id/ScreenSearchSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/explore_now"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/colorSubtext"
+
+            />
+        <EditText
+            android:layout_below="@id/ScreenSearchSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:paddingBottom="8dp"
+            android:background="@drawable/bg_search_box"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/avenirltstd_roman"
+            android:hint="@string/search_hint"
+            android:paddingStart="20dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:inputType="textCapWords"
+            />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingBottom="100dp"
+        android:id="@+id/recyclerMovieList"
+        app:layout_constraintTop_toBottomOf="@id/titlePanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
+</android.support.constraint.ConstraintLayout>

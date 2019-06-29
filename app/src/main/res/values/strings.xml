@@ -45,4 +45,14 @@
     <string name="n_a">N/A</string>
     <string name="lb_MovieTitle">Movie Title</string>
     <string name="Distribute_Company">Distributed Company:</string>
+    <string name="Wishlist">Wishlist</string>
+    <string name="Calendar">Calendar</string>
+    <string name="Rank">Rank</string>
+    <string name="favorite">Favorite</string>
+    <string name="Browse">Browse</string>
+    <string name="Next_release">Next Release</string>
+    <string name="search_movie">Search Movie</string>
+    <string name="search">Search</string>
+    <string name="search_hint">  Search </string>
+    <string name="explore_now">Explore now</string>
 </resources>

@@ -2,14 +2,8 @@ package com.nyka.primedb;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.location.Address;
-import android.nfc.Tag;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,6 +36,7 @@ public class MainActivity extends BaseActivity {
     TextView lbMovieMostPopular;
     TextView lbMovieMostPopularReleaseDate;
     ImageView ivMostPopular;
+    ImageView btnBrowse;
     RequestQueue mQueue;
     String IdMovie="";
     String IdMovieUpcomingOne="";
@@ -73,8 +68,17 @@ public class MainActivity extends BaseActivity {
         lbMovieMostPopular=findViewById(R.id.lbMovieMostPopular);
         lbMovieMostPopularReleaseDate=findViewById(R.id.lbMovieMostPopularReleaseDate);
         ivMostPopular=findViewById(R.id.ivMostPopular);
+        btnBrowse=findViewById(R.id.imBrowse);
 
         //Open Detail Screen
+
+        btnBrowse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenSearch();
+            }
+        });
+
         imageViewUpcoming.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +115,13 @@ public class MainActivity extends BaseActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+    public void OpenSearch(){
+        Intent intent = new Intent(this, SearchActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+
     public void RequestMainScreen(){
 
             String Url="https://api.themoviedb.org/3/movie/now_playing?api_key=1469231605651a4f67245e5257160b5f&language=en-US&page=1";

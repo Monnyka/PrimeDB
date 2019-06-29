@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,10 +30,11 @@ import java.util.Date;
 public class activity_moviedetail extends BaseActivity {
 
     String mm="";
-    //ImageView btnBack;
+    ImageView btnBack;
     TextView lbMovieTitle;
     RequestQueue mQueue;
     String MovieID = "";
+    String imdb_id="";
 
     ArrayList<String> mArrayList;
 
@@ -60,7 +62,6 @@ public class activity_moviedetail extends BaseActivity {
     RecyclerView mRecyclerView;
     MovieAdapter mMovieAdapter;
     ArrayList<MovieItem> mMovieList;
-
     ArrayList<String> imageUrl;
 
     @Override
@@ -71,7 +72,7 @@ public class activity_moviedetail extends BaseActivity {
         mQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
         MovieID = intent.getStringExtra("movieID");
-        //btnBack = findViewById(R.id.btnBackDetail);
+        btnBack = findViewById(R.id.btnBackDetail);
         lbMovieTitle = findViewById(R.id.lbMovieTitle);
         ivPoster = findViewById(R.id.ivPoster);
         lbRated = findViewById(R.id.lbRated);
@@ -100,20 +101,19 @@ public class activity_moviedetail extends BaseActivity {
         getMovieDetail();
         getBanner();
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-//        btnBack.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                OpenActivity();
-//            }
-//        });
-
+                OpenActivity();
+            }
+        });
     }
-//    private void OpenActivity() {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
-//    }
+    private void OpenActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 
     public void getMovieDetail() {
         String movieUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "?api_key=" + apiKey + "&language=en-US";
@@ -124,6 +124,7 @@ public class activity_moviedetail extends BaseActivity {
             public void onResponse(JSONObject response) {
 
                 try {
+                    String imdbID=response.optString("imdb_id");
                     String MovieTitle = response.getString("original_title");
                     String poster = "https://image.tmdb.org/t/p/w185" + response.getString("poster_path");
                     String Synopsis = response.getString("overview");
@@ -136,9 +137,8 @@ public class activity_moviedetail extends BaseActivity {
                     String Revenue = response.getString("revenue");
                     String MovieVoteCount = response.getString("vote_count");
                     String MovieBudget = response.getString("budget");
-
+                    imdb_id=imdbID;
                     String DateFormat = ConvertDateString(MovieYear);
-
                     lbYear.setText(DateFormat);
                     if (Revenue != null && Revenue.length() > 6) {
                         String MovieRevenue = Revenue.substring(0, Revenue.length() - 6) + "M";
@@ -246,7 +246,7 @@ public class activity_moviedetail extends BaseActivity {
                         JSONObject crew = jsonArray.getJSONObject(i);
 
                         String getDirector = crew.optString("job");
-                        String Director_Image_Profile = "https://image.tmdb.org/t/p/w185" + crew.optString("profile_path");
+                        String Director_Image_Profile = "https://image.tmdb.org/t/p/w500" + crew.optString("profile_path");
 
                         if (getDirector.equals("Director")) {
                             String DirectorName = crew.optString("name");
@@ -294,26 +294,28 @@ public class activity_moviedetail extends BaseActivity {
 
     private void getBanner(){
 
-        String url="https://api.themoviedb.org/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f&language=en-US&include_image_language=en";
+        //String url="https://api.themoviedb.org/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f&language=en-US&include_image_language=en";
+       String url="https://api.themoviedb.org/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f";
         JsonObjectRequest requestBanner = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray jsonArray = response.getJSONArray("backdrops");
-                    JSONArray jsonArrayPoster = response.getJSONArray("posters");
+                    //JSONArray jsonArrayPoster = response.getJSONArray("posters");
 
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject banner = jsonArray.getJSONObject(i);
-                        mm=("https://image.tmdb.org/t/p/original"+banner.getString("file_path"));
+                        mm=("https://image.tmdb.org/t/p/w500"+banner.getString("file_path"));
+                        //mm=banner.getString("");
                         Log.d("god","hell: "+mm);
                         imageUrl.add(mm);
                     }
-                    for(int i=0;i<jsonArrayPoster.length();i++){
-                        JSONObject poster = jsonArrayPoster.getJSONObject(i);
-                        mm=("https://image.tmdb.org/t/p/original"+poster.getString("file_path"));
-                        Log.d("god1","hell: "+mm);
-                        imageUrl.add(mm);
-                    }
+//                    for(int i=0;i<jsonArrayPoster.length();i++){
+//                        JSONObject poster = jsonArrayPoster.getJSONObject(i);
+//                        mm=("https://image.tmdb.org/t/p/original"+poster.getString("file_path"));
+//                        Log.d("god1","hell: "+mm);
+//                        imageUrl.add(mm);
+ //                   }
 
                     ViewPager viewPager =findViewById(R.id.view_pager);
                     ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(activity_moviedetail.this, imageUrl);

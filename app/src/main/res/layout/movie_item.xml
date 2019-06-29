@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:background="#848484">
+        <RelativeLayout
+            android:layout_width="370dp"
+            android:layout_height="145dp"
+            android:background="@drawable/bg_button_main"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            >
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivMovieItem"
+            android:layout_width="100dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="36dp"
+            android:background="@drawable/bg_imageview_main"
+            android:padding="2.65dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/image_one" />
+
+        <TextView
+            android:id="@+id/txt_MovieTitle"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="45dp"
+            android:text="@string/txt_movie_title"
+            android:fontFamily="@font/avenir_lst_td_black"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/txt_Rate"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:text="8.0"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_below="@id/txt_MovieTitle"
+            android:fontFamily="@font/roboto_regular"
+            />
+        <TextView
+            android:id="@+id/txt_releaseDate"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:text="aaa"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_below="@id/txt_Rate"
+            android:fontFamily="@font/roboto_regular"
+            />
+    </RelativeLayout>
+</RelativeLayout>
