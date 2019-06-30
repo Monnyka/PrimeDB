@@ -5,61 +5,59 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="165dp"
-        android:background="#848484">
-        <RelativeLayout
-            android:layout_width="370dp"
-            android:layout_height="145dp"
-            android:background="@drawable/bg_button_main"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            >
-        </RelativeLayout>
+        android:layout_height="130dp"
+        android:background="@color/colorMainBackground">
 
         <ImageView
             android:id="@+id/ivMovieItem"
-            android:layout_width="100dp"
-            android:layout_height="145dp"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
             android:layout_marginTop="5dp"
-            android:layout_marginStart="36dp"
-            android:background="@drawable/bg_imageview_main"
+            android:layout_marginStart="28dp"
             android:padding="2.65dp"
             android:scaleType="fitXY"
-            android:src="@drawable/image_one" />
+            android:src="@drawable/image_one"
+            />
 
         <TextView
             android:id="@+id/txt_MovieTitle"
-            android:layout_width="230dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="45dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginTop="10dp"
             android:text="@string/txt_movie_title"
             android:fontFamily="@font/avenir_lst_td_black"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
             />
         <TextView
             android:id="@+id/txt_Rate"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="120dp"
             android:text="8.0"
-            android:textColor="#000000"
-            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
             android:layout_below="@id/txt_MovieTitle"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/avenirltstd_roman"
             />
         <TextView
             android:id="@+id/txt_releaseDate"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="120dp"
             android:text="aaa"
-            android:textColor="#000000"
-            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
             android:layout_below="@id/txt_Rate"
-            android:fontFamily="@font/roboto_regular"
+            android:fontFamily="@font/avenirltstd_roman"
             />
+
+        <ImageView
+            android:layout_width="350dp"
+            android:layout_height="0.5dp"
+            android:background="@color/colorSubtext"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 </RelativeLayout>

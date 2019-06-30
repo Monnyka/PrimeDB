@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    android:background="@color/colorMainBackground">
 
     <RelativeLayout
         android:id="@+id/toolbar"
@@ -15,7 +16,7 @@
         android:background="@drawable/bg_toolbar"
         >
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/btnBackDetail"
+            android:id="@+id/btnBackSearch"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="10dp"
@@ -89,6 +90,7 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
         android:paddingBottom="100dp"
         android:id="@+id/recyclerMovieList"
         app:layout_constraintTop_toBottomOf="@id/titlePanel"

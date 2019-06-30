@@ -1,8 +1,11 @@
 package com.nyka.primedb;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,6 +29,7 @@ public class SearchActivity extends BaseActivity {
     MovieListAdapter mMovieAdapter;
     ArrayList<MovieListItem> mMovieList;
     RequestQueue mQueue;
+    ImageView btnBackSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +37,19 @@ public class SearchActivity extends BaseActivity {
         setContentView(R.layout.activity_search);
         NoStatusBar();
 
+        btnBackSearch=findViewById(R.id.btnBackSearch);
         mRecyclerView = findViewById(R.id.recyclerMovieList);
         mRecyclerView.hasFixedSize();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMovieList = new ArrayList<>();
         mQueue = Volley.newRequestQueue(this);
+
+        btnBackSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenMainScreen();
+            }
+        });
 
         RequestList();
 
@@ -45,7 +57,7 @@ public class SearchActivity extends BaseActivity {
 
     private void RequestList() {
 
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key=1469231605651a4f67245e5257160b5f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1";
+        String url = "https://api.themoviedb.org/3/discover/movie?api_key=1469231605651a4f67245e5257160b5f&language=en-US&region=us&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=2019";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -96,5 +108,13 @@ public class SearchActivity extends BaseActivity {
         String newDateString1 = newDateString;
         return newDateString1;
     }
-    
+
+
+    public void OpenMainScreen(){
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
 }
