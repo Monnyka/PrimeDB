@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,13 +26,23 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SearchActivity extends BaseActivity {
+public class SearchActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener {
+
+    public static final String EXTRA_URL = "imageUrl";
+    public static final String EXTRA_TITLE = "movieTitle";
+    public static final String EXTRA_RATE = "imageRate";
+    public static final String EXTRA_RELEASE = "imageRelease";
 
     RecyclerView mRecyclerView;
     MovieListAdapter mMovieAdapter;
     ArrayList<MovieListItem> mMovieList;
     RequestQueue mQueue;
     ImageView btnBackSearch;
+    String popularApi="";
+    TextView ScreenTitle;
+    EditText edSearch;
+    String screenTitle="";
+    RelativeLayout llSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +50,24 @@ public class SearchActivity extends BaseActivity {
         setContentView(R.layout.activity_search);
         NoStatusBar();
 
-        btnBackSearch=findViewById(R.id.btnBackSearch);
+        ScreenTitle=findViewById(R.id.ScreenTitle);
+        edSearch=findViewById(R.id.edSearch);
+        btnBackSearch = findViewById(R.id.btnBackSearch);
         mRecyclerView = findViewById(R.id.recyclerMovieList);
+        llSearch=findViewById(R.id.llSearch);
         mRecyclerView.hasFixedSize();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMovieList = new ArrayList<>();
         mQueue = Volley.newRequestQueue(this);
+        Intent intent = getIntent();
+        popularApi=intent.getStringExtra("apiPopular");
+        screenTitle=intent.getStringExtra("ScreenTitle");
+
+        ScreenTitle.setText(screenTitle);
+            if(ScreenTitle.getText().equals("IN THEATER NOW")){
+                llSearch.setVisibility(View.GONE);
+            }
+
 
         btnBackSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,26 +82,27 @@ public class SearchActivity extends BaseActivity {
 
     private void RequestList() {
 
-        String url = "https://api.themoviedb.org/3/discover/movie?api_key=1469231605651a4f67245e5257160b5f&language=en-US&region=us&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_year=2019";
-
+        String url = popularApi;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray jsonArray = response.getJSONArray("results");
 
-                    for(int i=0;i<jsonArray.length();i++){
-                        JSONObject Movie =jsonArray.getJSONObject(i);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject Movie = jsonArray.getJSONObject(i);
 
-                        String imageUrl="https://image.tmdb.org/t/p/w185"+Movie.optString("poster_path");
-                        String MovieTitle=Movie.optString("title");
-                        String MovieRate=Movie.optString("vote_average");
-                        String ReleaseDate=Movie.optString("release_date");
-                        String MovieReleaseDate=ConvertDate(ReleaseDate);
-                        mMovieList.add(new MovieListItem(imageUrl, MovieTitle, MovieRate, MovieReleaseDate));
+                        String imageUrl = "https://image.tmdb.org/t/p/w185" + Movie.optString("poster_path");
+                        String MovieID = Movie.optString("id");
+                        String MovieTitle = Movie.optString("title");
+                        String MovieRate = Movie.optString("vote_average");
+                        String ReleaseDate = Movie.optString("release_date");
+                        String MovieReleaseDate = ConvertDate(ReleaseDate);
+                        mMovieList.add(new MovieListItem(imageUrl, MovieTitle, MovieRate, MovieReleaseDate, MovieID));
                     }
-                    mMovieAdapter =new MovieListAdapter(SearchActivity.this,mMovieList);
+                    mMovieAdapter = new MovieListAdapter(SearchActivity.this, mMovieList);
                     mRecyclerView.setAdapter(mMovieAdapter);
+                    mMovieAdapter.setOnClickListener(SearchActivity.this);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -92,8 +118,7 @@ public class SearchActivity extends BaseActivity {
         mQueue.add(request);
     }
 
-    public String ConvertDate(String ReleaseDate){
-
+    public String ConvertDate(String ReleaseDate) {
         String aa = ReleaseDate;
         SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
         Date newDate = null;
@@ -110,11 +135,22 @@ public class SearchActivity extends BaseActivity {
     }
 
 
-    public void OpenMainScreen(){
+    public void OpenMainScreen() {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Intent detailIntent = new Intent(this, activity_moviedetail.class);
+        MovieListItem clickedItem = mMovieList.get(position);
+        detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
+        detailIntent.putExtra(EXTRA_TITLE, clickedItem.getMovieTitle());
+        detailIntent.putExtra(EXTRA_RATE, clickedItem.getMovieRate());
+        detailIntent.putExtra(EXTRA_RELEASE, clickedItem.getMovieReleaseDate());
+        detailIntent.putExtra("movieID", clickedItem.getMovieID());
+        startActivity(detailIntent);
+    }
 }

@@ -55,4 +55,17 @@
     <string name="search">Search</string>
     <string name="search_hint">  Search </string>
     <string name="explore_now">Explore now</string>
+    <string name="dot">...</string>
+    <string name="Discover">Discover</string>
+    <string name="explore">Explore</string>
+    <string name="ViewMore">View More</string>
+    <string name="Popular">Popular</string>
+    <string name="view_more">View More</string>
+    <string name="lbPopularOne">Movie Title</string>
+    <string name="Topmoviethisyear">Top Movie This Year</string>
+    <string name="explorebygenre">Explore by genre</string>
+    <string name="Action">Action</string>
+    <string name="Horror">Horror</string>
+    <string name="Thrill">Thrill</string>
+    <string name="upcoming">Upcoming</string>
 </resources>

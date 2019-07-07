@@ -17,6 +17,21 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
 
     private Context mContext;
     private ArrayList<MovieListItem> mMovieList;
+    private OnItemClickListener mListener;
+
+
+    //Write interface for handle click event to the recycler list view
+    //Forward click from Adapter to Activity
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnClickListener(OnItemClickListener Listener){
+
+        mListener = Listener;
+    }
+
+
 
     public MovieListAdapter (Context context, ArrayList<MovieListItem> movieList){
         mContext=context;
@@ -40,6 +55,7 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
         String movieTitle=currentItem.getMovieTitle();
         String movieRate=currentItem.getMovieRate();
         String movieRelease=currentItem.getMovieReleaseDate();
+        String movieID=currentItem.getMovieID();
 
 
         movieViewHolder.mTextViewTitle.setText(movieTitle);
@@ -60,12 +76,29 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
         TextView mTextViewRate;
         TextView mTextViewRelease;
 
-        public MovieViewHolder(@NonNull View itemView) {
+        public MovieViewHolder(@NonNull final View itemView) {
             super(itemView);
         mImageView=itemView.findViewById(R.id.ivMovieItem);
         mTextViewTitle=itemView.findViewById(R.id.txt_MovieTitle);
         mTextViewRate=itemView.findViewById(R.id.txt_Rate);
         mTextViewRelease=itemView.findViewById(R.id.txt_releaseDate);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mListener !=null){
+
+                    int position =getAdapterPosition();
+                    if(position!=RecyclerView.NO_POSITION){
+
+                        mListener.onItemClick(position);
+                    }
+
+                }
+            }
+        });
+
+
         }
     }
 

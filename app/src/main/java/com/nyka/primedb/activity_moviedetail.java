@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -63,6 +64,7 @@ public class activity_moviedetail extends BaseActivity {
     MovieAdapter mMovieAdapter;
     ArrayList<MovieItem> mMovieList;
     ArrayList<String> imageUrl;
+    ScrollView svMovieDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class activity_moviedetail extends BaseActivity {
         NoStatusBar();
         mQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
+        //movieID
         MovieID = intent.getStringExtra("movieID");
         btnBack = findViewById(R.id.btnBackDetail);
         lbMovieTitle = findViewById(R.id.lbMovieTitle);
@@ -91,6 +94,9 @@ public class activity_moviedetail extends BaseActivity {
         lbCastMore = findViewById(R.id.lbCastMore);
         lbSynopsisDetail = findViewById(R.id.lbSynopsisDetail);
         mRecyclerView = findViewById(R.id.recycler_view_cast);
+        svMovieDetail=findViewById(R.id.svMovieDetail);
+        svMovieDetail.setVisibility(View.INVISIBLE);
+
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mMovieAdapter);
@@ -100,11 +106,10 @@ public class activity_moviedetail extends BaseActivity {
 
         getMovieDetail();
         getBanner();
-
+        svMovieDetail.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 OpenActivity();
             }
         });
@@ -150,7 +155,6 @@ public class activity_moviedetail extends BaseActivity {
                         String mBudgetConvert = (mBudget) + "M";
                         lbBudget.setText(mBudgetConvert);
                     } else {
-
                         String mBudgetConvert = "" + (mBudget);
                         lbBudget.setText(mBudgetConvert);
                     }

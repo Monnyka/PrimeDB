@@ -4,57 +4,526 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBackground"
+    android:background="@color/colorSubtext"
     tools:context=".MainActivity">
+
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:background="@drawable/bg_toolbar"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="fill_parent"
+        android:background="#0D7058"
         app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
+        <View
+            android:id="@+id/rectangle"
+            android:layout_width="143.92dp"
+            android:layout_height="143.92dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="-40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="-65dp"
+            android:background="@drawable/bg_wallpaper_rectangle"
+            android:alpha="0.3"
+            android:rotation="-280"
+            />
+        <View
+            android:layout_marginStart="247dp"
+            android:layout_width="57dp"
+            android:layout_height="31dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/bg_dot"
+            >
+        </View>
+
+        <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="65dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/circularstd_bold"
+        android:gravity="center_vertical"
+        android:text="@string/Discover"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/textVeryBig"
+        />
+        <RelativeLayout
+            android:id="@+id/btnExplore"
+            android:layout_width="70dp"
+            android:layout_height="28dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/bg_search_box"
+            >
+              <TextView
+                  android:id="@+id/explore"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:fontFamily="@font/circularstd_bold"
+                  android:text="@string/explore"
+                  android:layout_centerVertical="true"
+                  android:layout_centerHorizontal="true"
+                  android:gravity="center"
+                  />
+
+          </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/btnUpcoming"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/bg_search_box"
+        android:layout_alignStart="@+id/btnExplore"
+             >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/upcoming"
+            android:fontFamily="@font/circularstd_bold"
+            android:gravity="center"
+            />
+         </RelativeLayout>
+        <TextView
+            android:id="@+id/seed_pokemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="122dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/circularstd_bold"
+            android:textSize="@dimen/textNormal"
+            android:text="@string/ViewMore"
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnUpcoming"
+            android:layout_marginTop="10dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="20dp"
+                android:id="@+id/rvTrending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+            </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/lbPopular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:text="@string/Popular"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textMedium"
+                    android:layout_below="@+id/rvTrending"/>
+
+                <TextView
+                    android:id="@+id/view_more_popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rvTrending"
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/view_more"
+                    android:fontFamily="@font/circularstd_bold"
+                    />
+
+                <View
+                    android:id="@+id/btnPopularOne"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/lbPopular"
+                    android:background="@drawable/bg_search_box"
+                    />
+                <TextView
+                    android:id="@+id/lbPopularOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbPopularOne"
+                    android:textColor="#000000"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="15dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:layout_alignTop="@id/btnPopularOne"
+                    />
+
+                <TextView
+                    android:id="@+id/lbReleaseOne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbPopularOne"
+                    android:textColor="#000000"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="25dp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textNormal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:layout_alignTop="@id/lbPopularOne"
+                    />
+
+
+                <View
+                    android:id="@+id/btnPopularTwo"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/btnPopularOne"
+                    android:background="@drawable/bg_search_box"
+                    />
+                <TextView
+                    android:id="@+id/lbPopularTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbPopularOne"
+                    android:textColor="#000000"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="15dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:layout_alignTop="@id/btnPopularTwo"
+                    />
+                <TextView
+                    android:id="@+id/lbReleaseTwo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbPopularOne"
+                    android:textColor="#000000"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="25dp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textNormal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:layout_alignTop="@id/lbPopularTwo"
+                    />
+                <View
+                    android:id="@+id/btnPopularThree"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/btnPopularTwo"
+                    android:background="@drawable/bg_search_box"
+                    />
+                <TextView
+                    android:id="@+id/lbPopularThree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbPopularOne"
+                    android:textColor="#000000"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="15dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:layout_alignTop="@id/btnPopularThree"
+                    />
+                <TextView
+                    android:id="@+id/lbReleaseThree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lbPopularOne"
+                    android:textColor="#000000"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="25dp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textNormal"
+                    android:fontFamily="@font/avenirltstd_roman"
+                    android:layout_alignTop="@id/lbPopularThree"
+                    />
+
+                <View
+                    android:layout_width="143.92dp"
+                    android:layout_height="143.92dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="-80dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="285dp"
+                    android:background="@drawable/bg_wallpaper_rectangle"
+                    android:alpha="0.3"
+                    android:rotation="-150"
+                    />
+
+                <TextView
+                    android:id="@+id/lbTopMovieThisYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textMedium"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Topmoviethisyear"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:layout_below="@id/btnPopularThree"
+                    />
+
+                <TextView
+                    android:id="@+id/view_more_TopThisYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnPopularThree"
+                    android:layout_marginTop="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/view_more"
+                    android:fontFamily="@font/circularstd_bold"
+                    />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvTopThisYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:layout_below="@id/lbTopMovieThisYear"
+                    >
+                </android.support.v7.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/lbbygenre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textMedium"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/explorebygenre"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:layout_below="@id/rvTopThisYear"
+                    />
+                
+                <HorizontalScrollView
+                    android:layout_below="@id/lbbygenre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp">
+
+                        <View
+                            android:id="@+id/v_action"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/bg_itemgenre"
+                            />
+                        <ImageView
+                            android:layout_alignTop="@+id/v_action"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginStart="33dp"
+                            android:src="@drawable/ic_action"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Action"
+                            android:layout_below="@+id/v_action"
+                            android:layout_marginStart="28dp"
+                            android:fontFamily="@font/circularstd_bold"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/textSmall"
+                            />
+
+                        <View
+                            android:id="@+id/v_horror"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="65dp"
+                            android:layout_alignStart="@+id/v_action"
+                            android:background="@drawable/bg_itemgenre"
+                            />
+                        <ImageView
+                            android:layout_alignTop="@+id/v_action"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginStart="99dp"
+                            android:src="@drawable/ic_horror"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Horror"
+                            android:layout_below="@+id/v_action"
+                            android:layout_marginStart="92dp"
+                            android:fontFamily="@font/circularstd_bold"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/textSmall"
+                            />
+
+                        <View
+                            android:id="@+id/v_Thrill"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="65dp"
+                            android:layout_alignStart="@+id/v_horror"
+                            android:background="@drawable/bg_itemgenre"
+                            />
+                        <ImageView
+                            android:layout_alignTop="@+id/v_action"
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginStart="80dp"
+                            android:layout_alignStart="@+id/v_horror"
+                            android:src="@drawable/ic_thrill"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Thrill"
+                            android:layout_below="@+id/v_action"
+                            android:layout_marginStart="160dp"
+                            android:fontFamily="@font/circularstd_bold"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/textSmall"
+                            />
+
+
+                    </RelativeLayout>
+                    
+                    
+                    
+                    
+                    
+                    
+                </HorizontalScrollView>
+
+
+
+
+
+            </RelativeLayout>
+        </ScrollView>
     </RelativeLayout>
-    <TextView
-        android:id="@+id/txt_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
-        android:fontFamily="@font/avenir_lst_td_heavy"
-        android:text="@string/txt_title"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/txt_subtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
-        android:fontFamily="@font/roboto_regular"
-        android:text="@string/txt_subtitle"
-        android:textColor="@color/colorSubtext"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_title" />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Old UI
+    <RelativeLayout
+        android:id="@+id/pnTop"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@drawable/bg_mainscreen_title"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/avenir_lst_td_heavy"
+            android:text="@string/txt_title"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/txt_subtitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_title"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/txt_subtitle"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent" />
+    </RelativeLayout>
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_subtitle"
         android:scrollbars="none"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pnTop"
+        android:visibility="gone">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F4F7FA"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="3000dp"
             android:paddingBottom="100dp"
-            app:layout_constraintTop_toBottomOf="@+id/txt_title">
+            app:layout_constraintTop_toBottomOf="@+id/pnTop">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenir_lst_td_black"
+                android:text="Tranding"
+                android:textColor="@color/colorMainBackground"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_ViewWhatNow"
+                android:layout_width="match_parent"
+                android:layout_height="220dp">
+            </android.support.v7.widget.RecyclerView>
 
             <HorizontalScrollView
                 android:id="@+id/ll_movie_count"
@@ -62,7 +531,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:paddingStart="20dp"
-                android:paddingEnd="10dp"
+                android:paddingEnd="0dp"
                 android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -72,6 +541,7 @@
                     android:layout_height="wrap_content">
 
                     <RelativeLayout
+                        android:id="@+id/rlInTheater"
                         android:layout_width="300dp"
                         android:layout_height="120dp"
                         android:layout_marginTop="20dp"
@@ -262,8 +732,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_movie_count"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="0dp"
-                >
+                android:layout_marginBottom="0dp">
 
                 <RelativeLayout
                     android:id="@+id/ll_Button_Dashboard"
@@ -271,27 +740,24 @@
                     android:layout_height="90dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/bg_button_main"
-                    >
+                    android:background="@drawable/bg_button_main">
 
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="@string/favorite"
-                     android:layout_centerHorizontal="true"
-                     android:fontFamily="@font/avenir_lst_td_black"
-                     android:textColor="@color/colorMainBackground"
-                     android:layout_marginTop="15dp"
-                     android:textSize="16sp"
-                     />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/avenir_lst_td_black"
+                        android:text="@string/favorite"
+                        android:textColor="@color/colorMainBackground"
+                        android:textSize="16sp" />
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="40dp"
-                    android:src="@drawable/ic_favorite"
-                    />
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="40dp"
+                        android:src="@drawable/ic_favorite" />
 
                 </RelativeLayout>
 
@@ -305,21 +771,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Calendar"
                         android:layout_centerHorizontal="true"
-                        android:fontFamily="@font/avenir_lst_td_black"
-                        android:textColor="@color/colorMainBackground"
                         android:layout_marginTop="15dp"
-                        android:textSize="16sp"
-                        />
+                        android:fontFamily="@font/avenir_lst_td_black"
+                        android:text="@string/Calendar"
+                        android:textColor="@color/colorMainBackground"
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="40dp"
-                        android:src="@drawable/ic_calendar"
-                        />
+                        android:src="@drawable/ic_calendar" />
 
                 </RelativeLayout>
 
@@ -333,21 +797,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Rank"
                         android:layout_centerHorizontal="true"
-                        android:fontFamily="@font/avenir_lst_td_black"
-                        android:textColor="@color/colorMainBackground"
                         android:layout_marginTop="15dp"
-                        android:textSize="16sp"
-                        />
+                        android:fontFamily="@font/avenir_lst_td_black"
+                        android:text="@string/Rank"
+                        android:textColor="@color/colorMainBackground"
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="40dp"
-                        android:src="@drawable/ic_star"
-                        />
+                        android:src="@drawable/ic_star" />
 
                 </RelativeLayout>
 
@@ -358,17 +820,16 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="205dp"
                     android:layout_marginEnd="10dp"
-                    android:background="@drawable/bg_button_main"
-                    >
+                    android:background="@drawable/bg_button_main">
 
                     <ImageView
                         android:id="@+id/imBrowse"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/filter_browse"
                         android:scaleType="centerCrop"
-                        />
+                        android:src="@drawable/filter_browse" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -392,19 +853,19 @@
                     android:background="@drawable/bg_button_main">
 
                     <!--<ImageView-->
-                        <!--android:layout_width="60dp"-->
-                        <!--android:layout_height="60dp"-->
-                        <!--android:layout_gravity="center_vertical"-->
-                        <!--android:layout_marginStart="300dp"-->
-                        <!--android:layout_marginTop="25dp"-->
-                        <!--android:src="@drawable/ic_aperture" />-->
+                    <!--android:layout_width="60dp"-->
+                    <!--android:layout_height="60dp"-->
+                    <!--android:layout_gravity="center_vertical"-->
+                    <!--android:layout_marginStart="300dp"-->
+                    <!--android:layout_marginTop="25dp"-->
+                    <!--android:src="@drawable/ic_aperture" />-->
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="25dp"
-                        android:layout_centerHorizontal="true"
                         android:fontFamily="@font/avenir_lst_td_black"
                         android:paddingTop="15dp"
                         android:text="Avengers: End Game (2019)"
@@ -415,9 +876,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="25dp"
-                        android:layout_centerHorizontal="true"
                         android:fontFamily="@font/avenir_lst_td_heavy"
                         android:paddingBottom="30dp"
                         android:text="@string/Next_release"
@@ -433,96 +894,97 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rl_button_group"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/avenir_lst_td_heavy"
-                android:text="@string/lb_Coming_Up_title"
-                android:textColor="@color/colorSubtext"
-                android:textSize="16sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/avenir_lst_td_black"
+                android:text="UP COMING"
+                android:textColor="@color/colorMainBackground"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent" />
 
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lb_Coming_Up_title"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="8dp">
+
+                <ImageView
+                    android:id="@+id/ivComing1"
+                    android:layout_width="110dp"
+                    android:layout_height="170dp"
+                    android:background="@drawable/bg_imageview_main"
+                    android:padding="2.65dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_one"
+                    android:transitionName="imageViewPoster" />
+
+                <TextView
+                    android:id="@+id/lbUpComingMovieOne"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_below="@+id/lb_Coming_Up_title"
-                    >
+                    android:layout_marginTop="175dp"
+                    android:text="@string/lb_Movie_One"
+                    android:textColor="@color/colorSubtext" />
 
-                    <ImageView
-                        android:id="@+id/ivComing1"
-                        android:layout_width="110dp"
-                        android:layout_height="170dp"
-                        android:background="@drawable/bg_imageview_main"
-                        android:padding="2.65dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/image_one" />
+                <ImageView
+                    android:id="@+id/ivUpComing2"
+                    android:layout_width="110dp"
+                    android:layout_height="170dp"
+                    android:layout_marginStart="130dp"
+                    android:background="@drawable/bg_imageview_main"
+                    android:padding="2.65dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_two" />
 
-                    <TextView
-                        android:id="@+id/lbUpComingMovieOne"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="175dp"
-                        android:text="@string/lb_Movie_One"
-                        android:textColor="@color/colorSubtext" />
+                <TextView
+                    android:id="@+id/lbUpComingMovieTwo"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="130dp"
+                    android:layout_marginTop="175dp"
+                    android:text="@string/lb_Movie_two"
+                    android:textColor="@color/colorSubtext" />
 
-                    <ImageView
-                        android:id="@+id/ivUpComing2"
-                        android:layout_width="110dp"
-                        android:layout_height="170dp"
-                        android:layout_marginStart="130dp"
-                        android:background="@drawable/bg_imageview_main"
-                        android:padding="2.65dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/image_two" />
+                <ImageView
+                    android:id="@+id/ivUpComing3"
+                    android:layout_width="110dp"
+                    android:layout_height="170dp"
+                    android:layout_marginStart="260dp"
+                    android:background="@drawable/bg_imageview_main"
+                    android:padding="2.65dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/image_three" />
 
-                    <TextView
-                        android:id="@+id/lbUpComingMovieTwo"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="130dp"
-                        android:layout_marginTop="175dp"
-                        android:text="@string/lb_Movie_two"
-                        android:textColor="@color/colorSubtext" />
+                <TextView
+                    android:id="@+id/lbUpComingMovieThree"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="260dp"
+                    android:layout_marginTop="175dp"
+                    android:text="@string/lb_Movie_Three"
+                    android:textColor="@color/colorSubtext" />
+                <!--
+                                    <ImageView
+                                        android:layout_width="120dp"
+                                        android:layout_height="180dp"
+                                        android:layout_marginStart="420dp"
+                                        android:layout_marginEnd="40dp"
+                                        android:background="@drawable/bg_imageview_main"
+                                        android:padding="2.65dp"
+                                        android:scaleType="fitXY"
+                                        android:src="@drawable/image_four" />
 
-                    <ImageView
-                        android:id="@+id/ivUpComing3"
-                        android:layout_width="110dp"
-                        android:layout_height="170dp"
-                        android:layout_marginStart="260dp"
-                        android:background="@drawable/bg_imageview_main"
-                        android:padding="2.65dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/image_three" />
-
-                    <TextView
-                        android:id="@+id/lbUpComingMovieThree"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="260dp"
-                        android:layout_marginTop="175dp"
-                        android:text="@string/lb_Movie_Three"
-                        android:textColor="@color/colorSubtext" />
-<!--
-                    <ImageView
-                        android:layout_width="120dp"
-                        android:layout_height="180dp"
-                        android:layout_marginStart="420dp"
-                        android:layout_marginEnd="40dp"
-                        android:background="@drawable/bg_imageview_main"
-                        android:padding="2.65dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/image_four" />
-
-                    <TextView
-                        android:layout_width="120dp"
-                        android:layout_height="35dp"
-                        android:layout_marginStart="420dp"
-                        android:layout_marginTop="185dp"
-                        android:text="@string/lb_Movie_Four"
-                        android:textColor="@color/colorSubtext" />-->
-                </RelativeLayout>
+                                    <TextView
+                                        android:layout_width="120dp"
+                                        android:layout_height="35dp"
+                                        android:layout_marginStart="420dp"
+                                        android:layout_marginTop="185dp"
+                                        android:text="@string/lb_Movie_Four"
+                                        android:textColor="@color/colorSubtext" />-->
+            </RelativeLayout>
 
 
         </LinearLayout>

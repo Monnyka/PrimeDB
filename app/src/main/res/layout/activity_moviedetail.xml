@@ -8,17 +8,17 @@
     android:background="@color/colorMainBackground">
 
     <ScrollView
+        android:id="@+id/svMovieDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         >
-
     <RelativeLayout
+        android:id="@+id/rlMovieDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         >
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
@@ -56,7 +56,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="@string/lbTagLine"
+            android:text="@string/dot"
             android:textColor="#b0bec5"
             android:fontFamily="@font/avenirltstd_roman"
             android:textSize="14sp"
@@ -88,20 +88,21 @@
 
             <ImageView
                 android:id="@+id/ivPoster"
-                android:layout_width="110dp"
+                android:layout_width="115dp"
                 android:layout_height="170dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginStart="85dp"
+                android:layout_marginStart="75dp"
                 android:background="@drawable/bg_imageview_main"
                 android:padding="2.65dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/image_one"/>
+                android:transitionName="imageViewPoster"
+                />
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_release_date"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="220dp"
                 android:layout_marginTop="35dp"
                 />
             <TextView
@@ -118,7 +119,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_budget"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="220dp"
                 android:layout_marginTop="65dp"
                 />
 
@@ -128,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
                 android:fontFamily="@font/avenir_lst_td_heavy"
-                android:paddingStart="260dp"
+                android:paddingStart="250dp"
                 android:textColor="#ffffff"
                 android:textSize="14sp" />
 
@@ -136,7 +137,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_clock"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="220dp"
                 android:layout_marginTop="95dp"
                 />
             <TextView
@@ -153,7 +154,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_language"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="220dp"
                 android:layout_marginTop="125dp"
                 />
 
@@ -163,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="125dp"
                 android:fontFamily="@font/avenir_lst_td_heavy"
-                android:paddingStart="260dp"
+                android:paddingStart="250dp"
                 android:textColor="#ffffff"
                 android:textSize="14sp" />
 
@@ -171,7 +172,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_rated"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="220dp"
                 android:layout_marginTop="155dp"
                 />
 
@@ -182,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="155dp"
                 android:fontFamily="@font/avenir_lst_td_heavy"
-                android:paddingStart="260dp"
+                android:paddingStart="250dp"
                 android:textColor="#ffffff"
                 android:textSize="14sp" />
 
@@ -190,7 +191,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_revenue"
-                android:layout_marginStart="230dp"
+                android:layout_marginStart="220dp"
                 android:layout_marginTop="185dp"
                 />
 

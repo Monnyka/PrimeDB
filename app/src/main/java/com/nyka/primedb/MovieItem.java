@@ -1,10 +1,6 @@
 package com.nyka.primedb;
 
-import android.widget.ImageView;
-
 public class MovieItem {
-
-
 
     private String mImageUrl;
     private String mCastName;
