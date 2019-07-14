@@ -17,6 +17,16 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
 
     private Context mContext;
     private ArrayList<trending> mTrendingList;
+    private onClickItemListener mListener;
+
+    public interface onClickItemListener{
+
+        void onItemClick(int position);
+    }
+
+    public void setOnClickListener(onClickItemListener listener){
+        mListener=listener;
+    }
 
     public TrendingAdapter(Context context, ArrayList<trending> trendingList) {
         mContext = context;
@@ -36,6 +46,7 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
             String trendingTitle = currentItem.getTrendingTitle();
             String trendingPoster =currentItem.getTrendingPoster();
             String trendingReleaseDate=currentItem.getTrendingReleaseDate();
+            //String trendingID=currentItem.getTrendingID();
 
             trendingViewHolder.mTitle.setText(trendingTitle);
             trendingViewHolder.mReleaseDate.setText(trendingReleaseDate);
@@ -57,6 +68,22 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
             mImageView=itemView.findViewById(R.id.imTrendingPoster);
             mTitle=itemView.findViewById(R.id.lbTrendingTitle);
             mReleaseDate=itemView.findViewById(R.id.lbTrendingReleaseDate);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    if(mListener !=null) {
+
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
+
         }
     }
 

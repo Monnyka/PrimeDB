@@ -85,7 +85,7 @@
                 android:layout_centerVertical="true"
                 />
             <EditText
-                android:id="@+id/edSearch"
+                android:id="@+id/etSearch"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="25dp"
@@ -101,6 +101,7 @@
                 android:background="@android:color/transparent"
                 android:cursorVisible="false"
                 android:layout_centerVertical="true"
+                android:imeOptions="actionSearch"
                 />
         </RelativeLayout>
 

@@ -112,7 +112,7 @@
                 android:textColor="#ffffff"
                 android:fontFamily="@font/avenir_lst_td_heavy"
                 android:textSize="14sp"
-                android:paddingStart="260dp"
+                android:paddingStart="250dp"
                 android:layout_marginTop="35dp"/>
 
             <ImageView
@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="95dp"
             android:fontFamily="@font/avenir_lst_td_heavy"
-            android:layout_marginStart="260dp"
+            android:layout_marginStart="250dp"
             android:textColor="#ffffff"
             android:textSize="14sp" />
 
@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="185dp"
                 android:fontFamily="@font/avenir_lst_td_heavy"
-                android:paddingStart="260dp"
+                android:paddingStart="250dp"
                 android:textColor="#ffffff"
                 android:textSize="14sp" />
 
@@ -395,17 +395,21 @@
 
         </RelativeLayout>
     </ScrollView>
+
+
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="80dp"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     android:background="@drawable/bg_toolbar"
+
     >
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/btnBackDetail"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="30dp"
         android:paddingStart="10dp"
@@ -415,6 +419,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
+
     <TextView
 
         android:layout_centerHorizontal="true"
@@ -425,6 +430,18 @@
         android:textSize="18sp"
         android:fontFamily="@font/avenir_lst_td_heavy"
         android:textColor="#ffffff"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/btnAddFavorite"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_heart"
+        android:padding="8dp"
+        android:background="@drawable/bg_clickable"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        />
 </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

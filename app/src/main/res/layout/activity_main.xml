@@ -11,7 +11,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:background="#0D7058"
+        android:background="#242A37"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <View
@@ -19,9 +19,9 @@
             android:layout_width="143.92dp"
             android:layout_height="143.92dp"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="-40dp"
+            android:layout_marginStart="-20dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="-65dp"
+            android:layout_marginTop="-45dp"
             android:background="@drawable/bg_wallpaper_rectangle"
             android:alpha="0.3"
             android:rotation="-280"
@@ -35,13 +35,47 @@
             >
         </View>
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imProfile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/colorWhite"
+            android:src="@drawable/director"
+            />
+        <TextView
+            android:id="@+id/lbProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log In"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:fontFamily="@font/circularstd_bold"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="50dp"
+            />
+        <Button
+            android:id="@+id/btnLogIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="45dp"
+            android:fontFamily="@font/circularstd_bold"
+            android:background="@drawable/bg_search_box"
+            android:visibility="gone"
+            />
+
         <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="100dp"
         android:layout_marginStart="20dp"
         android:fontFamily="@font/circularstd_bold"
         android:gravity="center_vertical"
@@ -49,48 +83,39 @@
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/textVeryBig"
         />
-        <RelativeLayout
+        <Button
             android:id="@+id/btnExplore"
-            android:layout_width="70dp"
-            android:layout_height="28dp"
-            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:layout_marginStart="20dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="120dp"
+            android:layout_alignParentStart="true"
             android:background="@drawable/bg_search_box"
-            >
-              <TextView
-                  android:id="@+id/explore"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:fontFamily="@font/circularstd_bold"
-                  android:text="@string/explore"
-                  android:layout_centerVertical="true"
-                  android:layout_centerHorizontal="true"
-                  android:gravity="center"
-                  />
+            android:layout_below="@+id/title"
+            android:fontFamily="@font/circularstd_bold"
+            android:textColor="@color/colorMainBackground"
+            android:text="@string/explore"
+        />
 
-          </RelativeLayout>
         <RelativeLayout
             android:id="@+id/btnUpcoming"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginStart="95dp"
         android:background="@drawable/bg_search_box"
         android:layout_alignStart="@+id/btnExplore"
+            android:layout_below="@+id/title"
              >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="@string/upcoming"
-            android:fontFamily="@font/circularstd_bold"
-            android:gravity="center"
-            />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="9dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/circularstd_bold"
+                android:gravity="center"
+                android:text="@string/Booking_Ticket" />
          </RelativeLayout>
         <TextView
             android:id="@+id/seed_pokemo"
@@ -98,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="122dp"
+            android:layout_marginTop="165dp"
             android:layout_marginEnd="20dp"
             android:textColor="@color/colorWhite"
             android:fontFamily="@font/circularstd_bold"
@@ -119,7 +144,7 @@
                 >
 
             <android.support.v7.widget.RecyclerView
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="35dp"
                 android:id="@+id/rvTrending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,6 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/circularstd_bold"
                     android:text="@string/Popular"
                     android:textColor="@color/colorWhite"
@@ -143,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rvTrending"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="35dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/colorWhite"
@@ -171,12 +197,12 @@
                     android:layout_marginTop="15dp"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:fontFamily="@font/avenirltstd_roman"
+                    android:fontFamily="@font/avenir_lst_td_black"
                     android:layout_alignTop="@id/btnPopularOne"
                     />
 
                 <TextView
-                    android:id="@+id/lbReleaseOne"
+                    android:id="@+id/lbTicketOne"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lbPopularOne"
@@ -210,7 +236,7 @@
                     android:layout_marginTop="15dp"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:fontFamily="@font/avenirltstd_roman"
+                    android:fontFamily="@font/avenir_lst_td_black"
                     android:layout_alignTop="@id/btnPopularTwo"
                     />
                 <TextView
@@ -246,7 +272,7 @@
                     android:layout_marginTop="15dp"
                     android:textStyle="bold"
                     android:textSize="16sp"
-                    android:fontFamily="@font/avenirltstd_roman"
+                    android:fontFamily="@font/avenir_lst_td_black"
                     android:layout_alignTop="@id/btnPopularThree"
                     />
                 <TextView
@@ -420,10 +446,9 @@
                             android:textColor="@color/colorWhite"
                             android:textSize="@dimen/textSmall"
                             />
-
-
                     </RelativeLayout>
-                    
+
+
                     
                     
                     
@@ -757,7 +782,7 @@
                         android:layout_height="30dp"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="40dp"
-                        android:src="@drawable/ic_favorite" />
+                        android:src="@drawable/ic_heart" />
 
                 </RelativeLayout>
 

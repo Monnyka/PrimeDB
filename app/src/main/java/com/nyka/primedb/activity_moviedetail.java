@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,11 +18,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,6 +57,8 @@ public class activity_moviedetail extends BaseActivity {
     TextView lbDirectorName;
     ImageView ivDirector;
     TextView lbCastMore;
+    ImageView btnAddFavorite;
+    String favorite="false";
 
     RecyclerView mRecyclerView;
     MovieAdapter mMovieAdapter;
@@ -93,6 +93,7 @@ public class activity_moviedetail extends BaseActivity {
         lbDistributeDetail = findViewById(R.id.lbDistributeDetail);
         lbCastMore = findViewById(R.id.lbCastMore);
         lbSynopsisDetail = findViewById(R.id.lbSynopsisDetail);
+        btnAddFavorite=findViewById(R.id.btnAddFavorite);
         mRecyclerView = findViewById(R.id.recycler_view_cast);
         svMovieDetail=findViewById(R.id.svMovieDetail);
         svMovieDetail.setVisibility(View.INVISIBLE);
@@ -106,6 +107,10 @@ public class activity_moviedetail extends BaseActivity {
 
         getMovieDetail();
         getBanner();
+        getAccountState();
+
+
+
         svMovieDetail.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +118,97 @@ public class activity_moviedetail extends BaseActivity {
                 OpenActivity();
             }
         });
+        btnAddFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(favorite.equals("false")) {
+                    AddFavorite();
+                    favorite="true";
+                }else{
+                    RemoveFavorite();
+                    favorite="false";
+                }
+            }
+        });
     }
+
+    private void getAccountState(){
+
+        String urlAccountState="https://api.themoviedb.org/3/movie/"+MovieID+"/account_states?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, urlAccountState, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                boolean fav=response.optBoolean("favorite");
+                if(fav) {
+                    favorite="true";
+                    btnAddFavorite.setImageResource(R.drawable.ic_heart_clicked);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+mQueue.add(request);
+    }
+
+    private void AddFavorite() {
+        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+            JSONObject JsonFavorite = new JSONObject();
+
+        try {
+            JsonFavorite.put("media_type","movie");
+            JsonFavorite.put("media_id",""+MovieID);
+            JsonFavorite.put("favorite",true);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(),"Successfully added this movie to favorite list.",Toast.LENGTH_SHORT).show();
+                btnAddFavorite.setImageResource(R.drawable.ic_heart_clicked);
+                btnAddFavorite.setPadding(15,15,15,15);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"Request Fail: Please check you internet connection.",Toast.LENGTH_LONG).show();
+            }
+        });
+        mQueue.add(request);
+    }
+
+    private void RemoveFavorite(){
+        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+        JSONObject JsonFavorite = new JSONObject();
+
+        try {
+            JsonFavorite.put("media_type","movie");
+            JsonFavorite.put("media_id",""+MovieID);
+            JsonFavorite.put("favorite",false);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(),"Successfully removed this movie from favorite list.",Toast.LENGTH_SHORT).show();
+                btnAddFavorite.setImageResource(R.drawable.ic_heart);
+                btnAddFavorite.setPadding(15,15,15,15);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"Request Fail: Please check you internet connection.",Toast.LENGTH_LONG).show();
+            }
+        });
+        mQueue.add(request);
+    }
+
     private void OpenActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -268,7 +363,6 @@ public class activity_moviedetail extends BaseActivity {
                     e.printStackTrace();
                 }
 
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -342,3 +436,4 @@ public class activity_moviedetail extends BaseActivity {
     }
 
 }
+

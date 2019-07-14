@@ -9,9 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,8 +30,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity {
-
+public class MainActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener,TrendingAdapter.onClickItemListener {
     ImageView imageViewUpcoming;
     ImageView imageViewUpcomingTwo;
     ImageView imageViewUpcomingThree;
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity {
     TextView lbMovieMostPopularReleaseDate;
     ImageView ivMostPopular;
     ImageView btnBrowse;
+    Button btnExplore;
     RelativeLayout rlInTheater;
     RequestQueue mQueue;
     String IdMovie="";
@@ -54,6 +56,15 @@ public class MainActivity extends BaseActivity {
     String IdMovieUpcomingThree="";
     String popularAPIAddress="https://api.themoviedb.org/3/movie/now_playing?api_key=1469231605651a4f67245e5257160b5f&language=en-US&page=1";
     RecyclerView tRecyclerView;
+    TextView lbPopularOne;
+    Button btnLogIn;
+    String respondToken ="";
+    String verifiedToken="";
+    String sessionID="";
+    TextView lbProfileName;
+    String userName="";
+    String urlRequestProfile="";
+
     TrendingAdapter mTrendingAdapter;
     ArrayList<trending> mTrendingList;
 
@@ -82,8 +93,12 @@ public class MainActivity extends BaseActivity {
         lbMovieMostPopular=findViewById(R.id.lbMovieMostPopular);
         lbMovieMostPopularReleaseDate=findViewById(R.id.lbMovieMostPopularReleaseDate);
         ivMostPopular=findViewById(R.id.ivMostPopular);
+        lbPopularOne=findViewById(R.id.lbPopularOne);
         btnBrowse=findViewById(R.id.imBrowse);
+        btnExplore=findViewById(R.id.btnExplore);
         rlInTheater=findViewById(R.id.rlInTheater);
+        btnLogIn=findViewById(R.id.btnLogIn);
+        lbProfileName=findViewById(R.id.lbProfileName);
         tRecyclerView=findViewById(R.id.rvTrending);
 
         tRecyclerView.hasFixedSize();
@@ -95,42 +110,8 @@ public class MainActivity extends BaseActivity {
         final SnapHelper snapHelper = new GravitySnapHelper(GravityCompat.START);
         snapHelper.attachToRecyclerView(tRecyclerView);
 
-//        tRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-//                super.onScrollStateChanged(recyclerView, newState);
-//                if(newState==RecyclerView.SCROLL_STATE_IDLE){
-//
-//                    View view = snapHelper.findSnapView(linearLayoutManager);
-//                    int pos= linearLayoutManager.getPosition(view);
-//
-//                    RecyclerView.ViewHolder viewHolder =tRecyclerView.findViewHolderForAdapterPosition(pos);
-//                    LinearLayout tRecyclerView =viewHolder.itemView.findViewById(R.id.itemParent);
-//                    tRecyclerView.animate().scaleX(1).scaleY(1).setDuration(250).start();
-//                }else {
-//                    View view = snapHelper.findSnapView(linearLayoutManager);
-//                    int pos= linearLayoutManager.getPosition(view);
-//
-//                    RecyclerView.ViewHolder viewHolder =tRecyclerView.findViewHolderForAdapterPosition(pos);
-//                    LinearLayout tRecyclerView =viewHolder.itemView.findViewById(R.id.itemParent);
-//                    tRecyclerView.animate().scaleX(0.7f).scaleY(0.7f).setDuration(250).start();
-//                }
-//
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//            }
-//        });
-
         mTrendingList = new ArrayList<>();
-
         //Open Detail Screen
-
         btnBrowse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,7 +152,19 @@ public class MainActivity extends BaseActivity {
                 OpenPopularMovie();
             }
         });
+        btnExplore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenSearch();
+            }
+        });
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+        getProfile();
         RequestTrending();
         RequestMainScreen();
     }
@@ -191,7 +184,6 @@ public class MainActivity extends BaseActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
     public void OpenPopularMovie(){
         String title="IN THEATER NOW";
         Intent intent = new Intent(this, SearchActivity.class);
@@ -356,25 +348,26 @@ public class MainActivity extends BaseActivity {
         mQueue.add(requestPopularLastYear);
         mQueue.add(requestPopularThisYear);
     }
-
     public void RequestTrending(){
         String Url="https://api.themoviedb.org/3/movie/now_playing?api_key=1469231605651a4f67245e5257160b5f&language=en-US&page=1";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray jsonArray =response.getJSONArray("results");
 
-                    for(int i=0; i<jsonArray.length();i++){
+                    for(int i=0; i<=5;i++){
                         JSONObject result =jsonArray.getJSONObject(i);
+                        String movieID =result.getString("id");
                         String movieTitle = result.getString("title");
                         String releaseDate = result.getString("release_date");
                         String poster=result.getString("poster_path");
                         String Address="https://image.tmdb.org/t/p/original"+poster;
-                        mTrendingList.add(new trending(movieTitle,Address,releaseDate));
+                        mTrendingList.add(new trending(movieTitle,Address,releaseDate,movieID));
                     }
                     mTrendingAdapter=new TrendingAdapter(MainActivity.this,mTrendingList);
                     tRecyclerView.setAdapter(mTrendingAdapter);
+                    mTrendingAdapter.setOnClickListener(MainActivity.this);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -387,15 +380,111 @@ public class MainActivity extends BaseActivity {
             }
         });
         mQueue.add(request);
+    }
+    public void RequestAuth(){
+        String request_token="https://api.themoviedb.org/3/authentication/token/new?api_key="+apiKey;
+        String urlRequest_LogIn=requestRoute+"/3/authentication/token/validate_with_login?api_key="+apiKey;
+        String urlCreateSession=requestRoute+"/3/authentication/session/new?api_key="+apiKey;
 
+        JsonObjectRequest request_Token = new JsonObjectRequest(Request.Method.GET, request_token, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    respondToken =response.getString("request_token");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(),"Request Fail"+error,Toast.LENGTH_LONG).show();
+            }
+        });
+
+        JSONObject json = new JSONObject();
+        try {
+            json.put("username","nyka");
+            json.put("password","nyka27777727");
+            json.put("request_token", respondToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request_LonIn = new JsonObjectRequest(Request.Method.POST, urlRequest_LogIn, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                verifiedToken=response.optString("request_token");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"Request Fail"+error,Toast.LENGTH_LONG).show();
+            }
+        });
+
+        JSONObject jsonToken = new JSONObject();
+        try {
+            jsonToken.put("request_token",verifiedToken);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest create_sessionID = new JsonObjectRequest(Request.Method.POST, urlCreateSession, jsonToken, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    sessionID=response.getString("session_id");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+               Toast.makeText(getApplicationContext(),"Request Session Fail : "+error,Toast.LENGTH_LONG).show();
+            }
+        });
+
+        mQueue.add(request_Token);
+        mQueue.add(request_LonIn);
+        mQueue.add(create_sessionID);
     }
 
+    public void getProfile(){
 
+        urlRequestProfile="https://api.themoviedb.org/3/account?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+        JsonObjectRequest request_Profile = new JsonObjectRequest(Request.Method.GET, urlRequestProfile, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                userName=response.optString("username");
+                lbProfileName.setText(userName);
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"Request Fail: Please check your internet connection",Toast.LENGTH_LONG).show();
+            }
+        });
+        mQueue.add(request_Profile);
+    }
 
     public static void launch(Context context) {
 //        Intent intent=new Intent(context,MainActivity.class);
 //        context.startActivity(intent);
         context.startActivity(new Intent(context, MainActivity.class));
     }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intent =new Intent(this,activity_moviedetail.class);
+        trending clickItem =mTrendingList.get(position);
+        intent.putExtra("movieID",clickItem.getTrendingID());
+        startActivity(intent);
+    }
+
 }

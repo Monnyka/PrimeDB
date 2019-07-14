@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SearchActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener {
+public class SearchActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener,TrendingAdapter.onClickItemListener {
 
     public static final String EXTRA_URL = "imageUrl";
     public static final String EXTRA_TITLE = "movieTitle";
@@ -40,9 +42,10 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
     ImageView btnBackSearch;
     String popularApi="";
     TextView ScreenTitle;
-    EditText edSearch;
+    EditText etSearch;
     String screenTitle="";
     RelativeLayout llSearch;
+    String query="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
         NoStatusBar();
 
         ScreenTitle=findViewById(R.id.ScreenTitle);
-        edSearch=findViewById(R.id.edSearch);
+        etSearch=findViewById(R.id.etSearch);
         btnBackSearch = findViewById(R.id.btnBackSearch);
         mRecyclerView = findViewById(R.id.recyclerMovieList);
         llSearch=findViewById(R.id.llSearch);
@@ -62,13 +65,10 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
         Intent intent = getIntent();
         popularApi=intent.getStringExtra("apiPopular");
         screenTitle=intent.getStringExtra("ScreenTitle");
-
         ScreenTitle.setText(screenTitle);
             if(ScreenTitle.getText().equals("IN THEATER NOW")){
                 llSearch.setVisibility(View.GONE);
             }
-
-
         btnBackSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,8 +76,26 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
             }
         });
 
-        RequestList();
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                query=etSearch.getText().toString();
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                query=etSearch.getText().toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                query=etSearch.getText().toString();
+                mMovieAdapter.clear();
+                RequestSearch();
+            }
+        });
+
+        RequestList();
     }
 
     private void RequestList() {
@@ -88,10 +106,8 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray jsonArray = response.getJSONArray("results");
-
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject Movie = jsonArray.getJSONObject(i);
-
                         String imageUrl = "https://image.tmdb.org/t/p/w185" + Movie.optString("poster_path");
                         String MovieID = Movie.optString("id");
                         String MovieTitle = Movie.optString("title");
@@ -100,6 +116,7 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
                         String MovieReleaseDate = ConvertDate(ReleaseDate);
                         mMovieList.add(new MovieListItem(imageUrl, MovieTitle, MovieRate, MovieReleaseDate, MovieID));
                     }
+
                     mMovieAdapter = new MovieListAdapter(SearchActivity.this, mMovieList);
                     mRecyclerView.setAdapter(mMovieAdapter);
                     mMovieAdapter.setOnClickListener(SearchActivity.this);
@@ -134,12 +151,49 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
         return newDateString1;
     }
 
-
     public void OpenMainScreen() {
 
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    public void RequestSearch(){
+        String urll="https://api.themoviedb.org/3/search/movie?api_key=1469231605651a4f67245e5257160b5f&query="+query;
+        JsonObjectRequest request= new JsonObjectRequest(Request.Method.GET, urll, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("results");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject Movie = jsonArray.getJSONObject(i);
+                        String imageUrl = "https://image.tmdb.org/t/p/w185" + Movie.optString("poster_path");
+                        String MovieID = Movie.optString("id");
+                        String MovieTitle = Movie.optString("title");
+                        String MovieRate = Movie.optString("vote_average");
+                        String ReleaseDate =Movie.optString("release_date");
+                        if(ReleaseDate!=null&& !ReleaseDate.equals("")) {
+                            String MovieReleaseDate = ConvertDate(ReleaseDate);
+                            mMovieList.add(new MovieListItem(imageUrl, MovieTitle, MovieRate, MovieReleaseDate, MovieID));
+                        }
+
+                    }
+                    mMovieAdapter = new MovieListAdapter(SearchActivity.this, mMovieList);
+                    mRecyclerView.setAdapter(mMovieAdapter);
+                    mMovieAdapter.setOnClickListener(SearchActivity.this);
+
+                     } catch (JSONException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        mQueue.add(request);
     }
 
     @Override

@@ -68,4 +68,5 @@
     <string name="Horror">Horror</string>
     <string name="Thrill">Thrill</string>
     <string name="upcoming">Upcoming</string>
+    <string name="Booking_Ticket">Book Ticket</string>
 </resources>

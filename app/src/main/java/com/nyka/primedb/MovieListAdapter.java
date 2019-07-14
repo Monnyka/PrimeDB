@@ -26,14 +26,12 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
         void onItemClick(int position);
     }
 
-    public void setOnClickListener(OnItemClickListener Listener){
+    void setOnClickListener(OnItemClickListener Listener){
 
         mListener = Listener;
     }
 
-
-
-    public MovieListAdapter (Context context, ArrayList<MovieListItem> movieList){
+    MovieListAdapter(Context context, ArrayList<MovieListItem> movieList){
         mContext=context;
         mMovieList=movieList;
 
@@ -55,8 +53,7 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
         String movieTitle=currentItem.getMovieTitle();
         String movieRate=currentItem.getMovieRate();
         String movieRelease=currentItem.getMovieReleaseDate();
-        String movieID=currentItem.getMovieID();
-
+        //String movieID=currentItem.getMovieID();
 
         movieViewHolder.mTextViewTitle.setText(movieTitle);
         movieViewHolder.mTextViewRate.setText(movieRate);
@@ -64,6 +61,8 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
         Glide.with(mContext).load(imageUrl).centerInside().into(movieViewHolder.mImageView);
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -78,6 +77,7 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
 
         public MovieViewHolder(@NonNull final View itemView) {
             super(itemView);
+
         mImageView=itemView.findViewById(R.id.ivMovieItem);
         mTextViewTitle=itemView.findViewById(R.id.txt_MovieTitle);
         mTextViewRate=itemView.findViewById(R.id.txt_Rate);
@@ -98,8 +98,12 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
             }
         });
 
-
         }
+    }
+    public void clear() {
+        int size = mMovieList.size();
+        mMovieList.clear();
+        notifyItemRangeRemoved(0, size);
     }
 
 }
