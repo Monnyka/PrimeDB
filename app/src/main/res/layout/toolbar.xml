@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorMainBackground"
+    android:layout_marginTop="0dp"
+    android:padding="25dp"
+    android:paddingStart="0dp"
+    android:paddingEnd="8dp"
+    app:navigationIcon="@drawable/ic_arrow_back"
+    >
+</android.support.v7.widget.Toolbar>

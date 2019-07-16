@@ -109,8 +109,6 @@ public class activity_moviedetail extends BaseActivity {
         getBanner();
         getAccountState();
 
-
-
         svMovieDetail.setVisibility(View.VISIBLE);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,7 +216,6 @@ mQueue.add(request);
     public void getMovieDetail() {
         String movieUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "?api_key=" + apiKey + "&language=en-US";
         String movieCreditUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "/credits?api_key=" + apiKey;
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, movieUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -269,6 +266,10 @@ mQueue.add(request);
                     lbTagLine.setText(MovieTagLine);
                     lbVoteCount.setText(MovieVoteCount);
 
+                    if(MovieTagLine.equals("")){
+                        lbTagLine.setVisibility(View.GONE);
+                    }
+
                     Glide.with(activity_moviedetail.this).load(poster).into(ivPoster);
 
                     JSONArray jsonArray = response.optJSONArray("genres");
@@ -294,7 +295,7 @@ mQueue.add(request);
                     for (int i = 0; i < jsonArray1.length(); i++) {
 
                         JSONObject jsonObject = jsonArray1.getJSONObject(i);
-                        String P_company = "-" + jsonObject.optString("name") + "\n";
+                        String P_company = "~" + jsonObject.optString("name") + "\n";
                         lbDistributeDetail.append(P_company);
                     }
 
@@ -325,10 +326,10 @@ mQueue.add(request);
                         lbCastMore.setText(maa);
                         lbCastMore.append(" More");
                         String CastName = cast.getString("name");
-                        String CharrecterName = "as " + cast.getString("character");
+                        String CharracterName = "as " + cast.getString("character");
                         String aa = cast.getString("profile_path");
                         String imageUrl = "https://image.tmdb.org/t/p/w185" + aa;
-                        mMovieList.add(new MovieItem(imageUrl, CastName, CharrecterName));
+                        mMovieList.add(new MovieItem(imageUrl, CastName, CharracterName));
 
                     }
                     mMovieAdapter = new MovieAdapter(activity_moviedetail.this, mMovieList);

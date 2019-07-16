@@ -8,9 +8,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,23 +39,28 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
     MovieListAdapter mMovieAdapter;
     ArrayList<MovieListItem> mMovieList;
     RequestQueue mQueue;
-    ImageView btnBackSearch;
     String popularApi="";
     TextView ScreenTitle;
     EditText etSearch;
     String screenTitle="";
     RelativeLayout llSearch;
     String query="";
+    Toolbar toolbars;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         NoStatusBar();
-
+        toolbars=findViewById(R.id.toolbars);
         ScreenTitle=findViewById(R.id.ScreenTitle);
         etSearch=findViewById(R.id.etSearch);
-        btnBackSearch = findViewById(R.id.btnBackSearch);
         mRecyclerView = findViewById(R.id.recyclerMovieList);
         llSearch=findViewById(R.id.llSearch);
         mRecyclerView.hasFixedSize();
@@ -69,12 +74,6 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
             if(ScreenTitle.getText().equals("IN THEATER NOW")){
                 llSearch.setVisibility(View.GONE);
             }
-        btnBackSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenMainScreen();
-            }
-        });
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -195,6 +194,7 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
         });
         mQueue.add(request);
     }
+
 
     @Override
     public void onItemClick(int position) {

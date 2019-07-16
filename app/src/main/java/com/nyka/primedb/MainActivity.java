@@ -102,7 +102,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         tRecyclerView=findViewById(R.id.rvTrending);
 
         tRecyclerView.hasFixedSize();
-
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         tRecyclerView.setLayoutManager (linearLayoutManager);
 
@@ -177,7 +176,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         startActivity(intent, optionsCompat.toBundle());
     }
     public void OpenSearch(){
-        String title="EXPLORER MOVIE";
+        String title="What are you  looking for?";
         Intent intent = new Intent(this, SearchActivity.class);
         intent.putExtra("apiPopular",popularAPIAddress);
         intent.putExtra("ScreenTitle",title);

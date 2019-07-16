@@ -117,19 +117,6 @@
                 android:gravity="center"
                 android:text="@string/Booking_Ticket" />
          </RelativeLayout>
-        <TextView
-            android:id="@+id/seed_pokemo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="165dp"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/circularstd_bold"
-            android:textSize="@dimen/textNormal"
-            android:text="@string/ViewMore"
-            />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -157,7 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/circularstd_bold"
                     android:text="@string/Popular"
                     android:textColor="@color/colorWhite"
@@ -169,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rvTrending"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginTop="25dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="20dp"
                     android:textColor="@color/colorWhite"
