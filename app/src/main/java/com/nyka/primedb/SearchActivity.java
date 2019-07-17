@@ -18,11 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,20 +43,22 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
     String screenTitle="";
     RelativeLayout llSearch;
     String query="";
-    Toolbar toolbars;
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         NoStatusBar();
-        toolbars=findViewById(R.id.toolbars);
+
+
+
+        toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+
+
+
         ScreenTitle=findViewById(R.id.ScreenTitle);
         etSearch=findViewById(R.id.etSearch);
         mRecyclerView = findViewById(R.id.recyclerMovieList);
@@ -207,4 +207,5 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
         detailIntent.putExtra("movieID", clickedItem.getMovieID());
         startActivity(detailIntent);
     }
+
 }

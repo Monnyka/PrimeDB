@@ -1,9 +1,11 @@
 package com.nyka.primedb;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+@SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
 
     public String requestRoute="https://api.themoviedb.org";
