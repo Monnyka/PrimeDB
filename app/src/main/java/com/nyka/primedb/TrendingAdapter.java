@@ -36,7 +36,7 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
     @NonNull
     @Override
     public TrendingViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v= LayoutInflater.from(mContext).inflate(R.layout.whatnow_item, viewGroup,false);
+        View v= LayoutInflater.from(mContext).inflate(R.layout.trending_item, viewGroup,false);
         return new TrendingViewHolder(v);
     }
 
@@ -46,7 +46,9 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
             String trendingTitle = currentItem.getTrendingTitle();
             String trendingPoster =currentItem.getTrendingPoster();
             String trendingReleaseDate=currentItem.getTrendingReleaseDate();
+            String trendingGenre=currentItem.getmGenre();
             //String trendingID=currentItem.getTrendingID();
+
 
             trendingViewHolder.mTitle.setText(trendingTitle);
             trendingViewHolder.mReleaseDate.setText(trendingReleaseDate);
@@ -62,12 +64,15 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
          ImageView mImageView;
          TextView mTitle;
          TextView mReleaseDate;
+         TextView mGenre;
+
 
         public TrendingViewHolder(@NonNull View itemView) {
             super(itemView);
             mImageView=itemView.findViewById(R.id.imTrendingPoster);
             mTitle=itemView.findViewById(R.id.lbTrendingTitle);
             mReleaseDate=itemView.findViewById(R.id.lbTrendingReleaseDate);
+            mGenre=itemView.findViewById(R.id.lbGenre);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

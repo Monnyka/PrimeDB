@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,9 +19,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +32,6 @@ import java.util.Date;
 public class activity_moviedetail extends BaseActivity {
 
     String mm="";
-    ImageView btnBack;
     TextView lbMovieTitle;
     RequestQueue mQueue;
     String MovieID = "";
@@ -58,24 +60,37 @@ public class activity_moviedetail extends BaseActivity {
     ImageView ivDirector;
     TextView lbCastMore;
     ImageView btnAddFavorite;
+    ImageView btnWatchList;
     String favorite="false";
+    String watchListStatus="false";
 
     RecyclerView mRecyclerView;
     MovieAdapter mMovieAdapter;
     ArrayList<MovieItem> mMovieList;
     ArrayList<String> imageUrl;
     ScrollView svMovieDetail;
+    Toolbar toolbars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moviedetail);
         NoStatusBar();
+
+        toolbars=findViewById(R.id.toolbars);
+        setSupportActionBar(toolbars);
+        setTitle("");
+
+        toolbars.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         mQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
         //movieID
         MovieID = intent.getStringExtra("movieID");
-        btnBack = findViewById(R.id.btnBackDetail);
         lbMovieTitle = findViewById(R.id.lbMovieTitle);
         ivPoster = findViewById(R.id.ivPoster);
         lbRated = findViewById(R.id.lbRated);
@@ -94,6 +109,7 @@ public class activity_moviedetail extends BaseActivity {
         lbCastMore = findViewById(R.id.lbCastMore);
         lbSynopsisDetail = findViewById(R.id.lbSynopsisDetail);
         btnAddFavorite=findViewById(R.id.btnAddFavorite);
+        btnWatchList=findViewById(R.id.btnWatchList);
         mRecyclerView = findViewById(R.id.recycler_view_cast);
         svMovieDetail=findViewById(R.id.svMovieDetail);
         svMovieDetail.setVisibility(View.INVISIBLE);
@@ -110,12 +126,6 @@ public class activity_moviedetail extends BaseActivity {
         getAccountState();
 
         svMovieDetail.setVisibility(View.VISIBLE);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OpenActivity();
-            }
-        });
         btnAddFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +135,21 @@ public class activity_moviedetail extends BaseActivity {
                 }else{
                     RemoveFavorite();
                     favorite="false";
+                }
+            }
+        });
+
+        btnWatchList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(watchListStatus.equals("false")) {
+                    AddWatchList();
+                    watchListStatus="true";
+                }
+                else
+                {
+                    RemoveWatchList();
+                    watchListStatus="false";
                 }
             }
         });
@@ -139,9 +164,14 @@ public class activity_moviedetail extends BaseActivity {
             public void onResponse(JSONObject response) {
 
                 boolean fav=response.optBoolean("favorite");
+                boolean wat=response.optBoolean("watchlist");
                 if(fav) {
                     favorite="true";
                     btnAddFavorite.setImageResource(R.drawable.ic_heart_clicked);
+                }
+                if(wat){
+                    watchListStatus="true";
+                    btnWatchList.setImageResource(R.drawable.ic_watchlist_clicked);
                 }
             }
         }, new Response.ErrorListener() {
@@ -197,6 +227,62 @@ mQueue.add(request);
                 Toast.makeText(getApplicationContext(),"Successfully removed this movie from favorite list.",Toast.LENGTH_SHORT).show();
                 btnAddFavorite.setImageResource(R.drawable.ic_heart);
                 btnAddFavorite.setPadding(15,15,15,15);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"Request Fail: Please check you internet connection.",Toast.LENGTH_LONG).show();
+            }
+        });
+        mQueue.add(request);
+    }
+
+    private void AddWatchList(){
+        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+        JSONObject JsonFavorite = new JSONObject();
+
+        try {
+            JsonFavorite.put("media_type","movie");
+            JsonFavorite.put("media_id",""+MovieID);
+            JsonFavorite.put("watchlist",true);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(),"Successfully added this movie to watchlist.",Toast.LENGTH_SHORT).show();
+                btnWatchList.setImageResource(R.drawable.ic_watchlist_clicked);
+                btnWatchList.setPadding(15,15,15,15);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),"Request Fail: Please check you internet connection.",Toast.LENGTH_LONG).show();
+            }
+        });
+        mQueue.add(request);
+
+    }
+
+    private void RemoveWatchList(){
+
+        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+        JSONObject JsonFavorite = new JSONObject();
+
+        try {
+            JsonFavorite.put("media_type","movie");
+            JsonFavorite.put("media_id",""+MovieID);
+            JsonFavorite.put("watchlist",false);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(),"Successfully, Removed this movie to watchlist.",Toast.LENGTH_SHORT).show();
+                btnWatchList.setImageResource(R.drawable.ic_watch_later);
+                btnWatchList.setPadding(15,15,15,15);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -310,7 +396,6 @@ mQueue.add(request);
             }
         });
 
-
         JsonObjectRequest creditRequest = new JsonObjectRequest(Request.Method.GET, movieCreditUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -390,7 +475,6 @@ mQueue.add(request);
 
         return newDateString;
     }
-
     private void getBanner(){
 
         //String url="https://api.themoviedb.org/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f&language=en-US&include_image_language=en";

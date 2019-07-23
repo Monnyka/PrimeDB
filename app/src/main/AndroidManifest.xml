@@ -11,12 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SearchActivity"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".activity_dashboard"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name=".SearchActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".activity_dashboard" />
         <activity android:name=".activity_moviedetail" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LogInActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

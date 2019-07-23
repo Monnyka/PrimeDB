@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -49,15 +48,10 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        NoStatusBar();
-
-
-
+       NoStatusBar();
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
+        setTitle("");
 
         ScreenTitle=findViewById(R.id.ScreenTitle);
         etSearch=findViewById(R.id.etSearch);
@@ -68,10 +62,10 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
         mMovieList = new ArrayList<>();
         mQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
-        popularApi=intent.getStringExtra("apiPopular");
+        popularApi=intent.getStringExtra("api_link");
         screenTitle=intent.getStringExtra("ScreenTitle");
         ScreenTitle.setText(screenTitle);
-            if(ScreenTitle.getText().equals("IN THEATER NOW")){
+            if(ScreenTitle.getText().equals("Now In Theater")){
                 llSearch.setVisibility(View.GONE);
             }
 

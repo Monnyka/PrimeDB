@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LogInActivity"
+    android:background="@color/colorMainBackground"
+    >
+    <View
+        android:id="@+id/rectangle"
+        android:layout_width="match_parent"
+        android:layout_height="721.88dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/bg_login"
+        android:alpha="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+    />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/circularstd_bold"
+        android:text="Sign In"
+        android:textColor="@color/colorWhite"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/colorWhite"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:hint="User Name"
+        android:singleLine="true"
+        android:shadowColor="@color/colorWhite"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
+
+    <EditText
+        android:id="@+id/edPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/colorWhite"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:hint="@string/Password"
+        android:shadowColor="@color/colorWhite"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGray"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rectangle"
+        app:layout_constraintTop_toBottomOf="@+id/edUsername" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/colorMainBackground"
+        android:text="Sign In"
+        android:textColorHint="@color/colorGray"
+        android:fontFamily="@font/circularstd_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
+</android.support.constraint.ConstraintLayout>

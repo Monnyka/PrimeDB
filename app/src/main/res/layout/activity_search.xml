@@ -7,34 +7,6 @@
     tools:context=".SearchActivity"
     android:background="@color/colorMainBackground">
 
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbars"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="56dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:padding="0dp"-->
-        <!--android:paddingStart="0dp"-->
-        <!--android:paddingEnd="8dp"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:navigationIcon="@drawable/ic_arrow_back">-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/toolbar_profile_name"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text=""-->
-            <!--android:textColor="@color/colorPrimary"-->
-            <!--android:textSize="24sp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:visibility="invisible" />-->
-
-
-    <!--</android.support.v7.widget.Toolbar>-->
-
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"
         />
@@ -42,7 +14,6 @@
         android:id="@+id/titlePanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
         android:background="@color/colorMainBackground"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="76dp"
@@ -84,7 +55,6 @@
                 android:textSize="16sp"
                 android:textColorHint="#9E9E9E"
                 android:background="@drawable/bg_search_box"
-                android:layout_centerVertical="true"
                 android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="10dp"
                 android:paddingStart="15dp"
@@ -92,16 +62,17 @@
                 tools:ignore="RtlSymmetry"
 
                 />
+            <android.support.v7.widget.RecyclerView
+                android:layout_marginTop="45dp"
+                android:id="@+id/recyclerMovieList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="90dp">
+        </android.support.v7.widget.RecyclerView>
+
         </RelativeLayout>
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="0dp"
-        android:paddingBottom="100dp"
-        android:id="@+id/recyclerMovieList"
-        app:layout_constraintTop_toBottomOf="@id/titlePanel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
+
 </android.support.constraint.ConstraintLayout>

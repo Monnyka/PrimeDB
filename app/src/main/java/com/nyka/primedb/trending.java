@@ -5,13 +5,17 @@ public class trending {
     private String mTrendingPoster;
     private String mTrendingReleaseDate;
     private String mTrendingID;
+    private String mGenre;
 
-    public trending(String trendingTitle, String trendingPoster, String trendingReleaseDate, String trendingID) {
+    public trending(String trendingTitle, String trendingPoster, String trendingReleaseDate, String trendingID,String genre) {
         mTrendingTitle = trendingTitle;
         mTrendingPoster = trendingPoster;
         mTrendingReleaseDate = trendingReleaseDate;
         mTrendingID=trendingID;
+        mGenre=genre;
     }
+
+    public String getmGenre(){return mGenre;}
 
     public String getTrendingTitle() {
         return mTrendingTitle;
