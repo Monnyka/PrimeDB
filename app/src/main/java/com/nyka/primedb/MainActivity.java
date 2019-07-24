@@ -110,13 +110,12 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     }
 
     public void OpenUpcoming(){
-        String title="UPCOMING MOVIE";
+        String title="Upcoming Movie";
         Intent intent = new Intent(this, SearchActivity.class);
         intent.putExtra("api_link",urlUpcoming);
         intent.putExtra("ScreenTitle",title);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-
     }
 
     public void OpenPopularMovie(){

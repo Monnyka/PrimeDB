@@ -11,15 +11,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,7 +59,6 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
         ScreenTitle=findViewById(R.id.ScreenTitle);
         etSearch=findViewById(R.id.etSearch);
         mRecyclerView = findViewById(R.id.recyclerMovieList);
-        llSearch=findViewById(R.id.llSearch);
         mRecyclerView.hasFixedSize();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMovieList = new ArrayList<>();
@@ -65,8 +67,8 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
         popularApi=intent.getStringExtra("api_link");
         screenTitle=intent.getStringExtra("ScreenTitle");
         ScreenTitle.setText(screenTitle);
-            if(ScreenTitle.getText().equals("Now In Theater")){
-                llSearch.setVisibility(View.GONE);
+            if(ScreenTitle.getText().equals("Now In Theater")||ScreenTitle.getText().equals("Upcoming Movie")){
+                etSearch.setVisibility(View.GONE);
             }
 
         etSearch.addTextChangedListener(new TextWatcher() {
