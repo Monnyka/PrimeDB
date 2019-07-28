@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMainBackground"
+    tools:context=".ProfileActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbarNav"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarNav"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+
+            <TextView
+                android:id="@+id/lbTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="80dp"
+                android:fontFamily="@font/circularstd_bold"
+                android:gravity="center_vertical"
+                android:text="@string/Profile"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textVeryBig" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iV_Profile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@id/lbTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/profile"
+                app:civ_border_color="@color/colorWhite"
+                app:civ_border_width="1dp" />
+
+            <TextView
+                android:id="@+id/lbUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iV_Profile"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/circularstd_bold"
+                android:text="@string/Nyka"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textMedium" />
+
+            <TextView
+                android:id="@+id/lbUserList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lbUserName"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/circularstd_bold"
+                android:text="@string/User_List"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textMedium" />
+
+            <RelativeLayout
+                android:id="@+id/rl_partFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lbUserList"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/imFavoriteBackdrop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="210dp"
+                    android:alpha="0.3"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_newsfeede" />
+
+                <TextView
+                    android:id="@+id/lbPartFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="70dp"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:text="@string/Part_of_your_favorite"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textMedium" />
+
+                <Button
+                    android:id="@+id/btnViewFavoriteList"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/lbPartFavorite"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/bg_search_box"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:text="View list" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_partWatchlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_partFavorite"
+                android:layout_marginTop="10dp"
+                >
+
+                <ImageView
+                    android:id="@+id/im_watchlist_backdrop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="210dp"
+                    android:alpha="0.4"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_newsfeede" />
+
+                <TextView
+                    android:id="@+id/lbPartWatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="70dp"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:text="@string/Part_of_your_watchlist"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textMedium" />
+
+                <Button
+                    android:id="@+id/btnViewWatchlist"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/lbPartWatch"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="10dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/bg_search_box"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:text="View list"
+                    android:layout_marginBottom="10dp"
+                    />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/lbCreateList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_partWatchlist"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/circularstd_bold"
+                android:text="@string/User_List"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textMedium" />
+
+            <RelativeLayout
+                android:layout_below="@id/lbCreateList"
+                android:id="@+id/rv_CreateList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@id/lbCreateList"
+                android:id="@+id/rv_UserList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

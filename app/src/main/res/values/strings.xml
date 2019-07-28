@@ -72,4 +72,12 @@
     <string name="What_are_you_looking_for">What are you  looking for?</string>
     <string name="Password">Password</string>
     <string name="News_Feed">News Feed</string>
+    <string name="Recap">Recap</string>
+    <string name="Your_watchlist">Your watchlist</string>
+    <string name="Profile">Profile</string>
+    <string name="Nyka">Nyka</string>
+    <string name="Movie">Movie</string>
+    <string name="Part_of_your_favorite">Part of your favorite</string>
+    <string name="Part_of_your_watchlist">Part of your watchlist</string>
+    <string name="User_List">Your List</string>
 </resources>

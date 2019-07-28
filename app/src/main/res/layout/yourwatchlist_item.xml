@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorBackgroundSecond"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="290dp">
+
+        <ImageView
+            android:id="@+id/iv_YourWatchList_Poster"
+            android:layout_width="160dp"
+            android:layout_height="235dp"
+            android:src="@drawable/image_one"
+
+            />
+        <TextView
+            android:id="@+id/lbWatchListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="Avengers - End Game"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/circularstd_bold"
+            android:layout_below="@id/iv_YourWatchList_Poster"
+            />
+
+        <TextView
+            android:id="@+id/lbWatchListYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2019"
+            android:fontFamily="@font/circularstd_bold"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="5dp"
+            android:layout_below="@id/lbWatchListTitle"
+            />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

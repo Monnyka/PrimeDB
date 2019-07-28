@@ -155,33 +155,33 @@
                     android:id="@+id/cdFeed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/lbNewsFeed"
-                    android:layout_marginTop="8dp"
-                    app:cardCornerRadius="10dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
+                    android:layout_below="@id/lbNewsFeed"
                     android:background="@color/colorMainBackground"
-                    android:elevation="4dp"
+                    app:cardCornerRadius="15dp"
                     >
-                <ImageView
-                    android:id="@+id/bg_news_feed"
-                    android:layout_width="match_parent"
-                    android:layout_height="232dp"
-                    android:elevation="4dp"
-                    android:src="@drawable/bg_newsfeede"
-                    android:scaleType="centerCrop"
-                    />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:alpha="0.9"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_newsfeede" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="John wick - Chapter III has become the most"
-                        android:textColor="@color/colorMainBackground"
-                        android:fontFamily="@font/circularstd_bold"
-                        android:layout_marginBottom="8dp"
+                        android:layout_gravity="bottom"
+                        android:paddingBottom="10dp"
+                        android:text="John wick - Chapter 3 Parabelum is lead nuber 1st on the "
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/textNormal"
                         android:layout_marginStart="10dp"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginTop="240dp"
+                        android:layout_marginEnd="30dp"
+                        android:gravity="start"
+                        android:fontFamily="@font/circularstd_bold"
                         />
 
                 </android.support.v7.widget.CardView>
@@ -198,15 +198,47 @@
                     android:rotation="-150"
                     />
 
-                <RelativeLayout
-                    android:id="@+id/btnRecap"
+
+                <TextView
+                    android:id="@+id/lbWatchlist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:text="@string/Your_watchlist"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textMedium"
+                    android:layout_below="@+id/cdFeed"/>
+
+                <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_below="@id/cdFeed"
+                    android:id="@+id/rv_Yourwatchlist"
+                    android:layout_below="@id/lbWatchlist">
+                </android.support.v7.widget.RecyclerView>
+
+                <!--recap-->
+                <TextView
+                    android:id="@+id/lbRecap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/circularstd_bold"
+                    android:text="@string/Recap"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/textMedium"
+                    android:layout_below="@+id/rv_Yourwatchlist"/>
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cdRecap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/lbRecap"
+                    app:cardCornerRadius="15dp"
                     android:layout_marginBottom="20dp"
                     >
                     <ImageView
@@ -214,31 +246,8 @@
                         android:layout_height="120dp"
                         android:src="@drawable/bg_recap"
                         android:scaleType="centerCrop"
-                        android:alpha="0.4"
                         />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2019"
-                        android:textSize="66sp"
-                        android:fontFamily="@font/avenir_lst_td_heavy"
-                        android:textColor="#30BB70"
-                        android:gravity="center"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Year Recap"
-                        android:textSize="36sp"
-                        android:fontFamily="@font/avenir_lst_td_heavy"
-                        android:textColor="@color/colorWhite"
-                        android:gravity="center"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        />
-                </RelativeLayout>
+                </android.support.v7.widget.CardView>
 
             </RelativeLayout>
         </ScrollView>

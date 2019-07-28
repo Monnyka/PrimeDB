@@ -3,21 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolbars"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:layout_marginTop="20dp"
-    android:padding="0dp"
+    android:layout_height="76dp"
+    android:layout_marginTop="0dp"
+    android:padding="20dp"
     android:paddingStart="0dp"
     android:paddingEnd="8dp"
-    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintHorizontal_bias="0.2"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:navigationIcon="@drawable/ic_arrow_back"
     android:background="@color/colorMainBackground"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    android:elevation="0dp"
     >
-
-
-
-
-
 </android.support.v7.widget.Toolbar>

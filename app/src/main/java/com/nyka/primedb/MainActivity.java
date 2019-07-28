@@ -41,6 +41,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     ImageView btnSearch;
     Button btnPopular;
     Button btnUpcoming;
+    ImageView imProfile;
 
     TrendingAdapter mTrendingAdapter;
     ArrayList<trending> mTrendingList;
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         btnSearch=findViewById(R.id.btnSearch);
         btnPopular=findViewById(R.id.btnPopular);
         btnUpcoming=findViewById(R.id.btnUpcoming);
+        imProfile=findViewById(R.id.imProfile);
 
         tRecyclerView.hasFixedSize();
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -89,16 +91,21 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
                 OpenUpcoming();
             }
         });
+        imProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenProfileScreen();
+            }
+        });
         getProfile();
         RequestTrending();
     }
     public void OpenScreenMovieDetail(String passValue){
-
         Intent intent = new Intent(this, activity_moviedetail.class);
         intent.putExtra("movieID",passValue);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,findViewById(R.id.), "imageViewPoster");
-//        startActivity(intent, optionsCompat.toBundle());
+//      ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,findViewById(R.id.), "imageViewPoster");
+//      startActivity(intent, optionsCompat.toBundle());
     }
     public void OpenSearch(){
         String title="What are you looking for?";
@@ -125,7 +132,11 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         intent.putExtra("ScreenTitle",title);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
 
+    public void OpenProfileScreen(){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
     public void RequestTrending(){
         String Url="https://api.themoviedb.org/3/movie/now_playing?api_key=1469231605651a4f67245e5257160b5f&language=en-US&page=1";
@@ -167,7 +178,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         JsonObjectRequest request_Profile = new JsonObjectRequest(Request.Method.GET, urlRequestProfile, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                userName=response.optString("username");
+                userName=response.optString("name");
                 lbProfileName.setText(userName);
 
             }
@@ -179,7 +190,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         });
         mQueue.add(request_Profile);
     }
-
     public static void launch(Context context) {
 //      Intent intent=new Intent(context,MainActivity.class);
 //      context.startActivity(intent);
