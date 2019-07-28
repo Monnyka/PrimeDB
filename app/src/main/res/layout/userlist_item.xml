@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="wrap_content">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorMainBackground">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_watch_later"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/lbListTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/What_are_you_looking_for"
+        android:fontFamily="@font/circularstd_bold"
+        android:textSize="16sp"
+        android:textColor="@color/colorWhite"
+        />
+
+    <TextView
+        android:id="@+id/lbListDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:text="@string/What_are_you_looking_for"
+        android:textSize="@dimen/textSmall"
+        android:fontFamily="@font/avenirltstd_roman"
+        android:textStyle="bold"
+        android:layout_below="@id/lbListTitle"
+        android:textColor="@color/colorGray"
+        />
+
+    <TextView
+        android:id="@+id/lbListTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/What_are_you_looking_for"
+        android:textSize="@dimen/textSmall"
+        android:layout_below="@id/lbListDesc"
+        android:textColor="@color/colorGray"
+        />
+    <View
+        android:layout_width="350dp"
+        android:layout_height="0.5dp"
+        android:background="@color/colorGray"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/lbListTotal"/>
+
+    </RelativeLayout>
+</RelativeLayout>

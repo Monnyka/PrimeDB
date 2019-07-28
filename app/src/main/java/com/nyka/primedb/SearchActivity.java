@@ -9,7 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -43,7 +42,6 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
     TextView ScreenTitle;
     EditText etSearch;
     String screenTitle="";
-    RelativeLayout llSearch;
     String query="";
     Toolbar toolbar;
 
@@ -58,9 +56,11 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
 
         ScreenTitle=findViewById(R.id.ScreenTitle);
         etSearch=findViewById(R.id.etSearch);
+
         mRecyclerView = findViewById(R.id.recyclerMovieList);
         mRecyclerView.hasFixedSize();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         mMovieList = new ArrayList<>();
         mQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();

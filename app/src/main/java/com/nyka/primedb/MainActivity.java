@@ -46,6 +46,9 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     TrendingAdapter mTrendingAdapter;
     ArrayList<trending> mTrendingList;
 
+    YourWatchListAdapter mYourWatchListAdapter;
+    ArrayList<YourWatchlistModel> mYourWatchList;
+    RecyclerView rv_Yourwatchlist;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -63,6 +66,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         btnUpcoming=findViewById(R.id.btnUpcoming);
         imProfile=findViewById(R.id.imProfile);
 
+
         tRecyclerView.hasFixedSize();
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         tRecyclerView.setLayoutManager (linearLayoutManager);
@@ -71,6 +75,11 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         final SnapHelper snapHelper = new GravitySnapHelper(GravityCompat.START);
         snapHelper.attachToRecyclerView(tRecyclerView);
         mTrendingList = new ArrayList<>();
+
+        rv_Yourwatchlist=findViewById(R.id.rv_Yourwatchlist);
+        rv_Yourwatchlist.setHasFixedSize(true);
+        rv_Yourwatchlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        mYourWatchList=new ArrayList<>();
 
 
         btnPopular.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +108,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         });
         getProfile();
         RequestTrending();
+        RequestYourWatchList();
     }
     public void OpenScreenMovieDetail(String passValue){
         Intent intent = new Intent(this, activity_moviedetail.class);
@@ -153,7 +163,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
                         String releaseDate = result.getString("release_date");
                         String poster=result.getString("poster_path");
                         String Address="https://image.tmdb.org/t/p/original"+poster;
-                        String genre=result.optString("genre");
+                        String genre=result.optString("release_date");
                         mTrendingList.add(new trending(movieTitle,Address,releaseDate,movieID,genre));
                     }
                     mTrendingAdapter=new TrendingAdapter(MainActivity.this,mTrendingList);
@@ -172,6 +182,43 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         });
         mQueue.add(request);
     }
+
+    public void RequestYourWatchList(){
+
+        String url="https://api.themoviedb.org/3/account/{account_id}/watchlist/movies?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&sort_by=created_at.asc&page=1";
+
+        JsonObjectRequest request= new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("results");
+
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject result=jsonArray.getJSONObject(i);
+                        String movieImage="https://image.tmdb.org/t/p/original"+result.optString("poster_path");
+                        String movieTitle=result.optString("original_title");
+                        String movieYear=result.optString("release_date");
+                        mYourWatchList.add(new YourWatchlistModel(movieImage,movieTitle,movieYear));
+                    }
+                    mYourWatchListAdapter = new YourWatchListAdapter(MainActivity.this, mYourWatchList);
+                    rv_Yourwatchlist.setAdapter(mYourWatchListAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        mQueue.add(request);
+    }
+
+
     public void getProfile(){
 
         urlRequestProfile="https://api.themoviedb.org/3/account?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";

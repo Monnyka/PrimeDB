@@ -20,6 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 public class ProfileActivity extends BaseActivity {
 
     RequestQueue mQueue;
@@ -28,27 +30,31 @@ public class ProfileActivity extends BaseActivity {
     ImageView iV_Profile;
     TextView lbUserName;
     Toolbar toolbarNav;
-    RecyclerView rv_UserList;
+    RecyclerView mRecyclerView;
+    UserListAdapter mUserListAdapter;
+    ArrayList<UserListItem> mUserList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         NoStatusBar();
+
         mQueue = Volley.newRequestQueue(this);
         imFavoriteBackdrop=findViewById(R.id.imFavoriteBackdrop);
         im_watchlist_backdrop=findViewById(R.id.im_watchlist_backdrop);
         iV_Profile=findViewById(R.id.iV_Profile);
         lbUserName=findViewById(R.id.lbUserName);
-        rv_UserList=findViewById(R.id.rv_UserList);
-        rv_UserList.setHasFixedSize(true);
-        rv_UserList.setLayoutManager(new LinearLayoutManager(this));
 
+        mRecyclerView=findViewById(R.id.recyclerUserList);
+        mRecyclerView.hasFixedSize();
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mUserList= new ArrayList<>();
         toolbarNav=findViewById(R.id.toolbarNav);
         setSupportActionBar(toolbarNav);
         setTitle("");
         toolbarNav.setElevation(4);
-
         toolbarNav.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +65,6 @@ public class ProfileActivity extends BaseActivity {
         RequestProfileDetail();
         RequestUserList();
     }
-
     private void RequestProfile(){
 
         String url = "https://api.themoviedb.org/3/account?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
@@ -105,7 +110,7 @@ public class ProfileActivity extends BaseActivity {
 
                     for (int i = 0; i < 1; i++) {
                         JSONObject backdrop = jsonArray.getJSONObject(i);
-                        String imageUrl = "https://image.tmdb.org/t/p/w185" + backdrop.getString("backdrop_path");
+                        String imageUrl = "https://image.tmdb.org/t/p/w500" + backdrop.getString("backdrop_path");
                         Glide.with(ProfileActivity.this).load(imageUrl).into(imFavoriteBackdrop);
                     }
                 } catch (JSONException e) {
@@ -127,7 +132,7 @@ public class ProfileActivity extends BaseActivity {
 
                     for (int i = 0; i <=1; i++) {
                         JSONObject backdrop = jsonArray.getJSONObject(i);
-                        String watchlist_backdrop = "https://image.tmdb.org/t/p/w185" + backdrop.getString("backdrop_path");
+                        String watchlist_backdrop = "https://image.tmdb.org/t/p/w500" + backdrop.getString("backdrop_path");
                         Glide.with(ProfileActivity.this).load(watchlist_backdrop).into(im_watchlist_backdrop);
                     }
 
@@ -146,21 +151,21 @@ public class ProfileActivity extends BaseActivity {
 
     }
     private void RequestUserList(){
-
-        String url="https://api.themoviedb.org/3/account/{account_id}/lists?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&page=1";
+        String url="https://api.themoviedb.org/3/account/%7Baccount_id%7D/lists?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&page=1";
         JsonObjectRequest request= new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray jsonArray = response.getJSONArray("results");
-                    for(int i=0;i<=1;i++){
-
-                        String listName="aa";
-                        String listDesc="aa";
-                        String listTotal="aa";
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject list = jsonArray.getJSONObject(i);
+                        String listName=list.getString("name");
+                        String listDesc=list.optString("description");
+                        String listTotal="Total Movie: "+list.optString("item_count");
+                        mUserList.add(new UserListItem(listName,listDesc,listTotal));
                     }
-
-
+                    mUserListAdapter=new UserListAdapter(ProfileActivity.this,mUserList);
+                    mRecyclerView.setAdapter(mUserListAdapter);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

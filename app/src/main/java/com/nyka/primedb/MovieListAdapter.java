@@ -59,10 +59,7 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
         movieViewHolder.mTextViewRate.setText(movieRate);
         movieViewHolder.mTextViewRelease.setText(movieRelease);
         Glide.with(mContext).load(imageUrl).centerInside().into(movieViewHolder.mImageView);
-
     }
-
-
 
     @Override
     public int getItemCount() {

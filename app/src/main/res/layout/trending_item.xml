@@ -38,7 +38,7 @@
         <TextView
             android:id="@+id/lbTrendingTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_below="@+id/cv_imageView"
             android:text="John Wick - Chapter 3 Parabellum"
             android:fontFamily="@font/circularstd_bold"
@@ -65,7 +65,7 @@
             android:id="@+id/lbGenre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lbTrendingTitle"
+            android:layout_below="@id/lbTrendingTitle"
             android:text="Action/ Crime"
             android:fontFamily="@font/avenirltstd_roman"
             android:textSize="14sp"

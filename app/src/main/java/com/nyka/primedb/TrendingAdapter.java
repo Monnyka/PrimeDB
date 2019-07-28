@@ -52,6 +52,7 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
 
             trendingViewHolder.mTitle.setText(trendingTitle);
             trendingViewHolder.mReleaseDate.setText(trendingReleaseDate);
+            trendingViewHolder.mGenre.setText(trendingGenre);
         Glide.with(mContext).load(trendingPoster).into(trendingViewHolder.mImageView);
     }
 
