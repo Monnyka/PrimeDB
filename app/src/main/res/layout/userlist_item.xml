@@ -53,10 +53,11 @@
         android:textColor="@color/colorGray"
         />
     <View
+        android:id="@+id/sl_userList"
         android:layout_width="350dp"
         android:layout_height="0.5dp"
         android:background="@color/colorGray"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_below="@id/lbListTotal"/>
 
     </RelativeLayout>

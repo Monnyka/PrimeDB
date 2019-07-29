@@ -2,6 +2,7 @@ package com.nyka.primedb;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,12 +53,14 @@ public class YourWatchListAdapter extends RecyclerView.Adapter<YourWatchListAdap
         ImageView  mImageView;
         TextView mMovieTitle;
         TextView mYear;
+        CardView mCardView;
 
         public YourWatchListViewHolder(@NonNull View itemView) {
             super(itemView);
             mImageView=itemView.findViewById(R.id.iv_YourWatchList_Poster);
             mMovieTitle=itemView.findViewById(R.id.lbWatchListTitle);
             mYear=itemView.findViewById(R.id.lbWatchListYear);
+            mCardView=itemView.findViewById(R.id.cd_YourWatchList);
         }
     }
 }

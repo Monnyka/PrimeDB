@@ -1,4 +1,5 @@
 package com.nyka.primedb;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,6 +30,7 @@ public class ProfileActivity extends BaseActivity {
     ImageView im_watchlist_backdrop;
     ImageView iV_Profile;
     TextView lbUserName;
+    TextView btnCreateList;
     Toolbar toolbarNav;
     RecyclerView mRecyclerView;
     UserListAdapter mUserListAdapter;
@@ -45,6 +47,7 @@ public class ProfileActivity extends BaseActivity {
         im_watchlist_backdrop=findViewById(R.id.im_watchlist_backdrop);
         iV_Profile=findViewById(R.id.iV_Profile);
         lbUserName=findViewById(R.id.lbUserName);
+        btnCreateList=findViewById(R.id.btnCreateList);
 
         mRecyclerView=findViewById(R.id.recyclerUserList);
         mRecyclerView.hasFixedSize();
@@ -61,6 +64,14 @@ public class ProfileActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+
+        btnCreateList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenCreateList();
+            }
+        });
+
         RequestProfile();
         RequestProfileDetail();
         RequestUserList();
@@ -178,5 +189,10 @@ public class ProfileActivity extends BaseActivity {
             }
         });
         mQueue.add(request);
+    }
+
+    private void OpenCreateList(){
+        Intent intent = new Intent(this,CreateListActivity.class);
+        startActivity(intent);
     }
 }

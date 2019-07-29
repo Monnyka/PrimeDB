@@ -30,6 +30,9 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
     public void onBindViewHolder(@NonNull UserList_ViewHolder userList_viewHolder, int i) {
 
         UserListItem currentItem = mUserList.get(i);
+        if(i==mUserList.size()-1){
+            userList_viewHolder.mSL_userList.setVisibility(View.INVISIBLE);
+        }
 
         String listName=currentItem.getListName();
         String listDesc=currentItem.getListDesc();
@@ -49,12 +52,14 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
          TextView mListName;
          TextView mListDesc;
          TextView mListTotal;
+         View mSL_userList;
 
         public UserList_ViewHolder(@NonNull View itemView) {
             super(itemView);
             mListName=itemView.findViewById(R.id.lbListTitle);
             mListDesc=itemView.findViewById(R.id.lbListDesc);
             mListTotal=itemView.findViewById(R.id.lbListTotal);
+            mSL_userList=itemView.findViewById(R.id.sl_userList);
         }
     }
 

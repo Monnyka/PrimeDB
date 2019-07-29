@@ -132,8 +132,10 @@
                 android:orientation="vertical"
                 >
             <android.support.v7.widget.RecyclerView
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="20dp"
                 android:id="@+id/rvTrending"
+                android:layout_marginEnd="20dp"
+                android:paddingStart="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
@@ -212,9 +214,11 @@
                     android:layout_below="@+id/cdFeed"/>
 
                 <android.support.v7.widget.RecyclerView
+                    android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/rv_Yourwatchlist"
+                    android:foregroundGravity="left"
                     android:layout_below="@id/lbWatchlist">
                 </android.support.v7.widget.RecyclerView>
 

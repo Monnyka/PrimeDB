@@ -13,14 +13,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolbarNav"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="500dp"
+            android:paddingBottom="80dp"
             >
 
             <TextView
@@ -167,6 +167,22 @@
                 android:text="@string/User_List"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/textMedium" />
+            <TextView
+                android:id="@+id/btnCreateList"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="@string/Create_List"
+                android:fontFamily="@font/circularstd_bold"
+                android:textColor="@color/colorWhite"
+                android:gravity="center_vertical"
+                android:layout_below="@id/rl_partWatchlist"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+
+            />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerUserList"
                 android:layout_width="wrap_content"
