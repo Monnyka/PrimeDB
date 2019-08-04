@@ -27,6 +27,7 @@ public class YourWatchListAdapter extends RecyclerView.Adapter<YourWatchListAdap
     @Override
     public YourWatchListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v=LayoutInflater.from(mContext).inflate(R.layout.yourwatchlist_item, viewGroup,false);
+        
         return new YourWatchListViewHolder(v);
     }
 

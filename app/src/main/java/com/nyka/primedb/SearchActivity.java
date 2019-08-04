@@ -111,7 +111,6 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
                         String MovieReleaseDate = ConvertDate(ReleaseDate);
                         mMovieList.add(new MovieListItem(imageUrl, MovieTitle, MovieRate, MovieReleaseDate, MovieID));
                     }
-
                     mMovieAdapter = new MovieListAdapter(SearchActivity.this, mMovieList);
                     mRecyclerView.setAdapter(mMovieAdapter);
                     mMovieAdapter.setOnClickListener(SearchActivity.this);

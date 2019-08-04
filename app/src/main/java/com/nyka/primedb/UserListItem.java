@@ -5,12 +5,15 @@ public class UserListItem {
     private String mListName;
     private String mListDesc;
     private String mListTotal;
+    private String mListID;
 
-    public UserListItem(String listName, String listDesc, String listTotal){
+    public UserListItem(String listName, String listDesc, String listTotal, String listID){
 
         mListName=listName;
         mListDesc=listDesc;
         mListTotal=listTotal;
+        mListID=listID;
+
 
     }
 
@@ -25,4 +28,6 @@ public class UserListItem {
     public String getListTotal() {
         return mListTotal;
     }
+
+    public String getListID(){return mListID;};
 }

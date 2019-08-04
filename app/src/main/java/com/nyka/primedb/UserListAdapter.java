@@ -13,6 +13,16 @@ import java.util.ArrayList;
 public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserList_ViewHolder> {
     private Context mContext;
     private ArrayList<UserListItem> mUserList;
+    private onItemClickListener mListener;
+
+    public interface onItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(onItemClickListener listener){
+        mListener=listener;
+    }
+
 
     UserListAdapter(Context context, ArrayList<UserListItem> userList){
         mContext=context;
@@ -60,7 +70,25 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
             mListDesc=itemView.findViewById(R.id.lbListDesc);
             mListTotal=itemView.findViewById(R.id.lbListTotal);
             mSL_userList=itemView.findViewById(R.id.sl_userList);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener!=null){
+                        int position=getAdapterPosition();
+
+                            if(position!=RecyclerView.NO_POSITION){
+                                mListener.onItemClick(position);
+                            }
+                    }
+                }
+            });
         }
+    }
+    public void clear() {
+        int size = mUserList.size();
+        mUserList.clear();
+        notifyItemRangeRemoved(0, size);
     }
 
 }

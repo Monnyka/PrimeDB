@@ -3,6 +3,7 @@ package com.nyka.primedb;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,11 +22,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener,TrendingAdapter.onClickItemListener {
@@ -43,6 +42,10 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     Button btnUpcoming;
     ImageView imProfile;
 
+    public static String savesessionID = "sessionID";
+    public String sessionID="";
+    public static final String SHARED_PREF = "Share_Pref";
+
     TrendingAdapter mTrendingAdapter;
     ArrayList<trending> mTrendingList;
 
@@ -56,6 +59,10 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         NoStatusBar();
+        //LoadData();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
+        sessionID = sharedPreferences.getString(savesessionID, "");
 
         mQueue = Volley.newRequestQueue(this);
         btnLogIn=findViewById(R.id.btnLogIn);
@@ -65,7 +72,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         btnPopular=findViewById(R.id.btnPopular);
         btnUpcoming=findViewById(R.id.btnUpcoming);
         imProfile=findViewById(R.id.imProfile);
-
 
         tRecyclerView.hasFixedSize();
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -80,7 +86,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         rv_Yourwatchlist.setHasFixedSize(true);
         rv_Yourwatchlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         mYourWatchList=new ArrayList<>();
-
 
         btnPopular.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,9 +111,11 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
                 OpenProfileScreen();
             }
         });
+
         getProfile();
         RequestTrending();
         RequestYourWatchList();
+        lbProfileName.setText(userName);
     }
     public void OpenScreenMovieDetail(String passValue){
         Intent intent = new Intent(this, activity_moviedetail.class);
@@ -134,7 +141,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
     public void OpenPopularMovie(){
         String title="Now In Theater";
         Intent intent = new Intent(this, SearchActivity.class);
@@ -143,7 +149,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
     public void OpenProfileScreen(){
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
@@ -182,7 +187,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         });
         mQueue.add(request);
     }
-
     public void RequestYourWatchList(){
 
         String url="https://api.themoviedb.org/3/account/{account_id}/watchlist/movies?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&sort_by=created_at.asc&page=1";
@@ -217,11 +221,9 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         });
         mQueue.add(request);
     }
-
-
     public void getProfile(){
 
-        urlRequestProfile="https://api.themoviedb.org/3/account?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+        urlRequestProfile="https://api.themoviedb.org/3/account?api_key="+apiKey+"&session_id="+sessionID;
         JsonObjectRequest request_Profile = new JsonObjectRequest(Request.Method.GET, urlRequestProfile, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -242,7 +244,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
 //      context.startActivity(intent);
         context.startActivity(new Intent(context, MainActivity.class));
     }
-
     @Override
     public void onItemClick(int position) {
         Intent intent =new Intent(this,activity_moviedetail.class);
@@ -250,5 +251,10 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         intent.putExtra("movieID",clickItem.getTrendingID());
         startActivity(intent);
     }
-
+    //private void LoadData() {
+//        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
+//        userName = sharedPreferences.getString(UserName, "");
+//        Password = sharedPreferences.getString(UserPassword, "");
+//        sessionID = sharedPreferences.getString(savesessionID, "");
+//    }
 }

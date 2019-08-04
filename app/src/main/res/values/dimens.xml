@@ -7,5 +7,6 @@
     <dimen name="textMedium">20sp</dimen>
     <dimen name="textNormal">14sp</dimen>
     <dimen name="textSmall">12sp</dimen>
+    <dimen name="textNormal_two">16sp</dimen>
     <item name="text_view_padding" type="integer">100</item>
 </resources>

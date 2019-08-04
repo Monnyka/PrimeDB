@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMainBackground"
+    tools:context=".UserListDetailActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/lbUserList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/USER_LIST"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/colorGray"
+            android:textStyle="bold"
+            android:fontFamily="@font/circularstd_bold"
+            android:textSize="@dimen/textNormal_two"
+            />
+
+        <TextView
+            android:id="@+id/lbListName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/User_List"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="@dimen/textVeryBig"
+            android:fontFamily="@font/circularstd_bold"
+            android:layout_below="@+id/lbUserList"
+            />
+            <TextView
+                android:id="@+id/lbListDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/User_List"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/colorGray"
+                android:textStyle="bold"
+                android:textSize="@dimen/textNormal_two"
+                android:layout_below="@+id/lbListName"
+                android:fontFamily="@font/circularstd_bold"
+                />
+
+            <TextView
+                android:id="@+id/lbListTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/User_List"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:textSize="@dimen/textNormal_two"
+                android:layout_below="@+id/lbListDesc"
+                android:fontFamily="@font/avenirltstd_roman"
+                />
+
+
+            <View
+                android:id="@+id/v_separate"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/lbListTotal"
+                android:background="@color/colorGray"
+                android:layout_marginStart="20dp"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvUserListDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/v_separate"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

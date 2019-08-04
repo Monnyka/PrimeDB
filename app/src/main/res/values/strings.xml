@@ -79,10 +79,14 @@
     <string name="Movie">Movie</string>
     <string name="Part_of_your_favorite">Part of your favorite</string>
     <string name="Part_of_your_watchlist">Part of your watchlist</string>
-    <string name="User_List">Your List</string>
+    <string name="User_List">User List</string>
     <string name="Log_Out">Log Out</string>
     <string name="Create_List">Create List</string>
     <string name="List_name">List name</string>
     <string name="Description">Description</string>
     <string name="Create">Create</string>
+    <string name="USER_LIST">USER LIST</string>
+    <string name="PRIMEDB">PRIMEDB</string>
+    <string name="OKAY">OKAY</string>
+    <string name="CANCEL">CANCEL</string>
 </resources>

@@ -64,7 +64,6 @@ public class LogInActivity extends BaseActivity {
                 CheckValidationLogin();
             }
         });
-        UpdateView();
     }
 
     public void RequestToken() {
@@ -116,10 +115,8 @@ public class LogInActivity extends BaseActivity {
     public void RequestSession() {
 
         String url_session = requestRoute + "/3/authentication/session/new" + api_key;
-
         JSONObject json = new JSONObject();
         try {
-
             json.put("request_token", verified_token);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -130,7 +127,7 @@ public class LogInActivity extends BaseActivity {
             public void onResponse(JSONObject response) {
                 try {
                     session_ID = response.getString("session_id");
-                    OpenMainScreen();
+                    SaveData();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -146,13 +143,14 @@ public class LogInActivity extends BaseActivity {
         mQueue.add(create_sessionID);
     }
     public void SaveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(UserName, edUname.getText().toString());
         editor.putString(UserPassword, edPassword.getText().toString());
         editor.putString(savesessionID, session_ID);
         editor.putBoolean(String.valueOf(isLogin), true);
         editor.apply();
+        OpenMainScreen();
     }
     public void LoadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
@@ -161,12 +159,7 @@ public class LogInActivity extends BaseActivity {
         textSessionID = sharedPreferences.getString(savesessionID, "");
         isLogin = sharedPreferences.getBoolean(String.valueOf(isLogin), false);
     }
-    public void UpdateView() {
-        edUname.setText(textUname);
-        edPassword.setText(textPassword);
-    }
     public void OpenMainScreen() {
-        SaveData();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

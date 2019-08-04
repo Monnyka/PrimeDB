@@ -1,6 +1,9 @@
 package com.nyka.primedb;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -63,6 +67,9 @@ public class activity_moviedetail extends BaseActivity {
     ImageView btnWatchList;
     String favorite="false";
     String watchListStatus="false";
+    Dialog successDialog;
+    Button btnOkay;
+    TextView lbMessage;
 
     RecyclerView mRecyclerView;
     MovieAdapter mMovieAdapter;
@@ -110,6 +117,8 @@ public class activity_moviedetail extends BaseActivity {
         lbSynopsisDetail = findViewById(R.id.lbSynopsisDetail);
         btnAddFavorite=findViewById(R.id.btnAddFavorite);
         btnWatchList=findViewById(R.id.btnWatchList);
+        successDialog = new Dialog(this);
+
         mRecyclerView = findViewById(R.id.recycler_view_cast);
         svMovieDetail=findViewById(R.id.svMovieDetail);
         svMovieDetail.setVisibility(View.INVISIBLE);
@@ -184,7 +193,7 @@ mQueue.add(request);
     }
 
     private void AddFavorite() {
-        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/favorite?api_key="+apiKey+"&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
             JSONObject JsonFavorite = new JSONObject();
 
         try {
@@ -197,7 +206,9 @@ mQueue.add(request);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(),"Successfully added this movie to favorite list.",Toast.LENGTH_SHORT).show();
+                String message="Successfully, Added this movie to your favorite list.";
+                ShowDialogSuccess(message);
+
                 btnAddFavorite.setImageResource(R.drawable.ic_heart_clicked);
                 btnAddFavorite.setPadding(15,15,15,15);
             }
@@ -209,7 +220,6 @@ mQueue.add(request);
         });
         mQueue.add(request);
     }
-
     private void RemoveFavorite(){
         String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
         JSONObject JsonFavorite = new JSONObject();
@@ -224,7 +234,8 @@ mQueue.add(request);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(),"Successfully removed this movie from favorite list.",Toast.LENGTH_SHORT).show();
+                String message="Successfully, Removed this movie from your favorite list.";
+                ShowDialogSuccess(message);
                 btnAddFavorite.setImageResource(R.drawable.ic_heart);
                 btnAddFavorite.setPadding(15,15,15,15);
             }
@@ -236,7 +247,6 @@ mQueue.add(request);
         });
         mQueue.add(request);
     }
-
     private void AddWatchList(){
         String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
         JSONObject JsonFavorite = new JSONObject();
@@ -251,7 +261,8 @@ mQueue.add(request);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(),"Successfully added this movie to watchlist.",Toast.LENGTH_SHORT).show();
+                String message="Successfully, Added this movie to your watchlist.";
+                ShowDialogSuccess(message);
                 btnWatchList.setImageResource(R.drawable.ic_watchlist_clicked);
                 btnWatchList.setPadding(15,15,15,15);
             }
@@ -262,9 +273,7 @@ mQueue.add(request);
             }
         });
         mQueue.add(request);
-
     }
-
     private void RemoveWatchList(){
 
         String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
@@ -280,7 +289,8 @@ mQueue.add(request);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(),"Successfully, Removed this movie to watchlist.",Toast.LENGTH_SHORT).show();
+                String message="Successfully, Removed this movie from your watchlist.";
+                ShowDialogSuccess(message);
                 btnWatchList.setImageResource(R.drawable.ic_watch_later);
                 btnWatchList.setPadding(15,15,15,15);
             }
@@ -292,13 +302,11 @@ mQueue.add(request);
         });
         mQueue.add(request);
     }
-
     private void OpenActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
     public void getMovieDetail() {
         String movieUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "?api_key=" + apiKey + "&language=en-US";
         String movieCreditUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "/credits?api_key=" + apiKey;
@@ -518,6 +526,20 @@ mQueue.add(request);
         });
 
         mQueue.add(requestBanner);
+    }
+    private void ShowDialogSuccess(String message){
+        successDialog.setContentView(R.layout.custom_popup_success);
+        lbMessage=successDialog.findViewById(R.id.lbMessage);
+        btnOkay=successDialog.findViewById(R.id.btnOkay);
+        btnOkay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                successDialog.dismiss();
+            }
+        });
+        lbMessage.setText(message);
+        successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        successDialog.show();
     }
 
 }
