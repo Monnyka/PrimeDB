@@ -89,4 +89,6 @@
     <string name="PRIMEDB">PRIMEDB</string>
     <string name="OKAY">OKAY</string>
     <string name="CANCEL">CANCEL</string>
+    <string name="Add_to_list">Add to list</string>
+    <string name="Select_list">Select list</string>
 </resources>

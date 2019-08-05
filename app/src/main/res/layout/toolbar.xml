@@ -13,7 +13,7 @@
     app:layout_constraintTop_toTopOf="parent"
     app:navigationIcon="@drawable/ic_arrow_back"
     android:background="@color/colorMainBackground"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     android:elevation="0dp"
+    android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
     >
 </android.support.v7.widget.Toolbar>

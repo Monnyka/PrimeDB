@@ -5,17 +5,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -70,6 +75,7 @@ public class activity_moviedetail extends BaseActivity {
     Dialog successDialog;
     Button btnOkay;
     TextView lbMessage;
+    BottomSheetBehavior mBottomSheetBehavior;
 
     RecyclerView mRecyclerView;
     MovieAdapter mMovieAdapter;
@@ -118,6 +124,8 @@ public class activity_moviedetail extends BaseActivity {
         btnAddFavorite=findViewById(R.id.btnAddFavorite);
         btnWatchList=findViewById(R.id.btnWatchList);
         successDialog = new Dialog(this);
+        View bottomSheet=findViewById(R.id.bottom_sheet);
+        mBottomSheetBehavior=BottomSheetBehavior.from(bottomSheet);
 
         mRecyclerView = findViewById(R.id.recycler_view_cast);
         svMovieDetail=findViewById(R.id.svMovieDetail);
@@ -542,5 +550,25 @@ mQueue.add(request);
         successDialog.show();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.it_add:
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                return true;
+            default:
+                    return super.onOptionsItemSelected(item);
+        }
+
+    }
 }
 

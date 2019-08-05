@@ -50,7 +50,6 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
     public static final String SHARED_PREF = "Share_Pref";
     public static final String savesessionID="sessionID";
     String sessionID="";
-
     RecyclerView mRecyclerView;
     UserListAdapter mUserListAdapter;
     ArrayList<UserListItem> mUserList;
@@ -188,7 +187,6 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         });
         mQueue.add(request);
