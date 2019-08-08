@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,12 +47,6 @@ public class activity_moviedetail extends BaseActivity {
     String MovieID = "";
     String imdb_id="";
 
-    ArrayList<String> mArrayList;
-
-
-    /*  String[] imageUrls = new String[]{
-                "https://image.tmdb.org/t/p/w185/kZv92eTc0Gg3mKxqjjDAM73z9cy.jpg"
-        };*/
     ImageView ivPoster;
     TextView lbSynopsisDetail;
     TextView lbRated;
@@ -76,6 +71,7 @@ public class activity_moviedetail extends BaseActivity {
     Button btnOkay;
     TextView lbMessage;
     BottomSheetBehavior mBottomSheetBehavior;
+    RelativeLayout btnPersonalRate;
 
     RecyclerView mRecyclerView;
     MovieAdapter mMovieAdapter;
@@ -83,6 +79,9 @@ public class activity_moviedetail extends BaseActivity {
     ArrayList<String> imageUrl;
     ScrollView svMovieDetail;
     Toolbar toolbars;
+    RecyclerView detailUserListRecycler;
+    ArrayList<DetailUserListModel> mDetailUserList;
+    DetailUserListAdapter mDetailUserListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,9 +119,8 @@ public class activity_moviedetail extends BaseActivity {
         ivDirector = findViewById(R.id.ivDirector);
         lbDistributeDetail = findViewById(R.id.lbDistributeDetail);
         lbCastMore = findViewById(R.id.lbCastMore);
+        btnPersonalRate=findViewById(R.id.rl_PersonalRate);
         lbSynopsisDetail = findViewById(R.id.lbSynopsisDetail);
-        btnAddFavorite=findViewById(R.id.btnAddFavorite);
-        btnWatchList=findViewById(R.id.btnWatchList);
         successDialog = new Dialog(this);
         View bottomSheet=findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior=BottomSheetBehavior.from(bottomSheet);
@@ -135,60 +133,68 @@ public class activity_moviedetail extends BaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mMovieAdapter);
 
+
+        detailUserListRecycler=findViewById(R.id.rv_userList);
+        detailUserListRecycler.setHasFixedSize(true);
+        detailUserListRecycler.setLayoutManager(new LinearLayoutManager(this));
+        detailUserListRecycler.setAdapter(mDetailUserListAdapter);
+
         mMovieList = new ArrayList<>();
         imageUrl = new ArrayList<>();
+        mDetailUserList=new ArrayList<>();
+
+        btnPersonalRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getUserList();
+            }
+        });
 
         getMovieDetail();
         getBanner();
         getAccountState();
 
         svMovieDetail.setVisibility(View.VISIBLE);
-        btnAddFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(favorite.equals("false")) {
-                    AddFavorite();
-                    favorite="true";
-                }else{
-                    RemoveFavorite();
-                    favorite="false";
-                }
-            }
-        });
-
-        btnWatchList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(watchListStatus.equals("false")) {
-                    AddWatchList();
-                    watchListStatus="true";
-                }
-                else
-                {
-                    RemoveWatchList();
-                    watchListStatus="false";
-                }
-            }
-        });
+//        btnAddFavorite.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(favorite.equals("false")) {
+//                    AddFavorite();
+//                    favorite="true";
+//                }else{
+//                    RemoveFavorite();
+//                    favorite="false";
+//                }
+//            }
+//        });
+//
+//        btnWatchList.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(watchListStatus.equals("false")) {
+//                    AddWatchList();
+//                    watchListStatus="true";
+//                }
+//                else
+//                {
+//                    RemoveWatchList();
+//                    watchListStatus="false";
+//                }
+//            }
+//        });
     }
-
     private void getAccountState(){
-
         String urlAccountState="https://api.themoviedb.org/3/movie/"+MovieID+"/account_states?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, urlAccountState, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 boolean fav=response.optBoolean("favorite");
                 boolean wat=response.optBoolean("watchlist");
                 if(fav) {
                     favorite="true";
-                    btnAddFavorite.setImageResource(R.drawable.ic_heart_clicked);
                 }
                 if(wat){
                     watchListStatus="true";
-                    btnWatchList.setImageResource(R.drawable.ic_watchlist_clicked);
                 }
             }
         }, new Response.ErrorListener() {
@@ -199,7 +205,6 @@ public class activity_moviedetail extends BaseActivity {
         });
 mQueue.add(request);
     }
-
     private void AddFavorite() {
         String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/favorite?api_key="+apiKey+"&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
             JSONObject JsonFavorite = new JSONObject();
@@ -228,33 +233,33 @@ mQueue.add(request);
         });
         mQueue.add(request);
     }
-    private void RemoveFavorite(){
-        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
-        JSONObject JsonFavorite = new JSONObject();
-
-        try {
-            JsonFavorite.put("media_type","movie");
-            JsonFavorite.put("media_id",""+MovieID);
-            JsonFavorite.put("favorite",false);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                String message="Successfully, Removed this movie from your favorite list.";
-                ShowDialogSuccess(message);
-                btnAddFavorite.setImageResource(R.drawable.ic_heart);
-                btnAddFavorite.setPadding(15,15,15,15);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Request Fail: Please check you internet connection.",Toast.LENGTH_LONG).show();
-            }
-        });
-        mQueue.add(request);
-    }
+//    private void RemoveFavorite(){
+//        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/favorite?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+//        JSONObject JsonFavorite = new JSONObject();
+//
+//        try {
+//            JsonFavorite.put("media_type","movie");
+//            JsonFavorite.put("media_id",""+MovieID);
+//            JsonFavorite.put("favorite",false);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                String message="Successfully, Removed this movie from your favorite list.";
+//                ShowDialogSuccess(message);
+//                btnAddFavorite.setImageResource(R.drawable.ic_heart);
+//                btnAddFavorite.setPadding(15,15,15,15);
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getApplicationContext(),"Request Fail: Please check you internet connection.",Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        mQueue.add(request);
+//    }
     private void AddWatchList(){
         String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
         JSONObject JsonFavorite = new JSONObject();
@@ -282,34 +287,34 @@ mQueue.add(request);
         });
         mQueue.add(request);
     }
-    private void RemoveWatchList(){
-
-        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
-        JSONObject JsonFavorite = new JSONObject();
-
-        try {
-            JsonFavorite.put("media_type","movie");
-            JsonFavorite.put("media_id",""+MovieID);
-            JsonFavorite.put("watchlist",false);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                String message="Successfully, Removed this movie from your watchlist.";
-                ShowDialogSuccess(message);
-                btnWatchList.setImageResource(R.drawable.ic_watch_later);
-                btnWatchList.setPadding(15,15,15,15);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),"Request Fail: Please check you internet connection.",Toast.LENGTH_LONG).show();
-            }
-        });
-        mQueue.add(request);
-    }
+//    private void RemoveWatchList(){
+//
+//        String urlAddFavorite="https://api.themoviedb.org/3/account/{account_id}/watchlist?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+//        JSONObject JsonFavorite = new JSONObject();
+//
+//        try {
+//            JsonFavorite.put("media_type","movie");
+//            JsonFavorite.put("media_id",""+MovieID);
+//            JsonFavorite.put("watchlist",false);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, urlAddFavorite, JsonFavorite, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                String message="Successfully, Removed this movie from your watchlist.";
+//                ShowDialogSuccess(message);
+//                btnWatchList.setImageResource(R.drawable.ic_watch_later);
+//                btnWatchList.setPadding(15,15,15,15);
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getApplicationContext(),"Request Fail: Please check you internet connection.",Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        mQueue.add(request);
+//    }
     private void OpenActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -476,6 +481,34 @@ mQueue.add(request);
         mQueue.add(request);
         mQueue.add(creditRequest);
     }
+    public void getUserList(){
+        String url="https://api.themoviedb.org/3/account/{account_id}/lists?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&page=1";
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("results");
+
+                    for(int i=0;i<jsonArray.length();i++) {
+                        JSONObject list = jsonArray.getJSONObject(i);
+                        String listName = "Name: " + list.optString("name");
+                        mDetailUserList.add(new DetailUserListModel(listName));
+                    }
+                    mDetailUserListAdapter= new DetailUserListAdapter(activity_moviedetail.this,mDetailUserList);
+                    detailUserListRecycler.setAdapter(mDetailUserListAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        mQueue.add(request);
+    }
 
     private String ConvertDateString(String MovieYear) {
         String aa = MovieYear;
@@ -492,7 +525,6 @@ mQueue.add(request);
         return newDateString;
     }
     private void getBanner(){
-
         //String url="https://api.themoviedb.org/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f&language=en-US&include_image_language=en";
        String url="https://api.themoviedb.org/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f";
         JsonObjectRequest requestBanner = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -549,7 +581,6 @@ mQueue.add(request);
         successDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         successDialog.show();
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -564,6 +595,12 @@ mQueue.add(request);
 
             case R.id.it_add:
                     mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                return true;
+            case R.id.it_addfavorite:
+                AddFavorite();
+                return true;
+            case R.id.it_addwatchlist:
+                AddWatchList();
                 return true;
             default:
                     return super.onOptionsItemSelected(item);

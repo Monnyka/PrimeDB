@@ -3,6 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     >
+    <item android:id="@+id/it_addwatchlist"
+        android:title="@string/Add_to_list"
+        android:icon="@drawable/ic_watch_later"
+        app:showAsAction="ifRoom"
+        />
+    <item android:id="@+id/it_addfavorite"
+        android:title="@string/Add_to_list"
+        android:icon="@drawable/ic_heart"
+        app:showAsAction="ifRoom"
+        />
     <item android:id="@+id/it_add"
         android:title="@string/Add_to_list"
         app:showAsAction="never"

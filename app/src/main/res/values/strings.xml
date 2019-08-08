@@ -91,4 +91,8 @@
     <string name="CANCEL">CANCEL</string>
     <string name="Add_to_list">Add to list</string>
     <string name="Select_list">Select list</string>
+    <string name="Overal_Rating">Overal Rating</string>
+    <string name="Overall_Rating">Overall Rating</string>
+    <string name="Personal_Rating">Personal Rating</string>
+    <string name="Popularity">Popularity</string>
 </resources>
