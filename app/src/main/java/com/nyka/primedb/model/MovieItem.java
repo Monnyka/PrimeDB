@@ -1,4 +1,4 @@
-package com.nyka.primedb;
+package com.nyka.primedb.model;
 
 public class MovieItem {
 

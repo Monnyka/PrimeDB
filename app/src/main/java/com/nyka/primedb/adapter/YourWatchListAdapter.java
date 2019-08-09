@@ -1,4 +1,4 @@
-package com.nyka.primedb;
+package com.nyka.primedb.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.view.LayoutInflater;
 
 import com.bumptech.glide.Glide;
+import com.nyka.primedb.R;
+import com.nyka.primedb.model.YourWatchlistModel;
 
 import java.util.ArrayList;
 

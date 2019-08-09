@@ -22,12 +22,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
+import com.nyka.primedb.adapter.MovieListAdapter;
+import com.nyka.primedb.adapter.TrendingAdapter;
+import com.nyka.primedb.adapter.YourWatchListAdapter;
+import com.nyka.primedb.model.YourWatchlistModel;
+import com.nyka.primedb.model.trending;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener,TrendingAdapter.onClickItemListener {
+public class MainActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener, TrendingAdapter.onClickItemListener {
     RequestQueue mQueue;
     String popularAPIAddress=requestRoute+"/3/movie/now_playing"+api_key+"&language=en-US&page=1";
     String urlUpcoming=requestRoute+"/3/movie/upcoming"+api_key+"&language=en-US&page=1";
@@ -118,7 +124,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         lbProfileName.setText(userName);
     }
     public void OpenScreenMovieDetail(String passValue){
-        Intent intent = new Intent(this, activity_moviedetail.class);
+        Intent intent = new Intent(this, MovieDetailActivity.class);
         intent.putExtra("movieID",passValue);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //      ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this,findViewById(R.id.), "imageViewPoster");
@@ -246,7 +252,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     }
     @Override
     public void onItemClick(int position) {
-        Intent intent =new Intent(this,activity_moviedetail.class);
+        Intent intent =new Intent(this, MovieDetailActivity.class);
         trending clickItem =mTrendingList.get(position);
         intent.putExtra("movieID",clickItem.getTrendingID());
         startActivity(intent);

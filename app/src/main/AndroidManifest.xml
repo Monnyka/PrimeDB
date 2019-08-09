@@ -19,7 +19,7 @@
             android:name=".SearchActivity"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".activity_dashboard" />
-        <activity android:name=".activity_moviedetail" />
+        <activity android:name=".MovieDetailActivity" />
         <activity
             android:name=".LogInActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

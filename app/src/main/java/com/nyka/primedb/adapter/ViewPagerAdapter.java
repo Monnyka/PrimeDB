@@ -1,4 +1,4 @@
-package com.nyka.primedb;
+package com.nyka.primedb.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -16,7 +16,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     private Context context;
     private ArrayList<String> imageUrl;
 
-    ViewPagerAdapter(Context context, ArrayList<String> imageUrl){
+    public ViewPagerAdapter(Context context, ArrayList<String> imageUrl){
 
         this.context=context;
         this.imageUrl=imageUrl;

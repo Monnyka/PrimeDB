@@ -1,4 +1,4 @@
-package com.nyka.primedb;
+package com.nyka.primedb.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.nyka.primedb.R;
+import com.nyka.primedb.model.MovieListItem;
 
 import java.util.ArrayList;
 
@@ -26,12 +28,12 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
         void onItemClick(int position);
     }
 
-    void setOnClickListener(OnItemClickListener Listener){
+    public void setOnClickListener(OnItemClickListener Listener){
 
         mListener = Listener;
     }
 
-    MovieListAdapter(Context context, ArrayList<MovieListItem> movieList){
+    public MovieListAdapter(Context context, ArrayList<MovieListItem> movieList){
         mContext=context;
         mMovieList=movieList;
 

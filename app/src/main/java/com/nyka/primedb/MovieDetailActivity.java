@@ -29,6 +29,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.nyka.primedb.adapter.DetailUserListAdapter;
+import com.nyka.primedb.adapter.MovieAdapter;
+import com.nyka.primedb.adapter.ViewPagerAdapter;
+import com.nyka.primedb.model.DetailUserListModel;
+import com.nyka.primedb.model.MovieItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class activity_moviedetail extends BaseActivity {
+public class MovieDetailActivity extends BaseActivity {
 
     String mm="";
     TextView lbMovieTitle;
@@ -377,7 +382,7 @@ mQueue.add(request);
                         lbTagLine.setVisibility(View.GONE);
                     }
 
-                    Glide.with(activity_moviedetail.this).load(poster).into(ivPoster);
+                    Glide.with(MovieDetailActivity.this).load(poster).into(ivPoster);
 
                     JSONArray jsonArray = response.optJSONArray("genres");
 
@@ -438,7 +443,7 @@ mQueue.add(request);
                         mMovieList.add(new MovieItem(imageUrl, CastName, CharracterName));
 
                     }
-                    mMovieAdapter = new MovieAdapter(activity_moviedetail.this, mMovieList);
+                    mMovieAdapter = new MovieAdapter(MovieDetailActivity.this, mMovieList);
                     mRecyclerView.setAdapter(mMovieAdapter);
 
                 } catch (JSONException e) {
@@ -456,7 +461,7 @@ mQueue.add(request);
 
                         if (getDirector.equals("Director")) {
                             String DirectorName = crew.optString("name");
-                            Glide.with(activity_moviedetail.this).load(Director_Image_Profile).into(ivDirector);
+                            Glide.with(MovieDetailActivity.this).load(Director_Image_Profile).into(ivDirector);
 
                             if (lbDirectorName.getText() == "") {
                                 lbDirectorName.append(DirectorName);
@@ -491,10 +496,10 @@ mQueue.add(request);
 
                     for(int i=0;i<jsonArray.length();i++) {
                         JSONObject list = jsonArray.getJSONObject(i);
-                        String listName = "Name: " + list.optString("name");
+                        String listName =list.optString("name");
                         mDetailUserList.add(new DetailUserListModel(listName));
                     }
-                    mDetailUserListAdapter= new DetailUserListAdapter(activity_moviedetail.this,mDetailUserList);
+                    mDetailUserListAdapter= new DetailUserListAdapter(MovieDetailActivity.this,mDetailUserList);
                     detailUserListRecycler.setAdapter(mDetailUserListAdapter);
 
                 } catch (JSONException e) {
@@ -549,7 +554,7 @@ mQueue.add(request);
  //                   }
 
                     ViewPager viewPager =findViewById(R.id.view_pager);
-                    ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(activity_moviedetail.this, imageUrl);
+                    ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(MovieDetailActivity.this, imageUrl);
                     viewPager.setAdapter(viewPagerAdapter);
 
                     Log.d("ffda",""+imageUrl);
@@ -594,6 +599,7 @@ mQueue.add(request);
         switch (item.getItemId()){
 
             case R.id.it_add:
+                getUserList();
                     mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 return true;
             case R.id.it_addfavorite:

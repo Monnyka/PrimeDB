@@ -1,4 +1,4 @@
-package com.nyka.primedb;
+package com.nyka.primedb.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.view.LayoutInflater;
+
+import com.nyka.primedb.R;
+import com.nyka.primedb.model.UserListItem;
 
 import java.util.ArrayList;
 
@@ -24,7 +27,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserLi
     }
 
 
-    UserListAdapter(Context context, ArrayList<UserListItem> userList){
+    public UserListAdapter(Context context, ArrayList<UserListItem> userList){
         mContext=context;
         mUserList=userList;
     }

@@ -23,6 +23,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.nyka.primedb.adapter.UserListAdapter;
+import com.nyka.primedb.model.UserListItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -262,7 +264,6 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
         Intent intent= new Intent(this,LogInActivity.class);
         startActivity(intent);
     }
-
     private void ShowDialogLogOut(){
 
         dialogLogOut.setContentView(R.layout.custom_popup_confirm);

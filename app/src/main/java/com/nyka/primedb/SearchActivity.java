@@ -17,6 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.nyka.primedb.adapter.MovieListAdapter;
+import com.nyka.primedb.adapter.TrendingAdapter;
+import com.nyka.primedb.model.MovieListItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SearchActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener,TrendingAdapter.onClickItemListener {
+public class SearchActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener, TrendingAdapter.onClickItemListener {
 
     public static final String EXTRA_URL = "imageUrl";
     public static final String EXTRA_TITLE = "movieTitle";
@@ -193,7 +196,7 @@ public class SearchActivity extends BaseActivity implements MovieListAdapter.OnI
 
     @Override
     public void onItemClick(int position) {
-        Intent detailIntent = new Intent(this, activity_moviedetail.class);
+        Intent detailIntent = new Intent(this, MovieDetailActivity.class);
         MovieListItem clickedItem = mMovieList.get(position);
         detailIntent.putExtra(EXTRA_URL, clickedItem.getImageUrl());
         detailIntent.putExtra(EXTRA_TITLE, clickedItem.getMovieTitle());
