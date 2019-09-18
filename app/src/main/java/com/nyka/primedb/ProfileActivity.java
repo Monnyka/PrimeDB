@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,11 +24,9 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.nyka.primedb.adapter.UserListAdapter;
 import com.nyka.primedb.model.UserListItem;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class ProfileActivity extends BaseActivity implements UserListAdapter.onItemClickListener{
@@ -91,15 +88,16 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
                 OpenCreateList();
             }
         });
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShowDialogLogOut();
-            }
-        });
         RequestProfile();
         RequestProfileDetail();
         RequestUserList();
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CallLogOut();
+//                ShowDialogLogOut();
+            }
+        });
     }
 
     @Override
@@ -110,7 +108,6 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
     }
     private void RequestProfile(){
         String url = "https://api.themoviedb.org/3/account?api_key=1469231605651a4f67245e5257160b5f&session_id="+sessionID;
-        Log.d("asdcw1",""+url);
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -265,7 +262,6 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
         startActivity(intent);
     }
     private void ShowDialogLogOut(){
-
         dialogLogOut.setContentView(R.layout.custom_popup_confirm);
         lbMessage=dialogLogOut.findViewById(R.id.lbMessage);
         String message="Are you sure you want to log out?";

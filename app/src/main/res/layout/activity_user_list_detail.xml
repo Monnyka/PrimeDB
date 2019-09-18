@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBackground"
+    android:background="@drawable/bg_gradient_main"
     tools:context=".UserListDetailActivity">
 
     <include layout="@layout/toolbar"
@@ -17,43 +17,44 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/lbUserList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/USER_LIST"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/colorGray"
-            android:textStyle="bold"
-            android:fontFamily="@font/circularstd_bold"
-            android:textSize="@dimen/textNormal_two"
-            />
+
+        <ImageView
+            android:id="@+id/img_list"
+            android:layout_width="125dp"
+            android:layout_height="180dp"
+            android:elevation="3dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_gradient_main"/>
+
 
         <TextView
             android:id="@+id/lbListName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/User_List"
-            android:layout_marginStart="20dp"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
-            android:textSize="@dimen/textVeryBig"
-            android:fontFamily="@font/circularstd_bold"
-            android:layout_below="@+id/lbUserList"
+            android:textSize="@dimen/textBig"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/img_list"
             />
             <TextView
                 android:id="@+id/lbListDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/User_List"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/User_List"
                 android:layout_marginBottom="8dp"
                 android:textColor="@color/colorGray"
                 android:textStyle="bold"
-                android:textSize="@dimen/textNormal_two"
+                android:textSize="@dimen/textNormal"
                 android:layout_below="@+id/lbListName"
-                android:fontFamily="@font/circularstd_bold"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
                 />
 
             <TextView
@@ -65,9 +66,26 @@
                 android:layout_marginBottom="8dp"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
-                android:textSize="@dimen/textNormal_two"
+                android:textSize="@dimen/textNormal"
                 android:layout_below="@+id/lbListDesc"
-                android:fontFamily="@font/avenirltstd_roman"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:layout_centerHorizontal="true"
+                />
+
+            <Button
+                android:id="@+id/btnAddMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_button_main_white"
+                android:layout_below="@id/lbListTotal"
+                android:layout_centerHorizontal="true"
+                android:text="@string/ADD_MOVIE"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:lineSpacingExtra="4dp"
+                android:paddingStart="45dp"
+                android:paddingEnd="45dp"
+                android:elevation="3dp"
                 />
 
 
@@ -75,14 +93,19 @@
                 android:id="@+id/v_separate"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_below="@id/lbListTotal"
+                android:layout_below="@id/btnAddMore"
                 android:background="@color/colorGray"
-                android:layout_marginStart="20dp"/>
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                />
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvUserListDetail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/v_separate"
+                android:layout_marginTop="10dp"
                 >
 
             </android.support.v7.widget.RecyclerView>

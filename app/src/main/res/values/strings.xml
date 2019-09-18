@@ -95,4 +95,9 @@
     <string name="Overall_Rating">Overall Rating</string>
     <string name="Personal_Rating">Personal Rating</string>
     <string name="Popularity">Popularity</string>
+    <string name="RATING">RATING</string>
+    <string name="Submit">Submit</string>
+    <string name="Rate_Now">Rate Now</string>
+    <string name="Give_your_list_a_name">Give your list a name</string>
+    <string name="ADD_MOVIE">ADD MOVIE</string>
 </resources>

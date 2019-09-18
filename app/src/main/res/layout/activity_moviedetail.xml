@@ -13,9 +13,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbars"
+
         android:layout_marginTop="20dp"
-        android:paddingBottom="20dp"
         android:background="@color/colorBackgroundSecond"
         >
     <RelativeLayout
@@ -28,21 +28,30 @@
             android:layout_width="match_parent"
             android:layout_marginTop="58dp"
             android:layout_height="220dp"
-            android:background="#848484"
-            >
-        </android.support.v4.view.ViewPager>
+            android:background="@color/colorWhite"
+            android:autoStart="true"
+          />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignBottom="@id/view_pager"
+            android:background="@drawable/bg_gradiant_alpha"
+            />
+
+
+
         <TextView
             android:id="@+id/lbMovieTitle"
-            android:layout_width="280dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/view_pager"
+            android:paddingTop="235dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/circularstd_bold"
+            android:fontFamily="@font/proxima_nova_bold"
             android:gravity="center"
             android:text="@string/lb_MovieTitle"
             android:textColor="#ffffff"
-            android:textSize="24sp" />
+            android:textSize="28sp" />
 
         <TextView
             android:id="@+id/lbTagLine"
@@ -90,6 +99,14 @@
                 android:scaleType="fitXY"
                 android:transitionName="imageViewPoster"
                 />
+            <ImageView
+                android:id="@+id/ivWatchLater"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="80dp"
+                android:src="@drawable/ic_bookmark"
+                android:layout_alignTop="@id/ivPoster"
+                />
 
             <ImageView
                 android:layout_width="20dp"
@@ -103,7 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorGray"
-                android:fontFamily="@font/avenir_lst_td_heavy"
+                android:fontFamily="@font/proxima_nova_bold"
                 android:textSize="14sp"
                 android:paddingStart="250dp"
                 android:layout_marginTop="35dp"/>
@@ -121,7 +138,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
-                android:fontFamily="@font/avenir_lst_td_heavy"
+                android:fontFamily="@font/proxima_nova_bold"
                 android:paddingStart="250dp"
                 android:textColor="@color/colorGray"
                 android:textSize="14sp" />
@@ -138,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="95dp"
-            android:fontFamily="@font/avenir_lst_td_heavy"
+            android:fontFamily="@font/proxima_nova_bold"
             android:layout_marginStart="250dp"
             android:textColor="@color/colorGray"
             android:textSize="14sp" />
@@ -156,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="125dp"
-                android:fontFamily="@font/avenir_lst_td_heavy"
+                android:fontFamily="@font/proxima_nova_bold"
                 android:paddingStart="250dp"
                 android:textColor="@color/colorGray"
                 android:textSize="14sp" />
@@ -174,7 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="155dp"
-                android:fontFamily="@font/avenir_lst_td_heavy"
+                android:fontFamily="@font/proxima_nova_bold"
                 android:paddingStart="250dp"
                 android:textColor="@color/colorGray"
                 android:textSize="14sp" />
@@ -192,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="185dp"
-                android:fontFamily="@font/avenir_lst_td_heavy"
+                android:fontFamily="@font/proxima_nova_bold"
                 android:paddingStart="250dp"
                 android:textColor="@color/colorGray"
                 android:textSize="14sp" />
@@ -212,7 +229,8 @@
                     <RelativeLayout
                         android:layout_width="140dp"
                         android:layout_marginStart="10dp"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_clickable">
 
                         <TextView
                             android:id="@+id/lbRated"
@@ -220,7 +238,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
                             android:text="@string/lb_SubRate"
-                            android:fontFamily="@font/circularstd_bold"
+                            android:fontFamily="@font/proxima_nova_bold"
                             android:textSize="14sp"
                             android:textColor="@color/colorWhite"
                             />
@@ -246,20 +264,22 @@
                       android:id="@+id/rl_PersonalRate"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                      android:background="@drawable/bg_clickable"
                     >
                     <TextView
                         android:id="@+id/lbYourRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:text="7.5"
                         android:fontFamily="@font/circularstd_bold"
                         android:textSize="14sp"
                         android:textColor="@color/colorSubtext"
+                        android:background="@drawable/bg_clickable"
                         />
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
+                        android:layout_marginTop="2.5dp"
                         android:src="@drawable/ic_star"
                         android:layout_toEndOf="@id/lbYourRating"
                         />
@@ -281,8 +301,10 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_Favorite"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_clickable"
                     >
 
                     <ImageView
@@ -338,7 +360,7 @@
             android:text="@string/Distribute_Company"
             android:textSize="14sp"
             android:textColor="@color/colorSubtext"
-            android:fontFamily="@font/circularstd_bold"
+            android:fontFamily="@font/proxima_nova_bold"
             android:layout_marginStart="30dp"
             />
 
@@ -376,98 +398,40 @@
             android:text="@string/lb_synopsisDetail"
             android:textSize="14sp"
             android:textColor="@color/colorGray"
-            android:fontFamily="@font/avenirltstd_roman"
+            android:fontFamily="@font/proxima_nova_regular"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             />
-        <TextView
-            android:id="@+id/lbDirector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/lbDistributeDetail"
-            android:text="@string/lb_Director"
-            android:textSize="14sp"
-            android:textColor="@color/colorSubtext"
-            android:fontFamily="@font/circularstd_bold"
-            android:layout_marginStart="30dp"/>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_below="@id/lbDirector"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="30dp"
-            android:id="@+id/ivDirector"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:civ_border_color="@color/colorSubtext"
-            app:civ_border_width="1dp"
-            android:src="@drawable/director"
-            />
-        <TextView
-            android:id="@+id/lbDirectorName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="90dp"
-            android:layout_marginTop="23dp"
-            android:fontFamily="@font/avenir_lst_td_heavy"
-            android:textSize="14sp"
-            android:textColor="@color/colorSubtext"
-            android:layout_below="@id/lbDirector"
-            />
 
-        <TextView
-            android:id="@+id/lbCast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ivDirector"
-            android:layout_marginTop="25dp"
-            android:text="@string/lb_cast"
-            android:textSize="14sp"
-            android:textColor="@color/colorSubtext"
-            android:fontFamily="@font/avenir_lst_td_heavy"
-            android:layout_marginStart="30dp"
-            />
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_marginTop="10dp"
-            android:nestedScrollingEnabled="false"
-            android:layout_marginBottom="20dp"
-            android:id="@+id/recycler_view_cast"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/lbCast"
-            android:background="@color/colorBackgroundSecond"
-            />
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_below="@id/recycler_view_cast"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="45dp"
-            android:id="@+id/ivDirectorMore"
-            android:layout_marginBottom="20dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_more"
-            />
-        <TextView
-            android:id="@+id/lbCastMore"
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/avenirltstd_roman"
-            android:layout_below="@id/recycler_view_cast"
-            android:layout_marginStart="100dp"
-            android:text="More"
-            android:textColor="@color/colorSubtext"
-            android:paddingBottom="20dp"
+            android:minHeight="?actionBarSize"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/colorWhite"
+            app:tabIndicatorHeight="2dp"
+            app:tabBackground="@color/colorBackgroundSecond"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/colorWhite"
+            android:layout_below="@+id/lbDistributeDetail"
+            >
+        </android.support.design.widget.TabLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPagerDetail"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_below="@id/tabLayout">
+        </android.support.v4.view.ViewPager>
 
-            />
-        </RelativeLayout>
+    </RelativeLayout>
     </ScrollView>
 
     <include layout="@layout/toolbar"
         android:id="@+id/toolbars"
         />
-
+    <!--BottomSheet-->
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
@@ -504,5 +468,9 @@
 
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
+
+
+
+
 
 </android.support.design.widget.CoordinatorLayout>

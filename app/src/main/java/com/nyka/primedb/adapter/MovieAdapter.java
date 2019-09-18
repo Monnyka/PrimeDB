@@ -9,9 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
 import com.bumptech.glide.Glide;
 import com.nyka.primedb.R;
 import com.nyka.primedb.model.MovieItem;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -20,8 +23,8 @@ public class MovieAdapter extends RecyclerView.Adapter <MovieAdapter.MovieViewHo
     private Context mContext;
     private ArrayList <MovieItem> mMovieList;
 
-    public MovieAdapter(Context context, ArrayList<MovieItem> MovieList){
-            mContext=context;
+    public MovieAdapter(Response.Listener<JSONObject> context, ArrayList<MovieItem> MovieList){
+//            mContext=context;
             mMovieList=MovieList;
 
     }

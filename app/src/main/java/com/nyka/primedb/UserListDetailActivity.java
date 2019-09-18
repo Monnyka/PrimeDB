@@ -36,19 +36,14 @@ public class UserListDetailActivity extends BaseActivity {
         lbListDesc=findViewById(R.id.lbListDesc);
         lbListTotal=findViewById(R.id.lbListTotal);
         mQueue= Volley.newRequestQueue(this);
-
-
-
         Intent intent =getIntent();
         list_ID=intent.getStringExtra("EXTRA_LIST_ID");
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-
         RequestListDetail();
 
     }
@@ -61,7 +56,6 @@ public class UserListDetailActivity extends BaseActivity {
                 String listName=response.optString("name");
                 String listDesc=response.optString("description");
                 String listTotal="Total: "+response.optString("item_count")+"Movies";
-
                 lbListName.setText(listName);
                 lbListDesc.setText(listDesc);
                 lbListTotal.setText(listTotal);

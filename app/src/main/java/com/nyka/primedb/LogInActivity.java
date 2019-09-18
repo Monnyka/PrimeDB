@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class LogInActivity extends BaseActivity {
     EditText edUname;
     EditText edPassword;
     TextView txtTitle;
+    ProgressBar progressBar;
 
     String response_token = "";
     String verified_token = "";
@@ -47,6 +49,9 @@ public class LogInActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+        NoStatusBar();
+        progressBar=findViewById(R.id.spin_kit);
+        progressBar.setVisibility(View.GONE);
         btnLogin = findViewById(R.id.btnLogin);
         edUname = findViewById(R.id.edUsername);
         edPassword = findViewById(R.id.edPassword);
@@ -61,6 +66,7 @@ public class LogInActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 CheckValidationLogin();
             }
         });
@@ -113,7 +119,6 @@ public class LogInActivity extends BaseActivity {
         mQueue.add(request_verify_token);
     }
     public void RequestSession() {
-
         String url_session = requestRoute + "/3/authentication/session/new" + api_key;
         JSONObject json = new JSONObject();
         try {
@@ -127,6 +132,7 @@ public class LogInActivity extends BaseActivity {
             public void onResponse(JSONObject response) {
                 try {
                     session_ID = response.getString("session_id");
+                    progressBar.setVisibility(View.GONE);
                     SaveData();
 
                 } catch (JSONException e) {

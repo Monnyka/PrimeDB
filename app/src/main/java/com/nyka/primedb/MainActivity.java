@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
 
         rv_Yourwatchlist=findViewById(R.id.rv_Yourwatchlist);
         rv_Yourwatchlist.setHasFixedSize(true);
-        rv_Yourwatchlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+        rv_Yourwatchlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mYourWatchList=new ArrayList<>();
 
         btnPopular.setOnClickListener(new View.OnClickListener() {
