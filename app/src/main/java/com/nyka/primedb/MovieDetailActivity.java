@@ -87,7 +87,7 @@ public class MovieDetailActivity extends BaseActivity {
     int current_position=0;
     ViewPagerAdapter viewPagerAdapter;
 
-    private TabAdapter tabAdapter;
+    TabAdapter tabAdapter;
     ViewPager viewPagerDetail;
     TabLayout tabLayout;
 
@@ -225,8 +225,12 @@ public class MovieDetailActivity extends BaseActivity {
         tabAdapter.addFragment(new Tab2Fragment(), "Review");
         viewPagerDetail.setAdapter(tabAdapter);
         tabLayout.setupWithViewPager(viewPagerDetail);
-
         svMovieDetail.setVisibility(View.VISIBLE);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("movieId",MovieID);
+        Tab1Fragment tab1Fragment=new Tab1Fragment();
+        tab1Fragment.setArguments(bundle);
     }
     private void getAccountState(){
         String urlAccountState=requestRoute+"/3/movie/"+MovieID+"/account_states?api_key="+apiKey+"&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
@@ -370,7 +374,6 @@ mQueue.add(request);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, movieUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
                 try {
                     String imdbID=response.optString("imdb_id");
                     String MovieTitle = response.getString("original_title");
@@ -449,7 +452,7 @@ mQueue.add(request);
                         String P_company = "~" + jsonObject.optString("name") + "\n";
                         lbDistributeDetail.append(P_company);
                     }
-
+                    svMovieDetail.setVisibility(View.VISIBLE);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -460,9 +463,7 @@ mQueue.add(request);
 
             }
         });
-
         mQueue.add(request);
-
     }
     public void getUserList(){
         String url="https://api.themoviedb.org/3/account/{account_id}/lists?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&page=1";
@@ -638,7 +639,6 @@ mQueue.add(request);
             }
         },250,3000);
     }
-
 
 }
 

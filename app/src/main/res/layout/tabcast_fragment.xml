@@ -4,10 +4,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@color/colorMainBackground"
+android:layout_height="wrap_content"
     >
-<LinearLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintStart_toStartOf="parent"
@@ -47,13 +46,13 @@ android:background="@color/colorMainBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="18dp"
         android:fontFamily="@font/avenir_lst_td_heavy"
         android:textSize="14sp"
         android:textColor="@color/colorSubtext"
-        android:layout_below="@id/lbDirector"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lbDirector"
+        android:text="@string/Log_Out"
+        android:layout_alignTop="@id/ivDirector"
+        android:layout_alignBottom="@id/ivDirector"
         />
 
     <TextView
@@ -82,7 +81,22 @@ android:background="@color/colorMainBackground"
         app:layout_constraintTop_toBottomOf="@id/lbCast"
         app:layout_constraintStart_toStartOf="parent"
         />
-</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/rc_cast">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_more"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="35dp"
+            />
+
+    </FrameLayout>
+</RelativeLayout>
 
 <!--<android.support.v7.widget.RecyclerView-->
     <!--android:id="@+id/rc_cast"-->

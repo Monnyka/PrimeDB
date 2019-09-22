@@ -14,7 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbars"
-
         android:layout_marginTop="20dp"
         android:background="@color/colorBackgroundSecond"
         >
@@ -421,7 +420,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/viewPagerDetail"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="500dp"
             android:layout_below="@id/tabLayout">
         </android.support.v4.view.ViewPager>
 

@@ -2,19 +2,17 @@ package com.nyka.primedb.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.Response;
 import com.bumptech.glide.Glide;
 import com.nyka.primedb.R;
 import com.nyka.primedb.model.MovieItem;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -23,8 +21,8 @@ public class MovieAdapter extends RecyclerView.Adapter <MovieAdapter.MovieViewHo
     private Context mContext;
     private ArrayList <MovieItem> mMovieList;
 
-    public MovieAdapter(Response.Listener<JSONObject> context, ArrayList<MovieItem> MovieList){
-//            mContext=context;
+    public MovieAdapter(FragmentActivity context, ArrayList<MovieItem> MovieList){
+            mContext=context;
             mMovieList=MovieList;
 
     }
