@@ -54,7 +54,7 @@ public class MovieDetailActivity extends BaseActivity {
     String mm="";
     TextView lbMovieTitle;
     RequestQueue mQueue;
-    String MovieID = "";
+    String MovieID = "384018";
     String imdb_id="";
 
     ImageView ivPoster;
@@ -90,7 +90,6 @@ public class MovieDetailActivity extends BaseActivity {
     TabAdapter tabAdapter;
     ViewPager viewPagerDetail;
     TabLayout tabLayout;
-
 
     TextView lbMessage;
     BottomSheetBehavior mBottomSheetBehavior;
@@ -129,6 +128,7 @@ public class MovieDetailActivity extends BaseActivity {
         Intent intent = getIntent();
         //movieID
         MovieID = intent.getStringExtra("movieID");
+
         lbMovieTitle = findViewById(R.id.lbMovieTitle);
         ivPoster = findViewById(R.id.ivPoster);
         ivFavorite=findViewById(R.id.ivFavorite);
@@ -227,10 +227,6 @@ public class MovieDetailActivity extends BaseActivity {
         tabLayout.setupWithViewPager(viewPagerDetail);
         svMovieDetail.setVisibility(View.VISIBLE);
 
-        Bundle bundle = new Bundle();
-        bundle.putString("movieId",MovieID);
-        Tab1Fragment tab1Fragment=new Tab1Fragment();
-        tab1Fragment.setArguments(bundle);
     }
     private void getAccountState(){
         String urlAccountState=requestRoute+"/3/movie/"+MovieID+"/account_states?api_key="+apiKey+"&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
@@ -640,5 +636,8 @@ mQueue.add(request);
         },250,3000);
     }
 
+    public String getMovieID() {
+        return MovieID;
+    }
 }
 

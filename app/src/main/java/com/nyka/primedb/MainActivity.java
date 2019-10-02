@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,7 +19,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 import com.nyka.primedb.adapter.MovieListAdapter;
 import com.nyka.primedb.adapter.TrendingAdapter;
 import com.nyka.primedb.adapter.YourWatchListAdapter;
@@ -31,6 +28,7 @@ import com.nyka.primedb.model.trending;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener, TrendingAdapter.onClickItemListener {
@@ -82,12 +80,10 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         tRecyclerView.hasFixedSize();
         final LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         tRecyclerView.setLayoutManager (linearLayoutManager);
-
         //Snapper Scroll Item
-        final SnapHelper snapHelper = new GravitySnapHelper(GravityCompat.START);
-        snapHelper.attachToRecyclerView(tRecyclerView);
+//        final SnapHelper snapHelper = new GravitySnapHelper(GravityCompat.START);
+//        snapHelper.attachToRecyclerView(tRecyclerView);
         mTrendingList = new ArrayList<>();
-
         rv_Yourwatchlist=findViewById(R.id.rv_Yourwatchlist);
         rv_Yourwatchlist.setHasFixedSize(true);
         rv_Yourwatchlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));

@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.nyka.primedb.adapter.MovieAdapter;
 import com.nyka.primedb.model.MovieItem;
 
@@ -35,19 +36,20 @@ public class Tab1Fragment extends Fragment{
     RecyclerView rcCast;
     ImageView ivDirector;
     TextView lbDirectorName;
-    String MovieID="";//384018
+    String MovieID="";//
     String apiKey="1469231605651a4f67245e5257160b5f";
-    String movieCreditUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "/credits?api_key=" + apiKey;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =inflater.inflate(R.layout.tabcast_fragment,container,false);
-            context=getActivity().getApplicationContext();
+        context=getActivity().getApplicationContext();
+        lbDirectorName=v.findViewById(R.id.lbDirectorName);
+        ivDirector=v.findViewById(R.id.ivDirector);
 
-            Bundle bundleGet=getArguments();
-            MovieID=bundleGet.getString("movieId");
+        MovieDetailActivity activity = (MovieDetailActivity) getActivity();
+        MovieID = activity.getMovieID();
 
-            mQueue = Volley.newRequestQueue(v.getContext());
+        mQueue = Volley.newRequestQueue(v.getContext());
             rcCast= v.findViewById(R.id.rc_cast);
             rcCast.setLayoutManager(new LinearLayoutManager(getActivity()));
             mMovieList= new ArrayList<>();
@@ -56,7 +58,7 @@ public class Tab1Fragment extends Fragment{
     }
 
     public void CastRequest(){
-
+        String movieCreditUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "/credits?api_key=" + apiKey;
         JsonObjectRequest creditRequest = new JsonObjectRequest(Request.Method.GET, movieCreditUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -88,16 +90,12 @@ public class Tab1Fragment extends Fragment{
 
                         if (getDirector.equals("Director")) {
                             String DirectorName = crew.optString("name");
-//                            Glide.with(context
-//                                    .getApplicationContext())
-//                                    .load(Director_Image_Profile)
-//                                    .fitCenter()
-//                                    .into(ivDirector);
-//
-//                            if (lbDirectorName.getText() == "") {
-//                                lbDirectorName.append(DirectorName);
-//                            } else if (lbDirectorName.getText() != null)
-//                                lbDirectorName.append(" & " + DirectorName);
+                            Glide.with(context
+                                    .getApplicationContext())
+                                    .load(Director_Image_Profile)
+                                    .fitCenter()
+                                    .into(ivDirector);
+                            lbDirectorName.setText(DirectorName);
                         }
                     }
                 } catch (JSONException e) {

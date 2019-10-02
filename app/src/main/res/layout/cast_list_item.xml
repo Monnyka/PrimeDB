@@ -40,7 +40,7 @@
             android:layout_centerVertical="true"
             android:paddingBottom="18dp"
             android:textSize="14sp"
-            android:fontFamily="@font/avenir_lst_td_black"
+            android:fontFamily="@font/proxima_nova_bold"
             />
         <TextView
             android:id="@+id/lbCharacter"
@@ -50,7 +50,7 @@
             android:layout_alignStart="@+id/im_cast_image"
             android:text="AS John Wick"
             android:textSize="14sp"
-            android:fontFamily="@font/avenirltstd_roman"
+            android:fontFamily="@font/proxima_nova_regular"
             android:textColor="@color/colorGray"
             android:layout_centerVertical="true"
             android:paddingTop="18dp"
