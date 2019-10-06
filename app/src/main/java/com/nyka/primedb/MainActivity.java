@@ -21,7 +21,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.nyka.primedb.adapter.MovieListAdapter;
 import com.nyka.primedb.adapter.TrendingAdapter;
+import com.nyka.primedb.adapter.UpcomingAdapter;
 import com.nyka.primedb.adapter.YourWatchListAdapter;
+import com.nyka.primedb.model.UpcomingModel;
 import com.nyka.primedb.model.YourWatchlistModel;
 import com.nyka.primedb.model.trending;
 
@@ -45,6 +47,12 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     Button btnPopular;
     Button btnUpcoming;
     ImageView imProfile;
+
+    //Upcoming
+    UpcomingAdapter mUpcomingAdapter;
+    ArrayList<UpcomingModel> mUpComingList;
+    RecyclerView mUpComingRecycler;
+
 
     public static String savesessionID = "sessionID";
     public String sessionID="";
@@ -89,6 +97,11 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         rv_Yourwatchlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mYourWatchList=new ArrayList<>();
 
+        mUpComingList=new ArrayList<>();
+        mUpComingRecycler=findViewById(R.id.rcUpComing);
+        mUpComingRecycler.hasFixedSize();
+        mUpComingRecycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
         btnPopular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +130,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         getProfile();
         RequestTrending();
         RequestYourWatchList();
+        RequestUpComingMovie();
         lbProfileName.setText(userName);
     }
     public void OpenScreenMovieDetail(String passValue){
@@ -189,6 +203,44 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         });
         mQueue.add(request);
     }
+
+    public void RequestUpComingMovie(){
+
+        String Url="https://api.themoviedb.org/3/discover/movie?api_key=1469231605651a4f67245e5257160b5f&language=en-US&region=US&sort_by=popularity.desc&include_video=false&page=1&primary_release_date.gte=2019-11-01&primary_release_date.lte=2019-12-01";
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray =response.getJSONArray("results");
+
+                    for(int i=0; i<=10;i++){
+                        JSONObject result =jsonArray.getJSONObject(i);
+                        //String movieID =result.getString("id");
+                        String movieTitle = result.getString("title");
+                        String releaseDate = result.getString("release_date");
+                        //String poster=result.getString("poster_path");
+                        String banner=result.getString("backdrop_path");
+                        String Address="https://image.tmdb.org/t/p/original"+banner;
+                        //String genre=result.optString("release_date");
+                        mUpComingList.add(new UpcomingModel(movieTitle,releaseDate,Address));
+                    }
+                    mUpcomingAdapter=new UpcomingAdapter(MainActivity.this,mUpComingList);
+                    mUpComingRecycler.setAdapter(mUpcomingAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
+
+    }
+
     public void RequestYourWatchList(){
 
         String url="https://api.themoviedb.org/3/account/{account_id}/watchlist/movies?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&sort_by=created_at.asc&page=1";
@@ -253,6 +305,12 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         intent.putExtra("movieID",clickItem.getTrendingID());
         startActivity(intent);
     }
+
+
+
+
+
+
     //private void LoadData() {
 //        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
 //        userName = sharedPreferences.getString(UserName, "");

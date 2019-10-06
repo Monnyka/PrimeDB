@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="20dp"
+        app:cardCornerRadius="9dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            >
+        <ImageView
+            android:id="@+id/ivUpcomingBanner"
+            android:layout_width="wrap_content"
+            android:layout_height="145dp"
+            android:background="@drawable/bg_newsfeede"
+            android:scaleType="centerCrop"/>
+        <ImageView
+            android:id="@+id/bg_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="145dp"
+            android:background="@drawable/bg_gradiant_alpha"
+            android:scaleType="centerCrop"
+            />
+        <TextView
+            android:id="@+id/lbUpcomingMovieTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upcoming"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="30dp"
+            android:layout_alignBottom="@+id/bg_gradient"
+
+            />
+        <TextView
+            android:id="@+id/lbReleaseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/upcoming"
+            android:textColor="#969696"
+            android:textSize="@dimen/textNormal"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignBottom="@+id/bg_gradient"
+            />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

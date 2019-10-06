@@ -29,14 +29,12 @@ public class MovieListAdapter extends RecyclerView.Adapter <MovieListAdapter.Mov
     }
 
     public void setOnClickListener(OnItemClickListener Listener){
-
         mListener = Listener;
     }
 
     public MovieListAdapter(Context context, ArrayList<MovieListItem> movieList){
         mContext=context;
         mMovieList=movieList;
-
     }
 
     @NonNull
