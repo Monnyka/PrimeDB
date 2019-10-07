@@ -100,4 +100,6 @@
     <string name="Rate_Now">Rate Now</string>
     <string name="Give_your_list_a_name">Give your list a name</string>
     <string name="ADD_MOVIE">ADD MOVIE</string>
+    <string name="Upcoming_Movie">Upcoming Movie</string>
+    <string name="Trending_Movie">Trending Movie</string>
 </resources>

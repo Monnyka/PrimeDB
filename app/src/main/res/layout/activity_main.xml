@@ -18,10 +18,10 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imProfile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="60dp"
             app:civ_border_width="1dp"
             app:civ_border_color="@color/colorWhite"
             android:src="@drawable/director"
@@ -77,6 +77,7 @@
             android:fontFamily="@font/circularstd_bold"
             android:textColor="@color/colorWhite"
             android:text="@string/upcoming"
+            android:visibility="gone"
         />
 
         <Button
@@ -90,12 +91,13 @@
             android:fontFamily="@font/circularstd_bold"
             android:textColor="@color/colorWhite"
             android:text="@string/Popular"
+            android:visibility="gone"
             />
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/btnSearch"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="58dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="60dp"
             android:layout_marginStart="365dp"
             android:layout_marginEnd="15dp"
             android:src="@drawable/ic_search_white"
@@ -114,13 +116,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
+
+                <TextView
+                    android:id="@+id/lbTrending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:text="@string/Trending_Movie"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    />
+
             <android.support.v7.widget.RecyclerView
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="5dp"
                 android:id="@+id/rvTrending"
-                android:layout_marginEnd="20dp"
-                android:paddingStart="0dp"
+                android:layout_marginEnd="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/lbTrending"
                 >
             </android.support.v7.widget.RecyclerView>
 
@@ -129,11 +144,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="29dp"
                     android:fontFamily="@font/proxima_nova_bold"
-                    android:text="@string/upcoming"
+                    android:text="@string/Upcoming_Movie"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/textMedium"
+                    android:textSize="16sp"
                     android:layout_below="@+id/rvTrending"/>
 
                 <android.support.v7.widget.RecyclerView
@@ -141,7 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lbUpcoming"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     />
 
                 <TextView
@@ -149,16 +164,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="29dp"
                     android:fontFamily="@font/proxima_nova_bold"
                     android:text="@string/Your_watchlist"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/textMedium"
+                    android:textSize="16sp"
                     android:layout_below="@+id/rcUpComing"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_Yourwatchlist"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:foregroundGravity="left"
