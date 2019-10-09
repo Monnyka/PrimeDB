@@ -42,7 +42,6 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
         upcomingViewHolder.mTextTitle.setText(mTitle);
         upcomingViewHolder.mTextReleaseDate.setText(mReleaseDate);
         Glide.with(mContext).load(mBanner).into(upcomingViewHolder.mIvMovie);
-
     }
 
     @Override

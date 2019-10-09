@@ -102,4 +102,6 @@
     <string name="ADD_MOVIE">ADD MOVIE</string>
     <string name="Upcoming_Movie">Upcoming Movie</string>
     <string name="Trending_Movie">Trending Movie</string>
+    <string name="On_Air_TV_Series">On-Air TV Series</string>
+    <string name="Next_Release_TV_Series">Next Release TV Series</string>
 </resources>

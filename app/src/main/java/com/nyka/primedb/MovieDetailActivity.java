@@ -377,6 +377,7 @@ mQueue.add(request);
                     String Synopsis = response.getString("overview");
                     String MovieRate = response.getString("vote_average");
                     String MovieTagLine = response.getString("tagline");
+
                     String MovieYear = response.getString("release_date");
                     String MovieRunTime = response.getString("runtime") + "";
                     String MovieLanguage = response.getString("original_language");
@@ -385,6 +386,7 @@ mQueue.add(request);
                     String MovieVoteCount = response.getString("vote_count");
                     String MovieBudget = response.getString("budget");
                     imdb_id=imdbID;
+
                     String DateFormat = ConvertDateString(MovieYear);
                     lbYear.setText(DateFormat);
                     if (Revenue != null && Revenue.length() > 6) {
@@ -497,7 +499,7 @@ mQueue.add(request);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        spf = new SimpleDateFormat("dd MMM, yyyy");
+        spf = new SimpleDateFormat("dd MMMM, yyyy");
         String newDateString = spf.format(newDate);
 
         return newDateString;

@@ -160,6 +160,46 @@
                     />
 
                 <TextView
+                    android:id="@+id/lbOnAirTVSeries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="29dp"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:text="@string/On_Air_TV_Series"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    android:layout_below="@+id/rcUpComing"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcOnAirToday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lbOnAirTVSeries"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/lbNextReleaseTVSeries"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="29dp"
+                    android:fontFamily="@font/proxima_nova_bold"
+                    android:text="@string/Next_Release_TV_Series"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    android:layout_below="@+id/rcOnAirToday"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcNextReleaseTVSeries"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lbNextReleaseTVSeries"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <TextView
                     android:id="@+id/lbWatchlist"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,7 +209,7 @@
                     android:text="@string/Your_watchlist"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
-                    android:layout_below="@+id/rcUpComing"/>
+                    android:layout_below="@+id/rcNextReleaseTVSeries"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_Yourwatchlist"
