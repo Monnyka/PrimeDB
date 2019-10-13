@@ -36,7 +36,7 @@ public class OnAirTodayAdapter extends RecyclerView.Adapter<OnAirTodayAdapter.On
     public void onBindViewHolder(@NonNull OnAirTodayViewHolder onAirTodayViewHolder, int i) {
         OnAirTVModel currentItem=mOnAirTodayList.get(i);
         String mTitle=currentItem.getTitle();
-        String mEpisode=currentItem.getEpisode();
+        String mEpisode=currentItem.getVote();
         String mPoster=currentItem.getImgUrl();
         onAirTodayViewHolder.mTitle.setText(mTitle);
         onAirTodayViewHolder.mEpisode.setText(mEpisode);
@@ -59,7 +59,6 @@ public class OnAirTodayAdapter extends RecyclerView.Adapter<OnAirTodayAdapter.On
                 mImgUrl=itemView.findViewById(R.id.imTrendingPoster);
                 mTitle=itemView.findViewById(R.id.lbTrendingTitle);
                 mEpisode=itemView.findViewById(R.id.lbGenre);
-
         }
     }
 

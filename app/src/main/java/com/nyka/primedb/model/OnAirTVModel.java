@@ -4,12 +4,12 @@ public class OnAirTVModel {
 
     private String imgUrl;
     private String title;
-    private String episode;
+    private String vote;
 
-    public OnAirTVModel(String imgUrl, String title, String episode) {
+    public OnAirTVModel(String imgUrl, String title, String vote) {
         this.imgUrl = imgUrl;
         this.title = title;
-        this.episode = episode;
+        this.vote = vote;
     }
 
     public String getImgUrl() {
@@ -20,7 +20,7 @@ public class OnAirTVModel {
         return title;
     }
 
-    public String getEpisode() {
-        return episode;
+    public String getVote() {
+        return vote;
     }
 }

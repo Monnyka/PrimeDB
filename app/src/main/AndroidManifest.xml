@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserListDetailActivity"></activity>
+<!--        <activity android:name=".TVDetail"></activity>-->
+        <activity android:name=".UserListDetailActivity" />
         <activity android:name=".CreateListActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" />
@@ -20,8 +21,9 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".activity_dashboard" />
         <activity android:name=".MovieDetailActivity" />
+
         <activity
-            android:name=".LogInActivity"
+            android:name=".TVDetail"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

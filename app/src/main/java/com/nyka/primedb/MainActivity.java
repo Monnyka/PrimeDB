@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.nyka.primedb.adapter.MovieListAdapter;
+import com.nyka.primedb.adapter.OnAirTVAdapter;
 import com.nyka.primedb.adapter.OnAirTodayAdapter;
 import com.nyka.primedb.adapter.TrendingAdapter;
 import com.nyka.primedb.adapter.UpcomingAdapter;
@@ -63,6 +64,11 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     OnAirTodayAdapter mOnAirTodayAdapter;
     ArrayList<OnAirTVModel> mOnAirTodayList;
     RecyclerView mRcOnAirToday;
+
+    //OnAirTV
+    OnAirTVAdapter mOnAirTVAdapter;
+    ArrayList<OnAirTVModel> mOnAirTVList;
+    RecyclerView mRCOnAirTV;
 
 
     public static String savesessionID = "sessionID";
@@ -118,6 +124,11 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         mRcOnAirToday=findViewById(R.id.rcOnAirToday);
         mRcOnAirToday.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
+        //OnAirTV
+        mOnAirTVList=new ArrayList<>();
+        mRCOnAirTV=findViewById(R.id.rcOnAirTV);
+        mRCOnAirTV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
         btnPopular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +159,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         RequestYourWatchList();
         RequestUpComingMovie();
         getOnAirToday();
+        getOnAirTV();
         lbProfileName.setText(userName);
     }
     public void OpenScreenMovieDetail(String passValue){
@@ -201,7 +213,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
                         String date = result.getString("release_date");
                         String dateFormat = ConvertDateString(date);
                         String poster=result.getString("poster_path");
-                        String Address="https://image.tmdb.org/t/p/original"+poster;
+                        String Address="https://image.tmdb.org/t/p/w342"+poster;
                         String genre=result.optString("release_date");
                         mTrendingList.add(new trending(movieTitle,Address,dateFormat,movieID,genre));
                     }
@@ -237,7 +249,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
                         String releaseDate = result.getString("release_date");
                         //String poster=result.getString("poster_path");
                         String banner=result.getString("backdrop_path");
-                        String Address="https://image.tmdb.org/t/p/original"+banner;
+                        String Address="https://image.tmdb.org/t/p/w342"+banner;
                         //String genre=result.optString("release_date");
                         mUpComingList.add(new UpcomingModel(movieTitle,releaseDate,Address));
                     }
@@ -321,7 +333,7 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
                         JSONObject results=jsonArray.getJSONObject(i);
                         String tvTitle=results.optString("name");
                         String tvOnAirDate=results.optString("first_air_date");
-                        String tvImage="https://image.tmdb.org/t/p/original"+results.optString("poster_path");
+                        String tvImage="https://image.tmdb.org/t/p/w342"+results.optString("poster_path");
 
                         mOnAirTodayList.add(new OnAirTVModel(tvImage,tvTitle,tvOnAirDate));
                     }
@@ -342,6 +354,42 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         });
         mQueue.add(request);
     }
+    public void getOnAirTV(){
+        String url="https://api.themoviedb.org/3/tv/on_the_air?api_key=1469231605651a4f67245e5257160b5f&language=en-US&page=1";
+        JsonObjectRequest request= new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray =response.getJSONArray("results");
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject results=jsonArray.getJSONObject(i);
+                        String title=results.optString("name");
+                        String vote=results.optString("vote_average");
+                        String image="https://image.tmdb.org/t/p/w342"+results.optString("poster_path");
+
+                        mOnAirTVList.add(new OnAirTVModel(image,title,vote));
+                    }
+                    mOnAirTVAdapter=new OnAirTVAdapter(MainActivity.this,mOnAirTVList);
+                    mRCOnAirTV.setAdapter(mOnAirTVAdapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        mQueue.add(request);
+    }
+
+
+
     private String ConvertDateString(String MovieYear) {
         String aa = MovieYear;
         SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");

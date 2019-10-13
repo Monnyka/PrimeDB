@@ -10,4 +10,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorGray">#b0bec5</color>
     <color name="colorLightGreen">#2ecc71</color>
+    <color name="LabelGreen">#45B950</color>
+    <color name="LabelGray">#D3D3D3</color>
 </resources>

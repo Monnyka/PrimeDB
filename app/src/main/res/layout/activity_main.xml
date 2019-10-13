@@ -186,13 +186,13 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="29dp"
                     android:fontFamily="@font/proxima_nova_bold"
-                    android:text="@string/Next_Release_TV_Series"
+                    android:text="@string/Season_Premier"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
                     android:layout_below="@+id/rcOnAirToday"/>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rcNextReleaseTVSeries"
+                    android:id="@+id/rcOnAirTV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/lbNextReleaseTVSeries"
@@ -209,7 +209,7 @@
                     android:text="@string/Your_watchlist"
                     android:textColor="@color/colorWhite"
                     android:textSize="16sp"
-                    android:layout_below="@+id/rcNextReleaseTVSeries"/>
+                    android:layout_below="@+id/rcOnAirTV"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_Yourwatchlist"
