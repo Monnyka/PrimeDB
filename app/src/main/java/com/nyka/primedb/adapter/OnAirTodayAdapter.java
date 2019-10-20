@@ -18,6 +18,16 @@ import java.util.ArrayList;
 public class OnAirTodayAdapter extends RecyclerView.Adapter<OnAirTodayAdapter.OnAirTodayViewHolder> {
     private Context mContext;
     private ArrayList<OnAirTVModel> mOnAirTodayList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+
+    public void SetOnItemClickListener(OnItemClickListener listener){
+        mListener=listener;
+    }
+
 
     public OnAirTodayAdapter(Context context, ArrayList<OnAirTVModel> onAirTodayList) {
         mContext=context;
@@ -42,6 +52,7 @@ public class OnAirTodayAdapter extends RecyclerView.Adapter<OnAirTodayAdapter.On
         onAirTodayViewHolder.mEpisode.setText(mEpisode);
         Glide.with(mContext).load(mPoster).into(onAirTodayViewHolder.mImgUrl);
 
+
     }
 
     @Override
@@ -59,6 +70,18 @@ public class OnAirTodayAdapter extends RecyclerView.Adapter<OnAirTodayAdapter.On
                 mImgUrl=itemView.findViewById(R.id.imTrendingPoster);
                 mTitle=itemView.findViewById(R.id.lbTrendingTitle);
                 mEpisode=itemView.findViewById(R.id.lbGenre);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(mListener!=null){
+                            int position=getAdapterPosition();
+                            if(position!=RecyclerView.NO_POSITION){
+                                mListener.OnItemClick(position);
+                            }
+                        }
+                    }
+                });
         }
     }
 

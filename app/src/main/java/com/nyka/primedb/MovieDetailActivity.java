@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.nyka.primedb.adapter.DetailUserListAdapter;
 import com.nyka.primedb.adapter.ViewPagerAdapter;
 import com.nyka.primedb.model.DetailUserListModel;
@@ -41,10 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -105,6 +103,8 @@ public class MovieDetailActivity extends BaseActivity {
     RecyclerView detailUserListRecycler;
     ArrayList<DetailUserListModel> mDetailUserList;
     DetailUserListAdapter mDetailUserListAdapter;
+    RelativeLayout rlNoInternet;
+    SpinKitView imSpin_kit;
 
     @SuppressLint("CutPasteId")
     @Override
@@ -160,7 +160,8 @@ public class MovieDetailActivity extends BaseActivity {
 
         mRecyclerView = findViewById(R.id.rc_cast);
         svMovieDetail=findViewById(R.id.svMovieDetail);
-        svMovieDetail.setVisibility(View.INVISIBLE);
+        rlNoInternet=findViewById(R.id.rlNoInternet);
+        imSpin_kit=findViewById(R.id.imSpin_kit);
 
         detailUserListRecycler=findViewById(R.id.rv_userList);
         detailUserListRecycler.setHasFixedSize(true);
@@ -225,7 +226,6 @@ public class MovieDetailActivity extends BaseActivity {
         tabAdapter.addFragment(new Tab2Fragment(), "Review");
         viewPagerDetail.setAdapter(tabAdapter);
         tabLayout.setupWithViewPager(viewPagerDetail);
-        svMovieDetail.setVisibility(View.VISIBLE);
 
     }
     private void getAccountState(){
@@ -372,7 +372,7 @@ mQueue.add(request);
             public void onResponse(JSONObject response) {
                 try {
                     String imdbID=response.optString("imdb_id");
-                    String MovieTitle = response.getString("original_title");
+                    String MovieTitle = response.getString("title");
                     String poster = "https://image.tmdb.org/t/p/w185" + response.getString("poster_path");
                     String Synopsis = response.getString("overview");
                     String MovieRate = response.getString("vote_average");
@@ -387,7 +387,7 @@ mQueue.add(request);
                     String MovieBudget = response.getString("budget");
                     imdb_id=imdbID;
 
-                    String DateFormat = ConvertDateString(MovieYear);
+                    String DateFormat = convertDate(MovieYear);
                     lbYear.setText(DateFormat);
                     if (Revenue != null && Revenue.length() > 6) {
                         String MovieRevenue = Revenue.substring(0, Revenue.length() - 6) + "M";
@@ -450,14 +450,18 @@ mQueue.add(request);
                         String P_company = "~" + jsonObject.optString("name") + "\n";
                         lbDistributeDetail.append(P_company);
                     }
-                    svMovieDetail.setVisibility(View.VISIBLE);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                svMovieDetail.setVisibility(View.VISIBLE);
+                imSpin_kit.setVisibility(View.GONE);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                rlNoInternet.setVisibility(View.VISIBLE);
+                imSpin_kit.setVisibility(View.GONE);
 
             }
         });
@@ -478,6 +482,7 @@ mQueue.add(request);
                     mDetailUserListAdapter= new DetailUserListAdapter(MovieDetailActivity.this,mDetailUserList);
                     detailUserListRecycler.setAdapter(mDetailUserListAdapter);
 
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -490,20 +495,7 @@ mQueue.add(request);
         });
         mQueue.add(request);
     }
-    private String ConvertDateString(String MovieYear) {
-        String aa = MovieYear;
-        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
-        Date newDate = null;
-        try {
-            newDate = spf.parse(aa);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        spf = new SimpleDateFormat("dd MMMM, yyyy");
-        String newDateString = spf.format(newDate);
 
-        return newDateString;
-    }
     private void getBanner(){
        String url=requestRoute+"/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f";
         JsonObjectRequest requestBanner = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

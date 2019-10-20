@@ -14,9 +14,20 @@ import com.nyka.primedb.R;
 import com.nyka.primedb.model.OnAirTVModel;
 import java.util.ArrayList;
 
+
 public class OnAirTVAdapter extends RecyclerView.Adapter <OnAirTVAdapter.OnAirTVViewHolder>{
     private Context mContext;
     private ArrayList<OnAirTVModel> mOnAirTVList;
+    private OnItemClickListener mListener;
+
+
+    public interface OnItemClickListener{
+        void OnOnAirItemClick(int position);
+    }
+
+    public void SetOnItemClickListener(OnItemClickListener listener){
+        mListener=listener;
+    }
 
     public OnAirTVAdapter(Context mContext, ArrayList<OnAirTVModel> mOnAirTVList) {
         this.mContext = mContext;
@@ -58,6 +69,21 @@ public class OnAirTVAdapter extends RecyclerView.Adapter <OnAirTVAdapter.OnAirTV
             mPoster=itemView.findViewById(R.id.imTrendingPoster);
             mTitle=itemView.findViewById(R.id.lbTrendingTitle);
             mVote=itemView.findViewById(R.id.lbGenre);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener!=null){
+                        int position=getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            mListener.OnOnAirItemClick(position);
+                        }
+                    }
+                }
+            });
+
+
+
         }
     }
 }

@@ -40,10 +40,10 @@ public class MovieAdapter extends RecyclerView.Adapter <MovieAdapter.MovieViewHo
         MovieItem currentItem = mMovieList.get(i);
         String imageUrl=currentItem.getmImageUrl();
         String castName=currentItem.getmCastName();
-        String charrecterName=currentItem.getmCharacter();
+        String charraterName=currentItem.getmCharacter();
 
         movieViewHolder.mCastName.setText(castName);
-        movieViewHolder.mCharrater.setText(charrecterName);
+        movieViewHolder.mCharrater.setText(charraterName);
         Glide.with(mContext).load(imageUrl).fitCenter().into(movieViewHolder.mImageView);
     }
 

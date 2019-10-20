@@ -28,7 +28,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Tab1Fragment extends Fragment{
+public class Tab1Fragment extends Fragment {
+
+    public static final String Extra_castID="123";
+
     Context context;
     RequestQueue mQueue;
     ArrayList<MovieItem> mMovieList;
@@ -58,6 +61,7 @@ public class Tab1Fragment extends Fragment{
     }
 
     public void CastRequest(){
+
         String movieCreditUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "/credits?api_key=" + apiKey;
         JsonObjectRequest creditRequest = new JsonObjectRequest(Request.Method.GET, movieCreditUrl, null, new Response.Listener<JSONObject>() {
             @Override
@@ -66,6 +70,7 @@ public class Tab1Fragment extends Fragment{
                     JSONArray jsonArray = response.getJSONArray("cast");
                     for (int i = 0; i < 5; i++) {
                         JSONObject cast = jsonArray.getJSONObject(i);
+                        String castID=cast.optString("id");
                         String CastName = cast.getString("name");
                         String CharracterName = "as " + cast.getString("character");
                         String aa = cast.getString("profile_path");
@@ -78,6 +83,7 @@ public class Tab1Fragment extends Fragment{
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
                 //Get crew director
                 try {
                     JSONArray jsonArray = response.getJSONArray("crew");
@@ -109,4 +115,5 @@ public class Tab1Fragment extends Fragment{
             });
         mQueue.add(creditRequest);
     }
+
 }

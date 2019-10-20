@@ -6,17 +6,15 @@ public class MovieItem {
     private String mCastName;
     private String mCharacter;
 
-
-    public MovieItem (String ImageUrl, String CastName, String Character){
+    public MovieItem(String ImageUrl, String CastName, String Character){
 
         mImageUrl = ImageUrl;
         mCastName= CastName;
         mCharacter =Character;
+
     }
 
-
     public String getmImageUrl(){
-
         return mImageUrl;
     }
 
@@ -27,5 +25,6 @@ public class MovieItem {
     public String getmCharacter(){
         return mCharacter;
     }
+
 
 }

@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorMainBackground"
     tools:context=".TVDetail">
 
+    <ScrollView
+        android:id="@+id/mScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorMainBackground"
+        android:visibility="gone"
+        >
     <RelativeLayout
         android:id="@+id/rlTVDetail"
         android:layout_width="match_parent"
@@ -19,6 +29,10 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
             android:background="@drawable/main_background" />
 
         <TextView
@@ -36,7 +50,7 @@
             android:id="@+id/lbTVSeason"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Season 9"
+            android:text="Season "
             android:fontFamily="@font/proxima_nova_bold"
             android:textColor="#D3D3D3"
             android:textSize="24sp"
@@ -234,7 +248,10 @@
                 android:id="@+id/lbNATitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:layout_marginStart="20dp"
                 android:text="RUN BARRY RUN"
+                android:gravity="center"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
                 android:fontFamily="@font/proxima_nova_bold"
@@ -287,10 +304,62 @@
             />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rcEpisode"
+            android:nestedScrollingEnabled="false"
+            android:clipToPadding="false"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/lbEpisode"
             />
     </RelativeLayout>
-    <include layout="@layout/toolbar"/>
+    </ScrollView>
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <RelativeLayout
+        android:id="@+id/rlNoInternet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/ivWifi"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_no_wifi"
+            />
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="There is no internet\n connection."
+            android:textSize="22dp"
+            android:gravity="center"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:textColor="@color/colorWhite"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/ivWifi"
+            />
+    </RelativeLayout>
+
+    <com.github.ybq.android.spinkit.SpinKitView
+        android:id="@+id/imSpin_kit"
+        style="@style/SpinKitView.Large.DoubleBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:SpinKit_Color="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

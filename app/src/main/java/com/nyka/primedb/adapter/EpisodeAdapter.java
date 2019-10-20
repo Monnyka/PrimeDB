@@ -37,13 +37,18 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.EpisodeV
         String title=currentItem.getEpisodeTitle();
         String releaseDate=currentItem.getEpisodeRelease();
         String overall=currentItem.getEpisodeOverall();
+
+
+        if(releaseDate.equals("NA")){
+            episodeViewHolder.episodeReleaseDate.setVisibility(View.GONE);
+        }
+
         if(overall.isEmpty()){
             overall="Coming soon";
         }
         episodeViewHolder.episodeTitle.setText(title);
         episodeViewHolder.episodeReleaseDate.setText(releaseDate);
         episodeViewHolder.episodeOverview.setText(overall);
-
     }
 
     @Override

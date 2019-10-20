@@ -5,6 +5,10 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
 
@@ -27,6 +31,19 @@ public class BaseActivity extends AppCompatActivity {
 //                .show();
 //    }
 
+    public String convertDate(String date) {
+            String mDate = date;
+            SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
+            Date newDate = null;
+            try {
+                newDate = spf.parse(mDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            spf = new SimpleDateFormat("MMMM dd, yyyy");
+            String newDateString = spf.format(newDate);
+            return newDateString;
+    }
 
 }
 
