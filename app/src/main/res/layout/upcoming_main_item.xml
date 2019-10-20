@@ -18,11 +18,13 @@
             android:layout_height="wrap_content"
 
             >
-        <ImageView
-            android:id="@+id/ivUpcomingBanner"
-            android:layout_width="wrap_content"
-            android:layout_height="145dp"
-            android:scaleType="centerCrop"/>
+
+            <ImageView
+                android:id="@+id/ivUpcomingBanner"
+                android:layout_width="match_parent"
+                android:layout_height="145dp"
+                android:scaleType="centerCrop"
+                />
 
         <ImageView
             android:id="@+id/bg_gradient"
@@ -30,6 +32,7 @@
             android:layout_height="145dp"
             android:background="@drawable/bg_gradiant_alpha"
             android:scaleType="centerCrop"
+
             />
         <TextView
             android:id="@+id/lbUpcomingMovieTitle"
@@ -60,9 +63,5 @@
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
-
-
-
-
 
 </android.support.constraint.ConstraintLayout>

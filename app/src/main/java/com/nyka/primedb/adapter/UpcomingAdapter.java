@@ -19,6 +19,15 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
 
     private Context mContext;
     private ArrayList<UpcomingModel> mUpcomingList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnUpcomingClickListener(int position);
+    }
+
+    public void setOnClickListener(OnItemClickListener listener){
+        mListener=listener;
+    }
 
     public UpcomingAdapter(Context context,ArrayList<UpcomingModel> upcominglist) {
        mContext=context;
@@ -60,8 +69,34 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
             mTextTitle=itemView.findViewById(R.id.lbUpcomingMovieTitle);
             mTextReleaseDate=itemView.findViewById(R.id.lbReleaseDate);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mListener!=null){
+                        int position=getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION){
+                            mListener.OnUpcomingClickListener(position);
+                        }
+                    }
+                }
+            });
+
         }
 
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

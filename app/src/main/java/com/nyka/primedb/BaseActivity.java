@@ -2,6 +2,7 @@ package com.nyka.primedb;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -43,6 +44,33 @@ public class BaseActivity extends AppCompatActivity {
             spf = new SimpleDateFormat("MMMM dd, yyyy");
             String newDateString = spf.format(newDate);
             return newDateString;
+    }
+
+    private void start_countdown_timer()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date a = null, b = null;
+        try {
+            a = sdf.parse("14-10-2012");
+            b = sdf.parse("12-11-2019");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        //      .getTime() does the conversion: Date --> long
+        final CountDownTimer cdt = new CountDownTimer(a.getTime() - b.getTime(), 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                // TODO Auto-generated method stub
+            long ct=millisUntilFinished;
+
+            }
+
+            public void onFinish() {
+                // TODO Auto-generated method stub
+
+            }
+        }.start();
     }
 
 }

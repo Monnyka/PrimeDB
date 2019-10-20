@@ -39,7 +39,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener, TrendingAdapter.onClickItemListener, OnAirTodayAdapter.OnItemClickListener, OnAirTVAdapter.OnItemClickListener {
+public class MainActivity extends BaseActivity implements MovieListAdapter.OnItemClickListener, TrendingAdapter.onClickItemListener, OnAirTodayAdapter.OnItemClickListener, OnAirTVAdapter.OnItemClickListener, UpcomingAdapter.OnItemClickListener {
     RequestQueue mQueue;
     String popularAPIAddress = requestRoute + "/3/movie/now_playing" + api_key + "&language=en-US&page=1";
     String urlUpcoming = requestRoute + "/3/movie/upcoming" + api_key + "&language=en-US&page=1";
@@ -57,6 +57,8 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     RelativeLayout rlNoInternet;
     ScrollView svMainScreen;
     SpinKitView imSpin_kit;
+
+    TextView title;
 
 
     //Upcoming
@@ -92,10 +94,11 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         NoStatusBar();
-
+        title=findViewById(R.id.title);
         rlNoInternet=findViewById(R.id.rlNoInternet);
         svMainScreen=findViewById(R.id.svMainScreen);
         imSpin_kit=findViewById(R.id.imSpin_kit);
+
 
         //LoadData();
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE);
@@ -261,17 +264,18 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
 
                     for (int i = 0; i <= 10; i++) {
                         JSONObject result = jsonArray.getJSONObject(i);
-                        //String movieID =result.getString("id");
+                        String movieID =result.getString("id");
                         String movieTitle = result.getString("title");
                         String releaseDate= convertDate(result.getString("release_date"));
                         //String poster=result.getString("poster_path");
                         String banner = result.getString("backdrop_path");
                         String Address = "https://image.tmdb.org/t/p/w342" + banner;
                         //String genre=result.optString("release_date");
-                        mUpComingList.add(new UpcomingModel(movieTitle, releaseDate, Address));
+                        mUpComingList.add(new UpcomingModel(movieTitle, releaseDate, Address, movieID));
                     }
                     mUpcomingAdapter = new UpcomingAdapter(MainActivity.this, mUpComingList);
                     mUpComingRecycler.setAdapter(mUpcomingAdapter);
+                    mUpcomingAdapter.setOnClickListener(MainActivity.this);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -444,4 +448,27 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
         startActivity(detailIntent);
 
     }
+
+    @Override
+    public void OnUpcomingClickListener(int position) {
+        Intent detailIntent = new Intent(this, MovieDetailActivity.class);
+        UpcomingModel clickItem=mUpComingList.get(position);
+        detailIntent.putExtra("movieID",clickItem.getMovieID());
+        startActivity(detailIntent);
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
