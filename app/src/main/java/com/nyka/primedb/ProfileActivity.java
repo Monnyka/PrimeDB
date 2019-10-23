@@ -6,15 +6,17 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,9 +26,11 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.nyka.primedb.adapter.UserListAdapter;
 import com.nyka.primedb.model.UserListItem;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ProfileActivity extends BaseActivity implements UserListAdapter.onItemClickListener{
@@ -172,8 +176,8 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
 
                     for (int i = 0; i <1; i++) {
                         JSONObject backdrop = jsonArray.getJSONObject(i);
-                        String watchlist_backdrop = "https://image.tmdb.org/t/p/w500" + backdrop.getString("backdrop_path");
-                        if(watchlist_backdrop.equals("https://image.tmdb.org/t/p/w500")) {
+                        String watchlist_backdrop = "https://image.tmdb.org/t/p/w185" + backdrop.getString("backdrop_path");
+                        if(watchlist_backdrop.equals("https://image.tmdb.org/t/p/w185")) {
                             im_watchlist_backdrop.setImageResource(R.drawable.bg_newsfeede);
                         }
                         else

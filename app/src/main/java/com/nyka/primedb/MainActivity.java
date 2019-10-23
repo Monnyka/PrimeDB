@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -228,10 +229,10 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
                         JSONObject result = jsonArray.getJSONObject(i);
                         String movieID = result.getString("id");
                         String movieTitle = result.getString("title");
-                        String date = convertDate(result.optString("release_date"));
+                        String date = result.optString("release_date");
                         String poster = result.getString("poster_path");
                         String Address = "https://image.tmdb.org/t/p/w342" + poster;
-                        String genre = result.optString("release_date");
+                        String genre = convertDate(result.optString("release_date"));
                         mTrendingList.add(new trending(movieTitle, Address, date, movieID, genre));
                     }
                     mTrendingAdapter = new TrendingAdapter(MainActivity.this, mTrendingList);
@@ -292,7 +293,6 @@ public class MainActivity extends BaseActivity implements MovieListAdapter.OnIte
     }
 
     public void RequestYourWatchList() {
-
         String url = "https://api.themoviedb.org/3/account/{account_id}/watchlist/movies?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&sort_by=created_at.asc&page=1";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

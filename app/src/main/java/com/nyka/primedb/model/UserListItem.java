@@ -29,5 +29,5 @@ public class UserListItem {
         return mListTotal;
     }
 
-    public String getListID(){return mListID;};
+    public String getListID(){return mListID;}
 }

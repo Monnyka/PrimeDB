@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.nyka.primedb">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,9 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-<!--        <activity android:name=".PeopleDetail"></activity>-->
-        <activity android:name=".TVDetail"></activity>
+        android:theme="@style/AppTheme"
+        >
+        <activity android:name=".MovieTrailer"></activity>
+        <activity android:name=".PeopleDetail"></activity>
+        <activity android:name=".TVDetail" />
         <activity android:name=".UserListDetailActivity" />
         <activity android:name=".CreateListActivity" />
         <activity android:name=".ProfileActivity" />

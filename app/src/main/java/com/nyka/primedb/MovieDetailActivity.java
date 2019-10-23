@@ -7,12 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +19,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,6 +32,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.github.ybq.android.spinkit.SpinKitView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.tabs.TabLayout;
 import com.nyka.primedb.adapter.DetailUserListAdapter;
 import com.nyka.primedb.adapter.ViewPagerAdapter;
 import com.nyka.primedb.model.DetailUserListModel;
@@ -47,13 +48,15 @@ import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MovieDetailActivity extends BaseActivity {
+public class MovieDetailActivity extends BaseActivity implements DetailUserListAdapter.OnItemClickListener {
 
     String mm="";
     TextView lbMovieTitle;
     RequestQueue mQueue;
     String MovieID = "384018";
     String imdb_id="";
+    String movieTitle;
+    String trailerID="OLWKEcwi0ao";
 
     ImageView ivPoster;
     TextView lbSynopsisDetail;
@@ -80,6 +83,8 @@ public class MovieDetailActivity extends BaseActivity {
     Dialog ratingDialog;
     Button btnOkay;
     Button btnSubmit;
+    Button btnTrailer;
+
     RatingBar ratingMovie;
     ViewPager viewPager;
     int current_position=0;
@@ -90,6 +95,7 @@ public class MovieDetailActivity extends BaseActivity {
     TabLayout tabLayout;
 
     TextView lbMessage;
+    TextView lbNoListFound;
     BottomSheetBehavior mBottomSheetBehavior;
     RelativeLayout btnPersonalRate;
     ImageView ivFavorite;
@@ -129,6 +135,7 @@ public class MovieDetailActivity extends BaseActivity {
         //movieID
         MovieID = intent.getStringExtra("movieID");
 
+        lbNoListFound=findViewById(R.id.lbNoListFound);
         lbMovieTitle = findViewById(R.id.lbMovieTitle);
         ivPoster = findViewById(R.id.ivPoster);
         ivFavorite=findViewById(R.id.ivFavorite);
@@ -148,13 +155,18 @@ public class MovieDetailActivity extends BaseActivity {
         ivDirector = findViewById(R.id.ivDirector);
         lbDistributeDetail = findViewById(R.id.lbDistributeDetail);
         btnPersonalRate=findViewById(R.id.rl_PersonalRate);
+        btnTrailer=findViewById(R.id.btnPlayTrailer);
+
         lbSynopsisDetail = findViewById(R.id.lbSynopsisDetail);
         rl_Favorite=findViewById(R.id.rl_Favorite);
         rl_PersonalRate=findViewById(R.id.rl_PersonalRate);
         successDialog = new Dialog(this);
         ratingDialog=new Dialog(this);
+
+        //Bottomsheet
         View bottomSheet=findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior=BottomSheetBehavior.from(bottomSheet);
+
         viewPager=findViewById(R.id.view_pager);
         tabLayout=findViewById(R.id.tabLayout);
 
@@ -212,6 +224,13 @@ public class MovieDetailActivity extends BaseActivity {
             public void onClick(View v) {
                 String title=lbMovieTitle.getText().toString();
                 ShowDialogRating(title);
+            }
+        });
+
+        btnTrailer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenTrailerActivity(movieTitle,trailerID);
             }
         });
 
@@ -366,13 +385,13 @@ mQueue.add(request);
         mQueue.add(request);
     }
     public void getMovieDetail() {
-        String movieUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "?api_key=" + apiKey + "&language=en-US";
+        String movieUrl = "https://api.themoviedb.org/3/movie/" + MovieID + "?api_key=" + apiKey + "&language=en-US&append_to_response=videos";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, movieUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     String imdbID=response.optString("imdb_id");
-                    String MovieTitle = response.getString("title");
+                    movieTitle = response.getString("title");
                     String poster = "https://image.tmdb.org/t/p/w185" + response.getString("poster_path");
                     String Synopsis = response.getString("overview");
                     String MovieRate = response.getString("vote_average");
@@ -411,7 +430,7 @@ mQueue.add(request);
                         lbRunTime.append("0");
                     } else lbRunTime.append((MovieRunTime) + "Minute");
 
-                    lbMovieTitle.setText(MovieTitle);
+                    lbMovieTitle.setText(movieTitle);
                     lbSynopsisDetail.setText(Synopsis);
                     lbRated.setText(MovieRate);
                     lbLanguage.setText(MovieLanguage.toUpperCase());
@@ -443,13 +462,24 @@ mQueue.add(request);
                     }
                     //Loop find distribute company
                     JSONArray jsonArray1 = response.optJSONArray("production_companies");
-
                     for (int i = 0; i < jsonArray1.length(); i++) {
 
                         JSONObject jsonObject = jsonArray1.getJSONObject(i);
-                        String P_company = "~" + jsonObject.optString("name") + "\n";
+                        String P_company = "-" + jsonObject.optString("name") + "\n";
                         lbDistributeDetail.append(P_company);
                     }
+
+
+                    //Get Videos Trailer
+
+                    JSONObject trailerObject = response.getJSONObject("videos");
+                    JSONArray trailerArray = trailerObject.optJSONArray("results");
+                    for(int i=0;i<trailerObject.length();i++){
+                        JSONObject arrayTrailerID = trailerArray.getJSONObject(i);
+                        trailerID=arrayTrailerID.optString("key");
+                    }
+
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -467,6 +497,12 @@ mQueue.add(request);
         });
         mQueue.add(request);
     }
+    private void OpenTrailerActivity(String movieTitle, String trailerID) {
+        Intent trailerIntent=new Intent(this,MovieTrailer.class);
+        trailerIntent.putExtra("movieTitle",movieTitle);
+        trailerIntent.putExtra("trailerID",trailerID);
+        startActivity(trailerIntent);
+    }
     public void getUserList(){
         String url="https://api.themoviedb.org/3/account/{account_id}/lists?api_key=1469231605651a4f67245e5257160b5f&language=en-US&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09&page=1";
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -477,10 +513,16 @@ mQueue.add(request);
                     for(int i=0;i<jsonArray.length();i++) {
                         JSONObject list = jsonArray.getJSONObject(i);
                         String listName =list.optString("name");
-                        mDetailUserList.add(new DetailUserListModel(listName));
+                        String listID=list.optString("id");
+                        if(list==null){
+                            lbNoListFound.setVisibility(View.VISIBLE);
+                        }
+
+                        mDetailUserList.add(new DetailUserListModel(listName,listID));
                     }
                     mDetailUserListAdapter= new DetailUserListAdapter(MovieDetailActivity.this,mDetailUserList);
                     detailUserListRecycler.setAdapter(mDetailUserListAdapter);
+                    mDetailUserListAdapter.setOnItemClickListener(MovieDetailActivity.this);
 
 
                 } catch (JSONException e) {
@@ -495,7 +537,6 @@ mQueue.add(request);
         });
         mQueue.add(request);
     }
-
     private void getBanner(){
        String url=requestRoute+"/3/movie/"+MovieID+"/images?api_key=1469231605651a4f67245e5257160b5f";
         JsonObjectRequest requestBanner = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -604,6 +645,7 @@ mQueue.add(request);
 
             case R.id.it_add:
                 getUserList();
+                    mDetailUserList.clear();
                     mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 return true;
             default:
@@ -632,6 +674,42 @@ mQueue.add(request);
 
     public String getMovieID() {
         return MovieID;
+    }
+
+    @Override
+    public void OnListItemClick(int position) {
+        DetailUserListModel clickItem=mDetailUserList.get(position);
+        String listID=clickItem.getListID();
+        AddMovieToList(listID);
+    }
+
+    public void AddMovieToList(String listID){
+        String addMovieToListUrl="https://api.themoviedb.org/3/list/"+listID+"/add_item?api_key=1469231605651a4f67245e5257160b5f&session_id=4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
+
+        JSONObject listObject=new JSONObject();
+        try {
+            listObject.put("media_id",MovieID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        final JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, addMovieToListUrl, listObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                Toast.makeText(getApplicationContext(),"This movie has been successfully added to the list.",Toast.LENGTH_LONG).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(getApplicationContext(),"Duplicated, Movie has been already added.",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        mQueue.add(request);
     }
 }
 

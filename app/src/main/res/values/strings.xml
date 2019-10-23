@@ -105,4 +105,6 @@
     <string name="On_Air_TV_Series">On-Air TV Series</string>
     <string name="Next_Release_TV_Series">Next Release TV Series</string>
     <string name="Season_Premier">Season Premier</string>
+    <string name="play_trailer">Play Trailer</string>
+    <string name="Select_movie_list">Select Movie List</string>
 </resources>
