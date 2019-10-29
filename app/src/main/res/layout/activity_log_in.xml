@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LogInActivity"
-    android:background="@color/colorMainBackground"
+    android:background="@drawable/main_background"
     >
     <View
         android:id="@+id/rectangle"
@@ -18,50 +18,62 @@
         app:layout_constraintTop_toTopOf="parent"
     />
 
+    <RelativeLayout
+        android:id="@+id/rlSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
         android:fontFamily="@font/proxima_nova_bold"
-        android:text="SIGN IN"
+        android:text="Welcome back,"
+        android:textAlignment="viewStart"
         android:textColor="@color/colorWhite"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/txtSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:text="Please input your login information to continue."
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/txtTitle"
+        />
+    <RelativeLayout
+        android:id="@+id/rlLogInform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtSubTitle"
+        >
     <EditText
         android:id="@+id/edUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/colorWhite"
-        android:fontFamily="@font/proxima_nova_bold"
-        android:hint="User Name"
+        android:fontFamily="@font/proxima_nova_regular"
+        android:hint="Username"
         android:singleLine="true"
-        android:background="#00000000"
         android:shadowColor="@color/colorWhite"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGray"
-        android:textSize="@dimen/textBig"
+        android:textSize="@dimen/textNormal_two"
         android:inputType="textCapWords"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorWhite"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginEnd="45dp"
-        app:layout_constraintTop_toBottomOf="@id/edUsername"
-        />
+        android:gravity="left"
+/>
 
     <EditText
         android:id="@+id/edPassword"
@@ -71,48 +83,48 @@
         android:layout_marginTop="18dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/colorWhite"
-        android:fontFamily="@font/proxima_nova_bold"
+        android:fontFamily="@font/proxima_nova_regular"
         android:hint="@string/Password"
         android:inputType="textPassword"
         android:shadowColor="@color/colorWhite"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGray"
-        android:textSize="@dimen/textBig"
-        android:gravity="center"
+        android:textSize="@dimen/textNormal_two"
+        android:gravity="start"
         android:singleLine="true"
-        android:background="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/rectangle"
-        app:layout_constraintTop_toBottomOf="@+id/edUsername" />
+        android:layout_below="@+id/edUsername"
+        />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:paddingStart="45dp"
         android:paddingEnd="45dp"
-        android:textColor="@color/colorMainBackground"
+        android:textColor="@color/colorWhite"
         android:text="Sign In"
-        android:textColorHint="@color/colorGray"
+        android:textColorHint="@color/colorWhite"
         android:fontFamily="@font/proxima_nova_bold"
-        android:background="@drawable/bg_button_main_white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
+        android:background="@drawable/bg_stroke_transparent"
+        android:layout_below="@+id/edPassword"
+        android:layout_centerHorizontal="true"
+         />
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/spin_kit"
-        style="@style/SpinKitView.Large.Circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:SpinKit_Color="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rectangle" />
+    </RelativeLayout>
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/idLogIn_spin_kit"
+            style="@style/SpinKitView.Large.DoubleBounce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:SpinKit_Color="@color/colorWhite"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txtSubTitle"
+            />
+</RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

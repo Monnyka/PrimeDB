@@ -107,4 +107,9 @@
     <string name="Season_Premier">Season Premier</string>
     <string name="play_trailer">Play Trailer</string>
     <string name="Select_movie_list">Select Movie List</string>
+    <string name="TV_Series">TV Series</string>
+    <string name="You">You</string>
+    <string name="New_Release_and_hot_flick_movie"><![CDATA[New Release & Hot Flick Movie]]></string>
+    <string name="New_Episode_and_Season_Premier">New Episode and Season Premier</string>
+    <string name="WatchList">Watchlist</string>
 </resources>

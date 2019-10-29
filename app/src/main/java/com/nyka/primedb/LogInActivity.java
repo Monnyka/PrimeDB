@@ -50,7 +50,7 @@ public class LogInActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         NoStatusBar();
-        progressBar=findViewById(R.id.spin_kit);
+        progressBar=findViewById(R.id.idLogIn_spin_kit);
         progressBar.setVisibility(View.GONE);
         btnLogin = findViewById(R.id.btnLogin);
         edUname = findViewById(R.id.edUsername);
@@ -172,9 +172,10 @@ public class LogInActivity extends BaseActivity {
     public void CheckValidationLogin() {
 
         if (edUname.getText().toString().equals("")||edPassword.getText().toString().equals("")) {
-
+            progressBar.setVisibility(View.GONE);
             new AlertDialog.Builder(LogInActivity.this)
-                    .setTitle("Alert...")
+
+//                    .setTitle("Alert...")
                     .setMessage("Please enter your user name and password.")
                     .setCancelable(true)
                     .setPositiveButton("Okay", new DialogInterface.OnClickListener() {

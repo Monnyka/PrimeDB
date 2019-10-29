@@ -95,11 +95,12 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
         RequestProfile();
         RequestProfileDetail();
         RequestUserList();
+
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CallLogOut();
-//                ShowDialogLogOut();
+                callLogOut();
+//               ShowDialogLogOut();
             }
         });
     }
@@ -230,15 +231,16 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
         Intent intent = new Intent(this,CreateListActivity.class);
         startActivity(intent);
     }
-    private void CallLogOut(){
-        String url="http://api.themoviedb.org/3/authentication/session?api_key=1469231605651a4f67245e5257160b5f&session_id="+sessionID;
+    private void callLogOut(){
+        String logOutUrl="https://api.themoviedb.org/3/authentication/session?api_key=1469231605651a4f67245e5257160b5f";
+
         JSONObject json = new JSONObject();
         try {
-            json.put("session_id", sessionID);
+            json.put("session_id:", sessionID);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, url, json, new Response.Listener<JSONObject>() {
+        JsonObjectRequest requestLogOut = new JsonObjectRequest(Request.Method.DELETE, logOutUrl, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
@@ -254,13 +256,15 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
                 Toast.makeText(getApplicationContext(), "Request Fail : " + error, Toast.LENGTH_LONG).show();
             }
         });
-        mQueue.add(request);
+        mQueue.add(requestLogOut);
     }
+
     private void LoadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF,MODE_PRIVATE);
-        sessionID=sharedPreferences.getString(savesessionID,"");
+        sessionID=sharedPreferences.getString(savesessionID,"123");
         Log.d("asdafawx",""+sessionID);
     }
+
     private void OpenLogInScreen(){
         Intent intent= new Intent(this,LogInActivity.class);
         startActivity(intent);
@@ -275,7 +279,7 @@ public class ProfileActivity extends BaseActivity implements UserListAdapter.onI
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CallLogOut();
+                callLogOut();
             }
         });
         btnNo.setOnClickListener(new View.OnClickListener() {

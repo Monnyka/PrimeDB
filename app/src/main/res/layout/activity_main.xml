@@ -5,7 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSubtext"
+
     tools:context=".MainActivity">
 
     <RelativeLayout
@@ -131,18 +131,6 @@
                     android:textSize="16sp"
                     />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="5dp"
-                android:id="@+id/rvTrending"
-                android:clipToPadding="false"
-                android:paddingEnd="20dp"
-                android:paddingStart="0dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/lbTrending"
-                >
-            </androidx.recyclerview.widget.RecyclerView>
-
                 <TextView
                     android:id="@+id/lbUpcoming"
                     android:layout_width="wrap_content"
@@ -155,16 +143,6 @@
                     android:textSize="16sp"
                     android:layout_below="@+id/rvTrending"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rcUpComing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:paddingEnd="20dp"
-                    android:paddingStart="0dp"
-                    android:layout_below="@id/lbUpcoming"
-                    android:layout_marginTop="5dp"
-                    />
 
                 <TextView
                     android:id="@+id/lbOnAirTVSeries"
@@ -224,16 +202,7 @@
                     android:textSize="16sp"
                     android:layout_below="@+id/rcOnAirTV"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_Yourwatchlist"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:paddingEnd="20dp"
-                    android:paddingStart="0dp"
-                    android:layout_below="@id/lbWatchlist">
-                </androidx.recyclerview.widget.RecyclerView>
+
 
                 <!--recap-->
                 <TextView
@@ -246,7 +215,6 @@
                     android:text="@string/Recap"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/textMedium"
-                    android:layout_below="@+id/rv_Yourwatchlist"
                     />
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cdRecap"
@@ -270,7 +238,6 @@
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
-
 <!--    No internet connection-->
     <RelativeLayout
         android:id="@+id/rlNoInternet"
@@ -303,7 +270,6 @@
             android:layout_below="@id/ivWifi"
             />
     </RelativeLayout>
-
     <com.github.ybq.android.spinkit.SpinKitView
         android:id="@+id/imSpin_kit"
         style="@style/SpinKitView.Large.DoubleBounce"
@@ -318,6 +284,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
+
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorMainBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_navigation_main"
+        android:background="?android:attr/windowBackground"
+        />
+
+
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,12 +6,14 @@ public class UpcomingModel {
     private String releaseDate;
     private String movieBanner;
     private String movieID;
+    private String movieOverview;
 
-    public UpcomingModel(String movieTitle, String releaseDate, String movieBanner, String id) {
+    public UpcomingModel(String movieTitle, String releaseDate, String movieBanner, String id, String overView) {
         this.movieTitle = movieTitle;
         this.releaseDate = releaseDate;
         this.movieBanner = movieBanner;
         this.movieID=id;
+        movieOverview=overView;
     }
 
     public String getMovieTitle() {
@@ -27,4 +29,8 @@ public class UpcomingModel {
     }
 
     public String getMovieID(){return movieID;}
+
+    public String getMovieOverview(){
+        return movieOverview;
+    }
 }

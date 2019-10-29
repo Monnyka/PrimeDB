@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorMainBackground"
+    android:layout_marginBottom="60dp"
+    >
+
+        <TextView
+            android:id="@+id/lbTitleFragmentMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/Discover"
+                android:textSize="28sp"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/proxima_nova_bold"
+                android:textColor="@color/colorWhite"/>
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lbTitleFragmentMovie"
+            >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/lbFragmentMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/Trending_Movie"
+            android:textSize="18sp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:textColor="@color/colorWhite"
+            />
+        <TextView
+            android:id="@+id/lbFragmentMovieSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/New_Release_and_hot_flick_movie"
+            android:textSize="14sp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/proxima_nova_regular"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/lbFragmentMovie"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="8dp"
+            android:id="@+id/rvTrending"
+            android:clipToPadding="false"
+            android:paddingEnd="20dp"
+            android:paddingStart="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbFragmentMovieSub"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/lbUpcoming"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/Upcoming_Movie"
+        android:textSize="18sp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/proxima_nova_bold"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@+id/rvTrending"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcUpComing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingEnd="20dp"
+        android:paddingStart="0dp"
+        android:layout_below="@id/lbUpcoming"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:id="@+id/lbWatchList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/WatchList"
+        android:textSize="18sp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/proxima_nova_bold"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@+id/rcUpComing"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_WatchList"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingEnd="20dp"
+        android:paddingStart="0dp"
+        android:layout_below="@id/lbWatchList">
+    </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+        </ScrollView>
+
+
+
+
+</RelativeLayout>

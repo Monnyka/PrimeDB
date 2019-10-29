@@ -1,13 +1,15 @@
 package com.nyka.primedb.adapter;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.nyka.primedb.R;
@@ -26,8 +28,8 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
         void onItemClick(int position);
     }
 
-    public void setOnClickListener(onClickItemListener listener){
-        mListener=listener;
+    public void setOnClickListener(FragmentActivity listener){
+//        mListener=listener;
     }
 
     public TrendingAdapter(Context context, ArrayList<trending> trendingList) {

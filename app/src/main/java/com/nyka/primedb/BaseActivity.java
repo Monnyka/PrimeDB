@@ -19,6 +19,8 @@ public class BaseActivity extends AppCompatActivity {
     //public String sessionID="4bff39b4c68a29530cbba35c119ae8ac4feb0f09";
 
 
+
+
     public void NoStatusBar(){
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         getWindow().setStatusBarColor(Color.TRANSPARENT);

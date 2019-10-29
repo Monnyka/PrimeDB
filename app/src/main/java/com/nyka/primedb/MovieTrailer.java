@@ -50,18 +50,14 @@ public class MovieTrailer extends BaseActivity {
             youTubePlayerView.setVisibility(View.GONE);
         }
 
-
-
         PlayTrailer();
-
-
     }
 
     public void PlayTrailer(){
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                youTubePlayer.loadVideo(videoId, 0f);
+                youTubePlayer.loadVideo(videoId, 1f);
             }
         });
     }

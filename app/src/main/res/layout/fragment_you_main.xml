@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+
+    android:background="@color/colorMainBackground"
+    >
+
+        <TextView
+            android:id="@+id/lbTitleFragmentMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Leon Pin"
+            android:textSize="28sp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:textColor="@color/colorWhite"/>
+
+        <TextView
+            android:id="@+id/lbFragmentMovie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/Trending_Movie"
+            android:textSize="18sp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/proxima_nova_bold"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/lbTitleFragmentMovie"
+            />
+        <TextView
+            android:id="@+id/lbFragmentMovieSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/New_Release_and_hot_flick_movie"
+            android:textSize="14sp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/proxima_nova_regular"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/lbFragmentMovie"
+            />
+
+
+
+</RelativeLayout>
